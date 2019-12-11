@@ -4690,3 +4690,7 @@ Caused by: java.sql.SQLSyntaxErrorException: Invalid default value for 'update_t
 2019-12-11 12:32:52.538  INFO 9637 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
 2019-12-11 12:32:52.626  INFO 9637 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
 2019-12-11 12:32:52.628  INFO 9637 --- [restartedMain] c.r.i.InterviewtrackingApplication       : Started InterviewtrackingApplication in 9.508 seconds (JVM running for 9.935)
+2019-12-11 12:39:06.139  INFO 9637 --- [Thread-9] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-12-11 12:39:06.142  INFO 9637 --- [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-12-11 12:39:06.147  INFO 9637 --- [Thread-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2019-12-11 12:39:06.155  INFO 9637 --- [Thread-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
