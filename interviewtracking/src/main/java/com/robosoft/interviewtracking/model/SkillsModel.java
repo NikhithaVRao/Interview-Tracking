@@ -34,6 +34,5 @@ public class SkillsModel {
 	@Column
 	@NotNull
 	private int experience;
-	@Column(name = "deleted")
-	private boolean isDeleted;
+	
 }

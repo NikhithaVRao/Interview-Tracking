@@ -13,14 +13,13 @@ address varchar(20),
 date_of_birth date,
 qualification varchar(20) NOT NULL,
 total_experience int,
-experience int,
 notice_period int,
 salary_expectation float,
 able_to_relocate boolean,
 current_salary float,
 gender varchar(20),
-phone varchar(20) NOT NULL,
-email varchar(20) NOT NULL,
+phone_number varchar(20) NOT NULL,
+email varchar(100) NOT NULL,
 deleted boolean,
 shortListed boolean,
 create_timestamp DATETIME,
@@ -32,6 +31,7 @@ carrier_start_date varchar(20),
 applicant_type varchar(20),
 post_applied varchar(20),
 referal_id varchar(20),
+final_result boolean,
 primary key(id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
@@ -67,7 +67,6 @@ sid int not null auto_increment,
 candidate_id int,
 skills_name varchar(20),
 experience int,
-deleted boolean,
 primary key(sid)
 );
 

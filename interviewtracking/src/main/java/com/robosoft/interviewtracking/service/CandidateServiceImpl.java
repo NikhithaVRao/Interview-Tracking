@@ -17,6 +17,8 @@ import com.robosoft.interviewtracking.exception.CustomException;
 import com.robosoft.interviewtracking.model.CandidateModel;
 import com.robosoft.interviewtracking.model.SkillsModel;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
+
 
 
 @Service
@@ -36,23 +38,72 @@ public class CandidateServiceImpl implements CandidateService{
 	public CandidateModel setModel(CandidateModel cmodel, Candidate candidate)
 	{
 		//CandidateModel cmodel = new CandidateModel();		
-		cmodel.setUpdateTimestamp(candidate.getUpdateTimestamp());
-		cmodel.setName(candidate.getName());
-		cmodel.setDateOfBirth(candidate.getDateOfBirth());
-		cmodel.setAddress(candidate.getAddress());
-		cmodel.setQualification(candidate.getQualification());
-		cmodel.setNoticePeriod(candidate.getNoticePeriod());
-		cmodel.setSalaryExpectation(candidate.getSalaryExpectation());
-		cmodel.setCurrentSalary(candidate.getCurrentSalary());
-		cmodel.setGender(candidate.getGender());
-		cmodel.setPhoneNumber(candidate.getPhone());
-		cmodel.setEmail(candidate.getEmail());
-		cmodel.setUniqueId(candidate.getUniqueId());
-		cmodel.setApplicantType(candidate.getApplicantType());
-		cmodel.setPostApplied(candidate.getPostApplied());
-		cmodel.setPreviousCompany(candidate.getPreviousCompany());
-		cmodel.setCarrierStartDate(candidate.getCarrierStartDate());
-		cmodel.setReferalId(candidate.getReferalId());
+		if(candidate.getName() != null) {
+			cmodel.setName(candidate.getName());
+		}
+		if(candidate.getDateOfBirth() != null) {
+			cmodel.setDateOfBirth(candidate.getDateOfBirth());
+		}
+		if(candidate.getAddress() != null) {
+			cmodel.setAddress(candidate.getAddress());
+		}
+		
+		if(candidate.getQualification() != null) {
+			cmodel.setQualification(candidate.getQualification());
+		}
+		
+		if(candidate.getTotalExperience() != 0) {
+			cmodel.setTotalExperience(candidate.getTotalExperience());
+		}
+		
+		if(candidate.getNoticePeriod() != 0) {
+			cmodel.setNoticePeriod(candidate.getNoticePeriod());
+		}
+		
+		if(candidate.getSalaryExpectation() != 0) {
+			cmodel.setSalaryExpectation(candidate.getSalaryExpectation());
+		}
+		
+		if(candidate.getCurrentSalary() != 0) {
+			cmodel.setCurrentSalary(candidate.getCurrentSalary());
+		}
+		
+		if(candidate.getGender() != null) {
+			cmodel.setGender(candidate.getGender());
+		}
+		
+		if(candidate.getPhone() != null) {
+			cmodel.setPhoneNumber(candidate.getPhone());
+		}
+		
+		if(candidate.getEmail() != null) {
+			cmodel.setEmail(candidate.getEmail());
+		}
+		
+		if(candidate.getUniqueId() != null) {
+			cmodel.setUniqueId(candidate.getUniqueId());
+		}
+		
+		if(candidate.getApplicantType() != null) {
+			cmodel.setApplicantType(candidate.getApplicantType());
+		}
+		
+		if(candidate.getPostApplied() != null) {
+			cmodel.setPostApplied(candidate.getPostApplied());
+		}
+		
+		if(candidate.getPreviousCompany() != null) {
+			cmodel.setPreviousCompany(candidate.getPreviousCompany());
+		}
+		
+		if(candidate.getCarrierStartDate() != null) {
+			cmodel.setCarrierStartDate(candidate.getCarrierStartDate());
+		}
+		
+		if(candidate.getReferalId() != null) {
+			cmodel.setReferalId(candidate.getReferalId());
+		}
+		
 		
 		try {
 			 cmodel = candidateRepository.save(cmodel);
@@ -69,11 +120,13 @@ public class CandidateServiceImpl implements CandidateService{
 	/* method to implement getter setter to get dto response */ 
 	public Candidate setDto(Candidate cdto, CandidateModel cmodel)
 	{
+		cdto.setId(cmodel.getId());
 		 cdto.setName(cmodel.getName());
 		 cdto.setAddress(cmodel.getAddress());
 		 cdto.setDateOfBirth(cmodel.getDateOfBirth());
 		 cdto.setAddress(cmodel.getAddress());
 		 cdto.setQualification(cmodel.getQualification());
+		 cdto.setTotalExperience(cmodel.getTotalExperience());
 		 cdto.setNoticePeriod(cmodel.getNoticePeriod());
 		 cdto.setSalaryExpectation(cmodel.getSalaryExpectation());
 		 cdto.setCurrentSalary(cmodel.getCurrentSalary());
@@ -91,7 +144,16 @@ public class CandidateServiceImpl implements CandidateService{
 		 cdto.setCarrierStartDate(cmodel.getCarrierStartDate());
 		 cdto.setShortListed(cmodel.isShortListed());
 		 cdto.setTotalExperience(cmodel.getTotalExperience());
-		 
+		 List<SkillsModel> smod = sRep.findAllByCandidateId(cmodel.getId());
+		 List<String> skills = new ArrayList<String>();
+		 List<Integer> exp = new ArrayList<Integer>();
+		 for(int skill = 0; skill < smod.size(); skill++) {
+			 SkillsModel skillModel = smod.get(skill);
+			 skills.add(skillModel.getSkillName());
+			 exp.add(skillModel.getExperience());
+		 }
+		 cdto.setSkills(skills);
+		 cdto.setExperience(exp);
 		 return cdto;
 	}
 	
@@ -226,48 +288,48 @@ public ResponseEntity<Candidate> updateCandidate(int id, Candidate candidate)
 	List<String> skills = new ArrayList<String>();
 	skills = candidate.getSkills();
 	int sumOfExperience = 0;
-	
-	CandidateModel cmodelData = candidateRepository.findById(id).get();
-	cmodelData.setCreateTimestamp(cmodelData.getCreateTimestamp());
-	cmodelData = setModel(cmodelData, candidate);
-	
-	/* To add total experience */ 
-	for(int experience = 0; experience < exp.size(); experience++)
-	{	
-		sumOfExperience = cmodelData.getTotalExperience() + exp.get(experience);
-		cmodelData.setTotalExperience(sumOfExperience);
+	List<SkillsModel> smod = sRep.findAllByCandidateId(id);
+	for(int newSkill = 0; newSkill < skills.size(); newSkill++) {
+		int flag = 0;
+		SkillsModel skillAtIndex;
+		for(int skillObj = 0; skillObj < smod.size(); skillObj++) {
+			skillAtIndex = smod.get(skillObj);
+			if(skills.get(newSkill).equals(skillAtIndex.getSkillName())) {
+				flag = 1;
+				break;
+			}
+		}
+		if(flag == 0) {
+			skillAtIndex = sRep.save(new SkillsModel(0, id, skills.get(newSkill), exp.get(newSkill)));
+			System.out.println(skillAtIndex.toString());
+		}
 	}
-	 
-	candidateRepository.save(cmodelData);
+	for(int skillObj = 0; skillObj < smod.size(); skillObj++) {
+		SkillsModel skillAtIndex = smod.get(skillObj);
+		for(int newSkill = 0; newSkill < skills.size(); newSkill++) {
+			if(skillAtIndex.getSkillName().equals(skills.get(newSkill))) {
+				skillAtIndex.setExperience(exp.get(newSkill));
+				sRep.save(skillAtIndex);
+				System.out.println(skillAtIndex.toString());
+				break;
+			}
+		}
+	}
 	
-	 candidate.setId(cmodelData.getId());
-	 candidate.setCreateTimestamp(cmodelData.getCreateTimestamp());
-	 candidate.setUpdateTimestamp(cmodelData.getUpdateTimestamp());
-	 candidate.setTotalExperience(cmodelData.getTotalExperience());
+	smod = sRep.findAllByCandidateId(id);
+	for(int expirience = 0; expirience < smod.size(); expirience++ ) {
+		SkillsModel skillAtIndex = smod.get(expirience);
+		sumOfExperience += skillAtIndex.getExperience();
+	}
+	CandidateModel cmodelData = candidateRepository.findById(id).get();
+	cmodelData = setModel(cmodelData, candidate);
+	cmodelData.setTotalExperience(sumOfExperience);
+	
 	 
-	 int i = 0;
-	/* To update skills to skill table */
+	cmodelData = candidateRepository.save(cmodelData);
 
-	List<SkillsModel> smod = sRep.findAllByCandidateId(candidate.getId());
-	 
-	 for( i = 0 ; i < smod.size() ; i++)
-		{
-		 SkillsModel smodelData = smod.get(i);
-//			smod.setCandidateId(cmodelData.getId());
-		 smodelData.setSkillName(skills.get(i));
-		 smodelData.setExperience(exp.get(i));
-			sRep.save(smodelData);
-		} 
-	 
-	 /* To add  extra skills */
-	for( int j = i ; j < skills.size() ; j++)
-	{
-		SkillsModel smodelData = new SkillsModel();
-		smodelData.setCandidateId(candidate.getId());
-		smodelData.setSkillName(skills.get(j));
-		smodelData.setExperience(exp.get(j));
-		sRep.save(smodelData);
-	} 
+	 candidate = setDto(candidate, cmodelData);
+
 
 	return new ResponseEntity<>(candidate, HttpStatus.ACCEPTED);
 }
@@ -281,12 +343,11 @@ public  ResponseEntity deleteSkills(int id, String skills)
 	if(smodel == null)
 		throw new CustomException(100,"Cannot delete the non existing skills");
 	
-	for(int i = 0 ; i < smodel.size() ; i++)
-	{
-	 SkillsModel smodelData = smodel.get(i);
-	smodelData.setDeleted(true);
-	sRep.save(smodelData);
-	}
+	 CandidateModel candidate = candidateRepository.findById(id).get();
+	 SkillsModel smodelData = smodel.get(0);
+	 candidate.setTotalExperience(candidate.getTotalExperience() - smodelData.getExperience());
+	 sRep.delete(smodelData);
+	 candidateRepository.save(candidate);
 	return new ResponseEntity<>(HttpStatus.ACCEPTED);
 }
 
