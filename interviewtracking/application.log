@@ -3764,3 +3764,929 @@ Caused by: java.sql.SQLSyntaxErrorException: Invalid default value for 'update_t
 	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.executeStatement(DefaultSqlScriptExecutor.java:189) ~[flyway-core-5.2.4.jar:na]
 	... 46 common frames omitted
 
+2019-12-11 12:17:02.691  INFO 9141 --- [restartedMain] c.r.i.InterviewtrackingApplication       : Starting InterviewtrackingApplication on kishancd-ubuntu with PID 9141 (/media/krishnacd/Development/Interview-Tracking/interviewtracking/bin/main started by krishnacd in /media/krishnacd/Development/Interview-Tracking/interviewtracking)
+2019-12-11 12:17:02.694  INFO 9141 --- [restartedMain] c.r.i.InterviewtrackingApplication       : No active profile set, falling back to default profiles: default
+2019-12-11 12:17:02.778  INFO 9141 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-12-11 12:17:02.779  INFO 9141 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-12-11 12:17:04.090  INFO 9141 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-12-11 12:17:04.252  INFO 9141 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 147ms. Found 5 repository interfaces.
+2019-12-11 12:17:04.829  INFO 9141 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$69094efb] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-12-11 12:17:05.236  INFO 9141 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
+2019-12-11 12:17:05.270  INFO 9141 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-12-11 12:17:05.271  INFO 9141 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.26]
+2019-12-11 12:17:05.383  INFO 9141 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-12-11 12:17:05.384  INFO 9141 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2604 ms
+2019-12-11 12:17:05.645  INFO 9141 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 5.2.4 by Boxfuse
+2019-12-11 12:17:05.652  INFO 9141 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-12-11 12:17:06.079  INFO 9141 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2019-12-11 12:17:06.082  INFO 9141 --- [restartedMain] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:mysql://localhost:3306/demointerview (MySQL 5.7)
+2019-12-11 12:17:06.173  INFO 9141 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.028s)
+2019-12-11 12:17:06.195  INFO 9141 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema `demointerview`: << Empty Schema >>
+2019-12-11 12:17:06.198  INFO 9141 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `demointerview` to version 1 - dataSql
+2019-12-11 12:17:06.233  WARN 9141 --- [restartedMain] o.f.c.i.s.DefaultSqlScriptExecutor       : DB: Table 'hibernate_sequence' already exists (SQL State: 42S01 - Error Code: 1050)
+2019-12-11 12:17:06.235 ERROR 9141 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migration of schema `demointerview` to version 1 - dataSql failed! Please restore backups and roll back database and code!
+2019-12-11 12:17:06.281  INFO 9141 --- [restartedMain] o.f.c.i.c.SqlScriptCallbackFactory       : Executing SQL callback: afterMigrateError
+2019-12-11 12:17:06.338  WARN 9141 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: 
+Migration V1__dataSql.sql failed
+--------------------------------
+SQL State  : 42S01
+Error Code : 1050
+Message    : Table 'hibernate_sequence' already exists
+Location   : db/migration/V1__dataSql.sql (/media/krishnacd/Development/Interview-Tracking/interviewtracking/bin/main/db/migration/V1__dataSql.sql)
+Line       : 1
+Statement  : create table hibernate_sequence
+(
+next_val bigint
+)ENGINE = InnoDB DEFAULT CHARSET = utf8
+
+2019-12-11 12:17:06.339  INFO 9141 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2019-12-11 12:17:06.359  INFO 9141 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2019-12-11 12:17:06.363  INFO 9141 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2019-12-11 12:17:06.378  INFO 9141 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-12-11 12:17:06.384 ERROR 9141 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: 
+Migration V1__dataSql.sql failed
+--------------------------------
+SQL State  : 42S01
+Error Code : 1050
+Message    : Table 'hibernate_sequence' already exists
+Location   : db/migration/V1__dataSql.sql (/media/krishnacd/Development/Interview-Tracking/interviewtracking/bin/main/db/migration/V1__dataSql.sql)
+Line       : 1
+Statement  : create table hibernate_sequence
+(
+next_val bigint
+)ENGINE = InnoDB DEFAULT CHARSET = utf8
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1778) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:307) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1105) ~[spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867) ~[spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) ~[spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:744) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:391) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1204) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.robosoft.interviewtracking.InterviewtrackingApplication.main(InterviewtrackingApplication.java:10) [main/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_211]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_211]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_211]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_211]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) [spring-boot-devtools-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+Caused by: org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: 
+Migration V1__dataSql.sql failed
+--------------------------------
+SQL State  : 42S01
+Error Code : 1050
+Message    : Table 'hibernate_sequence' already exists
+Location   : db/migration/V1__dataSql.sql (/media/krishnacd/Development/Interview-Tracking/interviewtracking/bin/main/db/migration/V1__dataSql.sql)
+Line       : 1
+Statement  : create table hibernate_sequence
+(
+next_val bigint
+)ENGINE = InnoDB DEFAULT CHARSET = utf8
+
+	at org.flywaydb.core.internal.command.DbMigrate.doMigrateGroup(DbMigrate.java:370) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.access$200(DbMigrate.java:54) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate$3.call(DbMigrate.java:284) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.jdbc.TransactionTemplate.execute(TransactionTemplate.java:74) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.applyMigrations(DbMigrate.java:281) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.migrateGroup(DbMigrate.java:246) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.access$100(DbMigrate.java:54) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate$2.call(DbMigrate.java:164) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate$2.call(DbMigrate.java:161) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.database.mysql.MySQLNamedLockTemplate.execute(MySQLNamedLockTemplate.java:60) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.database.mysql.MySQLConnection.lock(MySQLConnection.java:147) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory.lock(JdbcTableSchemaHistory.java:155) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.migrateAll(DbMigrate.java:161) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.migrate(DbMigrate.java:139) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1395) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1356) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.execute(Flyway.java:1711) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.migrate(Flyway.java:1356) ~[flyway-core-5.2.4.jar:na]
+	at org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:65) ~[spring-boot-autoconfigure-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1837) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1774) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	... 23 common frames omitted
+Caused by: org.flywaydb.core.internal.sqlscript.FlywaySqlScriptException: 
+Migration V1__dataSql.sql failed
+--------------------------------
+SQL State  : 42S01
+Error Code : 1050
+Message    : Table 'hibernate_sequence' already exists
+Location   : db/migration/V1__dataSql.sql (/media/krishnacd/Development/Interview-Tracking/interviewtracking/bin/main/db/migration/V1__dataSql.sql)
+Line       : 1
+Statement  : create table hibernate_sequence
+(
+next_val bigint
+)ENGINE = InnoDB DEFAULT CHARSET = utf8
+
+	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.handleException(DefaultSqlScriptExecutor.java:253) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.executeStatement(DefaultSqlScriptExecutor.java:202) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.execute(DefaultSqlScriptExecutor.java:125) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.resolver.sql.SqlMigrationExecutor.execute(SqlMigrationExecutor.java:77) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.doMigrateGroup(DbMigrate.java:367) ~[flyway-core-5.2.4.jar:na]
+	... 43 common frames omitted
+Caused by: java.sql.SQLSyntaxErrorException: Table 'hibernate_sequence' already exists
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:764) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:648) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-3.2.0.jar:na]
+	at org.flywaydb.core.internal.jdbc.JdbcTemplate.executeStatement(JdbcTemplate.java:235) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.sqlscript.StandardSqlStatement.execute(StandardSqlStatement.java:42) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.executeStatement(DefaultSqlScriptExecutor.java:189) ~[flyway-core-5.2.4.jar:na]
+	... 46 common frames omitted
+
+2019-12-11 12:17:25.953  INFO 9179 --- [restartedMain] c.r.i.InterviewtrackingApplication       : Starting InterviewtrackingApplication on kishancd-ubuntu with PID 9179 (/media/krishnacd/Development/Interview-Tracking/interviewtracking/bin/main started by krishnacd in /media/krishnacd/Development/Interview-Tracking/interviewtracking)
+2019-12-11 12:17:25.957  INFO 9179 --- [restartedMain] c.r.i.InterviewtrackingApplication       : No active profile set, falling back to default profiles: default
+2019-12-11 12:17:26.030  INFO 9179 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-12-11 12:17:26.030  INFO 9179 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-12-11 12:17:27.184  INFO 9179 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-12-11 12:17:27.311  INFO 9179 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 116ms. Found 5 repository interfaces.
+2019-12-11 12:17:27.901  INFO 9179 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$dd9d7965] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-12-11 12:17:28.341  INFO 9179 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
+2019-12-11 12:17:28.374  INFO 9179 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-12-11 12:17:28.374  INFO 9179 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.26]
+2019-12-11 12:17:28.494  INFO 9179 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-12-11 12:17:28.495  INFO 9179 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2464 ms
+2019-12-11 12:17:28.742  INFO 9179 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 5.2.4 by Boxfuse
+2019-12-11 12:17:28.749  INFO 9179 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-12-11 12:17:29.166  INFO 9179 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2019-12-11 12:17:29.169  INFO 9179 --- [restartedMain] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:mysql://localhost:3306/demointerview (MySQL 5.7)
+2019-12-11 12:17:29.244  INFO 9179 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.022s)
+2019-12-11 12:17:29.256  INFO 9179 --- [restartedMain] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table: `demointerview`.`flyway_schema_history`
+2019-12-11 12:17:29.749  INFO 9179 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema `demointerview`: << Empty Schema >>
+2019-12-11 12:17:29.751  INFO 9179 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `demointerview` to version 1 - dataSql
+2019-12-11 12:17:30.048  WARN 9179 --- [restartedMain] o.f.c.i.s.DefaultSqlScriptExecutor       : DB: Invalid default value for 'update_timestamp' (SQL State: 42000 - Error Code: 1067)
+2019-12-11 12:17:30.050 ERROR 9179 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migration of schema `demointerview` to version 1 - dataSql failed! Please restore backups and roll back database and code!
+2019-12-11 12:17:30.087  INFO 9179 --- [restartedMain] o.f.c.i.c.SqlScriptCallbackFactory       : Executing SQL callback: afterMigrateError
+2019-12-11 12:17:30.156  WARN 9179 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: 
+Migration V1__dataSql.sql failed
+--------------------------------
+SQL State  : 42000
+Error Code : 1067
+Message    : Invalid default value for 'update_timestamp'
+Location   : db/migration/V1__dataSql.sql (/media/krishnacd/Development/Interview-Tracking/interviewtracking/bin/main/db/migration/V1__dataSql.sql)
+Line       : 8
+Statement  : create table candidate
+(
+id INT NOT NULL AUTO_INCREMENT,
+name varchar(20) NOT NULL,
+address varchar(20),
+date_of_birth date,
+qualification varchar(20) NOT NULL,
+total_experience int,
+experience int,
+notice_period int,
+salary_expectation float,
+able_to_relocate boolean,
+current_salary float,
+gender varchar(20),
+phone varchar(20) NOT NULL,
+email varchar(20) NOT NULL,
+deleted boolean,
+shortListed boolean,
+create_timestamp timestamp NOT NULL,
+update_timestamp timestamp NOT NULL,
+unique_id varchar(20) NOT NULL,
+previous_company varchar(20),
+attempt_count int,
+carrier_start_date varchar(20),
+applicant_type varchar(20),
+post_applied varchar(20),
+referal_id varchar(20),
+primary key(id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8
+
+2019-12-11 12:17:30.157  INFO 9179 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2019-12-11 12:17:30.168  INFO 9179 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2019-12-11 12:17:30.172  INFO 9179 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2019-12-11 12:17:30.188  INFO 9179 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-12-11 12:17:30.195 ERROR 9179 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: 
+Migration V1__dataSql.sql failed
+--------------------------------
+SQL State  : 42000
+Error Code : 1067
+Message    : Invalid default value for 'update_timestamp'
+Location   : db/migration/V1__dataSql.sql (/media/krishnacd/Development/Interview-Tracking/interviewtracking/bin/main/db/migration/V1__dataSql.sql)
+Line       : 8
+Statement  : create table candidate
+(
+id INT NOT NULL AUTO_INCREMENT,
+name varchar(20) NOT NULL,
+address varchar(20),
+date_of_birth date,
+qualification varchar(20) NOT NULL,
+total_experience int,
+experience int,
+notice_period int,
+salary_expectation float,
+able_to_relocate boolean,
+current_salary float,
+gender varchar(20),
+phone varchar(20) NOT NULL,
+email varchar(20) NOT NULL,
+deleted boolean,
+shortListed boolean,
+create_timestamp timestamp NOT NULL,
+update_timestamp timestamp NOT NULL,
+unique_id varchar(20) NOT NULL,
+previous_company varchar(20),
+attempt_count int,
+carrier_start_date varchar(20),
+applicant_type varchar(20),
+post_applied varchar(20),
+referal_id varchar(20),
+primary key(id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1778) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:307) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1105) ~[spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867) ~[spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) ~[spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:744) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:391) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1204) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.robosoft.interviewtracking.InterviewtrackingApplication.main(InterviewtrackingApplication.java:10) [main/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_211]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_211]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_211]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_211]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) [spring-boot-devtools-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+Caused by: org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: 
+Migration V1__dataSql.sql failed
+--------------------------------
+SQL State  : 42000
+Error Code : 1067
+Message    : Invalid default value for 'update_timestamp'
+Location   : db/migration/V1__dataSql.sql (/media/krishnacd/Development/Interview-Tracking/interviewtracking/bin/main/db/migration/V1__dataSql.sql)
+Line       : 8
+Statement  : create table candidate
+(
+id INT NOT NULL AUTO_INCREMENT,
+name varchar(20) NOT NULL,
+address varchar(20),
+date_of_birth date,
+qualification varchar(20) NOT NULL,
+total_experience int,
+experience int,
+notice_period int,
+salary_expectation float,
+able_to_relocate boolean,
+current_salary float,
+gender varchar(20),
+phone varchar(20) NOT NULL,
+email varchar(20) NOT NULL,
+deleted boolean,
+shortListed boolean,
+create_timestamp timestamp NOT NULL,
+update_timestamp timestamp NOT NULL,
+unique_id varchar(20) NOT NULL,
+previous_company varchar(20),
+attempt_count int,
+carrier_start_date varchar(20),
+applicant_type varchar(20),
+post_applied varchar(20),
+referal_id varchar(20),
+primary key(id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8
+
+	at org.flywaydb.core.internal.command.DbMigrate.doMigrateGroup(DbMigrate.java:370) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.access$200(DbMigrate.java:54) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate$3.call(DbMigrate.java:284) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.jdbc.TransactionTemplate.execute(TransactionTemplate.java:74) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.applyMigrations(DbMigrate.java:281) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.migrateGroup(DbMigrate.java:246) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.access$100(DbMigrate.java:54) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate$2.call(DbMigrate.java:164) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate$2.call(DbMigrate.java:161) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.database.mysql.MySQLNamedLockTemplate.execute(MySQLNamedLockTemplate.java:60) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.database.mysql.MySQLConnection.lock(MySQLConnection.java:147) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory.lock(JdbcTableSchemaHistory.java:155) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.migrateAll(DbMigrate.java:161) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.migrate(DbMigrate.java:139) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1395) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1356) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.execute(Flyway.java:1711) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.migrate(Flyway.java:1356) ~[flyway-core-5.2.4.jar:na]
+	at org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:65) ~[spring-boot-autoconfigure-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1837) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1774) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	... 23 common frames omitted
+Caused by: org.flywaydb.core.internal.sqlscript.FlywaySqlScriptException: 
+Migration V1__dataSql.sql failed
+--------------------------------
+SQL State  : 42000
+Error Code : 1067
+Message    : Invalid default value for 'update_timestamp'
+Location   : db/migration/V1__dataSql.sql (/media/krishnacd/Development/Interview-Tracking/interviewtracking/bin/main/db/migration/V1__dataSql.sql)
+Line       : 8
+Statement  : create table candidate
+(
+id INT NOT NULL AUTO_INCREMENT,
+name varchar(20) NOT NULL,
+address varchar(20),
+date_of_birth date,
+qualification varchar(20) NOT NULL,
+total_experience int,
+experience int,
+notice_period int,
+salary_expectation float,
+able_to_relocate boolean,
+current_salary float,
+gender varchar(20),
+phone varchar(20) NOT NULL,
+email varchar(20) NOT NULL,
+deleted boolean,
+shortListed boolean,
+create_timestamp timestamp NOT NULL,
+update_timestamp timestamp NOT NULL,
+unique_id varchar(20) NOT NULL,
+previous_company varchar(20),
+attempt_count int,
+carrier_start_date varchar(20),
+applicant_type varchar(20),
+post_applied varchar(20),
+referal_id varchar(20),
+primary key(id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8
+
+	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.handleException(DefaultSqlScriptExecutor.java:253) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.executeStatement(DefaultSqlScriptExecutor.java:202) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.execute(DefaultSqlScriptExecutor.java:125) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.resolver.sql.SqlMigrationExecutor.execute(SqlMigrationExecutor.java:77) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.doMigrateGroup(DbMigrate.java:367) ~[flyway-core-5.2.4.jar:na]
+	... 43 common frames omitted
+Caused by: java.sql.SQLSyntaxErrorException: Invalid default value for 'update_timestamp'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:764) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:648) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-3.2.0.jar:na]
+	at org.flywaydb.core.internal.jdbc.JdbcTemplate.executeStatement(JdbcTemplate.java:235) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.sqlscript.StandardSqlStatement.execute(StandardSqlStatement.java:42) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.executeStatement(DefaultSqlScriptExecutor.java:189) ~[flyway-core-5.2.4.jar:na]
+	... 46 common frames omitted
+
+2019-12-11 12:24:07.801  INFO 9288 --- [restartedMain] c.r.i.InterviewtrackingApplication       : Starting InterviewtrackingApplication on kishancd-ubuntu with PID 9288 (/media/krishnacd/Development/Interview-Tracking/interviewtracking/bin/main started by krishnacd in /media/krishnacd/Development/Interview-Tracking/interviewtracking)
+2019-12-11 12:24:07.807  INFO 9288 --- [restartedMain] c.r.i.InterviewtrackingApplication       : No active profile set, falling back to default profiles: default
+2019-12-11 12:24:07.935  INFO 9288 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-12-11 12:24:07.936  INFO 9288 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-12-11 12:24:09.260  INFO 9288 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-12-11 12:24:09.426  INFO 9288 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 152ms. Found 5 repository interfaces.
+2019-12-11 12:24:10.097  INFO 9288 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$cf81a0e5] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-12-11 12:24:10.582  INFO 9288 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
+2019-12-11 12:24:10.615  INFO 9288 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-12-11 12:24:10.616  INFO 9288 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.26]
+2019-12-11 12:24:10.721  INFO 9288 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-12-11 12:24:10.722  INFO 9288 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2786 ms
+2019-12-11 12:24:10.970  INFO 9288 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 5.2.4 by Boxfuse
+2019-12-11 12:24:10.978  INFO 9288 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-12-11 12:24:11.376  INFO 9288 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2019-12-11 12:24:11.379  INFO 9288 --- [restartedMain] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:mysql://localhost:3306/demointerview (MySQL 5.7)
+2019-12-11 12:24:11.463  INFO 9288 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.026s)
+2019-12-11 12:24:11.479  INFO 9288 --- [restartedMain] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table: `demointerview`.`flyway_schema_history`
+2019-12-11 12:24:12.237  INFO 9288 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema `demointerview`: << Empty Schema >>
+2019-12-11 12:24:12.239  INFO 9288 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `demointerview` to version 1 - dataSql
+2019-12-11 12:24:12.793  WARN 9288 --- [restartedMain] o.f.c.i.s.DefaultSqlScriptExecutor       : DB: Invalid default value for 'update_timestamp' (SQL State: 42000 - Error Code: 1067)
+2019-12-11 12:24:12.794 ERROR 9288 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migration of schema `demointerview` to version 1 - dataSql failed! Please restore backups and roll back database and code!
+2019-12-11 12:24:12.848  INFO 9288 --- [restartedMain] o.f.c.i.c.SqlScriptCallbackFactory       : Executing SQL callback: afterMigrateError
+2019-12-11 12:24:12.922  WARN 9288 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: 
+Migration V1__dataSql.sql failed
+--------------------------------
+SQL State  : 42000
+Error Code : 1067
+Message    : Invalid default value for 'update_timestamp'
+Location   : db/migration/V1__dataSql.sql (/media/krishnacd/Development/Interview-Tracking/interviewtracking/bin/main/db/migration/V1__dataSql.sql)
+Line       : 8
+Statement  : create table candidate
+(
+id INT NOT NULL AUTO_INCREMENT,
+name varchar(20) NOT NULL,
+address varchar(20),
+date_of_birth date,
+qualification varchar(20) NOT NULL,
+total_experience int,
+experience int,
+notice_period int,
+salary_expectation float,
+able_to_relocate boolean,
+current_salary float,
+gender varchar(20),
+phone varchar(20) NOT NULL,
+email varchar(20) NOT NULL,
+deleted boolean,
+shortListed boolean,
+create_timestamp timestamp NOT NULL,
+update_timestamp timestamp NOT NULL,
+unique_id varchar(20) NOT NULL,
+previous_company varchar(20),
+attempt_count int,
+carrier_start_date varchar(20),
+applicant_type varchar(20),
+post_applied varchar(20),
+referal_id varchar(20),
+primary key(id)
+) 
+
+2019-12-11 12:24:12.923  INFO 9288 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2019-12-11 12:24:12.941  INFO 9288 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2019-12-11 12:24:12.944  INFO 9288 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2019-12-11 12:24:12.959  INFO 9288 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-12-11 12:24:12.966 ERROR 9288 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: 
+Migration V1__dataSql.sql failed
+--------------------------------
+SQL State  : 42000
+Error Code : 1067
+Message    : Invalid default value for 'update_timestamp'
+Location   : db/migration/V1__dataSql.sql (/media/krishnacd/Development/Interview-Tracking/interviewtracking/bin/main/db/migration/V1__dataSql.sql)
+Line       : 8
+Statement  : create table candidate
+(
+id INT NOT NULL AUTO_INCREMENT,
+name varchar(20) NOT NULL,
+address varchar(20),
+date_of_birth date,
+qualification varchar(20) NOT NULL,
+total_experience int,
+experience int,
+notice_period int,
+salary_expectation float,
+able_to_relocate boolean,
+current_salary float,
+gender varchar(20),
+phone varchar(20) NOT NULL,
+email varchar(20) NOT NULL,
+deleted boolean,
+shortListed boolean,
+create_timestamp timestamp NOT NULL,
+update_timestamp timestamp NOT NULL,
+unique_id varchar(20) NOT NULL,
+previous_company varchar(20),
+attempt_count int,
+carrier_start_date varchar(20),
+applicant_type varchar(20),
+post_applied varchar(20),
+referal_id varchar(20),
+primary key(id)
+) 
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1778) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:307) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1105) ~[spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867) ~[spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) ~[spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:744) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:391) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1204) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.robosoft.interviewtracking.InterviewtrackingApplication.main(InterviewtrackingApplication.java:10) [main/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_211]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_211]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_211]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_211]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) [spring-boot-devtools-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+Caused by: org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: 
+Migration V1__dataSql.sql failed
+--------------------------------
+SQL State  : 42000
+Error Code : 1067
+Message    : Invalid default value for 'update_timestamp'
+Location   : db/migration/V1__dataSql.sql (/media/krishnacd/Development/Interview-Tracking/interviewtracking/bin/main/db/migration/V1__dataSql.sql)
+Line       : 8
+Statement  : create table candidate
+(
+id INT NOT NULL AUTO_INCREMENT,
+name varchar(20) NOT NULL,
+address varchar(20),
+date_of_birth date,
+qualification varchar(20) NOT NULL,
+total_experience int,
+experience int,
+notice_period int,
+salary_expectation float,
+able_to_relocate boolean,
+current_salary float,
+gender varchar(20),
+phone varchar(20) NOT NULL,
+email varchar(20) NOT NULL,
+deleted boolean,
+shortListed boolean,
+create_timestamp timestamp NOT NULL,
+update_timestamp timestamp NOT NULL,
+unique_id varchar(20) NOT NULL,
+previous_company varchar(20),
+attempt_count int,
+carrier_start_date varchar(20),
+applicant_type varchar(20),
+post_applied varchar(20),
+referal_id varchar(20),
+primary key(id)
+) 
+
+	at org.flywaydb.core.internal.command.DbMigrate.doMigrateGroup(DbMigrate.java:370) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.access$200(DbMigrate.java:54) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate$3.call(DbMigrate.java:284) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.jdbc.TransactionTemplate.execute(TransactionTemplate.java:74) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.applyMigrations(DbMigrate.java:281) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.migrateGroup(DbMigrate.java:246) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.access$100(DbMigrate.java:54) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate$2.call(DbMigrate.java:164) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate$2.call(DbMigrate.java:161) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.database.mysql.MySQLNamedLockTemplate.execute(MySQLNamedLockTemplate.java:60) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.database.mysql.MySQLConnection.lock(MySQLConnection.java:147) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory.lock(JdbcTableSchemaHistory.java:155) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.migrateAll(DbMigrate.java:161) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.migrate(DbMigrate.java:139) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1395) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1356) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.execute(Flyway.java:1711) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.migrate(Flyway.java:1356) ~[flyway-core-5.2.4.jar:na]
+	at org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:65) ~[spring-boot-autoconfigure-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1837) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1774) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	... 23 common frames omitted
+Caused by: org.flywaydb.core.internal.sqlscript.FlywaySqlScriptException: 
+Migration V1__dataSql.sql failed
+--------------------------------
+SQL State  : 42000
+Error Code : 1067
+Message    : Invalid default value for 'update_timestamp'
+Location   : db/migration/V1__dataSql.sql (/media/krishnacd/Development/Interview-Tracking/interviewtracking/bin/main/db/migration/V1__dataSql.sql)
+Line       : 8
+Statement  : create table candidate
+(
+id INT NOT NULL AUTO_INCREMENT,
+name varchar(20) NOT NULL,
+address varchar(20),
+date_of_birth date,
+qualification varchar(20) NOT NULL,
+total_experience int,
+experience int,
+notice_period int,
+salary_expectation float,
+able_to_relocate boolean,
+current_salary float,
+gender varchar(20),
+phone varchar(20) NOT NULL,
+email varchar(20) NOT NULL,
+deleted boolean,
+shortListed boolean,
+create_timestamp timestamp NOT NULL,
+update_timestamp timestamp NOT NULL,
+unique_id varchar(20) NOT NULL,
+previous_company varchar(20),
+attempt_count int,
+carrier_start_date varchar(20),
+applicant_type varchar(20),
+post_applied varchar(20),
+referal_id varchar(20),
+primary key(id)
+) 
+
+	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.handleException(DefaultSqlScriptExecutor.java:253) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.executeStatement(DefaultSqlScriptExecutor.java:202) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.execute(DefaultSqlScriptExecutor.java:125) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.resolver.sql.SqlMigrationExecutor.execute(SqlMigrationExecutor.java:77) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.doMigrateGroup(DbMigrate.java:367) ~[flyway-core-5.2.4.jar:na]
+	... 43 common frames omitted
+Caused by: java.sql.SQLSyntaxErrorException: Invalid default value for 'update_timestamp'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:764) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:648) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-3.2.0.jar:na]
+	at org.flywaydb.core.internal.jdbc.JdbcTemplate.executeStatement(JdbcTemplate.java:235) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.sqlscript.StandardSqlStatement.execute(StandardSqlStatement.java:42) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.executeStatement(DefaultSqlScriptExecutor.java:189) ~[flyway-core-5.2.4.jar:na]
+	... 46 common frames omitted
+
+2019-12-11 12:24:53.001  INFO 9332 --- [restartedMain] c.r.i.InterviewtrackingApplication       : Starting InterviewtrackingApplication on kishancd-ubuntu with PID 9332 (/media/krishnacd/Development/Interview-Tracking/interviewtracking/bin/main started by krishnacd in /media/krishnacd/Development/Interview-Tracking/interviewtracking)
+2019-12-11 12:24:53.005  INFO 9332 --- [restartedMain] c.r.i.InterviewtrackingApplication       : No active profile set, falling back to default profiles: default
+2019-12-11 12:24:53.087  INFO 9332 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-12-11 12:24:53.087  INFO 9332 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-12-11 12:24:54.486  INFO 9332 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-12-11 12:24:54.675  INFO 9332 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 174ms. Found 5 repository interfaces.
+2019-12-11 12:24:55.363  INFO 9332 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$f80561ad] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-12-11 12:24:55.814  INFO 9332 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
+2019-12-11 12:24:55.846  INFO 9332 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-12-11 12:24:55.847  INFO 9332 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.26]
+2019-12-11 12:24:55.956  INFO 9332 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-12-11 12:24:55.956  INFO 9332 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2868 ms
+2019-12-11 12:24:56.265  INFO 9332 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 5.2.4 by Boxfuse
+2019-12-11 12:24:56.277  INFO 9332 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-12-11 12:24:56.847  INFO 9332 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2019-12-11 12:24:56.851  INFO 9332 --- [restartedMain] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:mysql://localhost:3306/demointerview (MySQL 5.7)
+2019-12-11 12:24:56.974  INFO 9332 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.044s)
+2019-12-11 12:24:56.992  INFO 9332 --- [restartedMain] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table: `demointerview`.`flyway_schema_history`
+2019-12-11 12:24:57.410  INFO 9332 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema `demointerview`: << Empty Schema >>
+2019-12-11 12:24:57.412  INFO 9332 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `demointerview` to version 1 - dataSql
+2019-12-11 12:24:57.730  WARN 9332 --- [restartedMain] o.f.c.i.s.DefaultSqlScriptExecutor       : DB: Invalid default value for 'update_timestamp' (SQL State: 42000 - Error Code: 1067)
+2019-12-11 12:24:57.731 ERROR 9332 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migration of schema `demointerview` to version 1 - dataSql failed! Please restore backups and roll back database and code!
+2019-12-11 12:24:57.766  INFO 9332 --- [restartedMain] o.f.c.i.c.SqlScriptCallbackFactory       : Executing SQL callback: afterMigrateError
+2019-12-11 12:24:57.823  WARN 9332 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: 
+Migration V1__dataSql.sql failed
+--------------------------------
+SQL State  : 42000
+Error Code : 1067
+Message    : Invalid default value for 'update_timestamp'
+Location   : db/migration/V1__dataSql.sql (/media/krishnacd/Development/Interview-Tracking/interviewtracking/bin/main/db/migration/V1__dataSql.sql)
+Line       : 8
+Statement  : create table candidate
+(
+id INT NOT NULL AUTO_INCREMENT,
+name varchar(20) NOT NULL,
+address varchar(20),
+date_of_birth date,
+qualification varchar(20) NOT NULL,
+total_experience int,
+experience int,
+notice_period int,
+salary_expectation float,
+able_to_relocate boolean,
+current_salary float,
+gender varchar(20),
+phone varchar(20) NOT NULL,
+email varchar(20) NOT NULL,
+deleted boolean,
+shortListed boolean,
+create_timestamp timestamp,
+update_timestamp timestamp,
+unique_id varchar(20) NOT NULL,
+previous_company varchar(20),
+attempt_count int,
+carrier_start_date varchar(20),
+applicant_type varchar(20),
+post_applied varchar(20),
+referal_id varchar(20),
+primary key(id)
+) 
+
+2019-12-11 12:24:57.823  INFO 9332 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2019-12-11 12:24:57.838  INFO 9332 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2019-12-11 12:24:57.842  INFO 9332 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2019-12-11 12:24:57.858  INFO 9332 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-12-11 12:24:57.865 ERROR 9332 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: 
+Migration V1__dataSql.sql failed
+--------------------------------
+SQL State  : 42000
+Error Code : 1067
+Message    : Invalid default value for 'update_timestamp'
+Location   : db/migration/V1__dataSql.sql (/media/krishnacd/Development/Interview-Tracking/interviewtracking/bin/main/db/migration/V1__dataSql.sql)
+Line       : 8
+Statement  : create table candidate
+(
+id INT NOT NULL AUTO_INCREMENT,
+name varchar(20) NOT NULL,
+address varchar(20),
+date_of_birth date,
+qualification varchar(20) NOT NULL,
+total_experience int,
+experience int,
+notice_period int,
+salary_expectation float,
+able_to_relocate boolean,
+current_salary float,
+gender varchar(20),
+phone varchar(20) NOT NULL,
+email varchar(20) NOT NULL,
+deleted boolean,
+shortListed boolean,
+create_timestamp timestamp,
+update_timestamp timestamp,
+unique_id varchar(20) NOT NULL,
+previous_company varchar(20),
+attempt_count int,
+carrier_start_date varchar(20),
+applicant_type varchar(20),
+post_applied varchar(20),
+referal_id varchar(20),
+primary key(id)
+) 
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1778) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:307) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1105) ~[spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867) ~[spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) ~[spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:744) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:391) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1204) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.robosoft.interviewtracking.InterviewtrackingApplication.main(InterviewtrackingApplication.java:10) [main/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_211]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_211]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_211]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_211]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) [spring-boot-devtools-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+Caused by: org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: 
+Migration V1__dataSql.sql failed
+--------------------------------
+SQL State  : 42000
+Error Code : 1067
+Message    : Invalid default value for 'update_timestamp'
+Location   : db/migration/V1__dataSql.sql (/media/krishnacd/Development/Interview-Tracking/interviewtracking/bin/main/db/migration/V1__dataSql.sql)
+Line       : 8
+Statement  : create table candidate
+(
+id INT NOT NULL AUTO_INCREMENT,
+name varchar(20) NOT NULL,
+address varchar(20),
+date_of_birth date,
+qualification varchar(20) NOT NULL,
+total_experience int,
+experience int,
+notice_period int,
+salary_expectation float,
+able_to_relocate boolean,
+current_salary float,
+gender varchar(20),
+phone varchar(20) NOT NULL,
+email varchar(20) NOT NULL,
+deleted boolean,
+shortListed boolean,
+create_timestamp timestamp,
+update_timestamp timestamp,
+unique_id varchar(20) NOT NULL,
+previous_company varchar(20),
+attempt_count int,
+carrier_start_date varchar(20),
+applicant_type varchar(20),
+post_applied varchar(20),
+referal_id varchar(20),
+primary key(id)
+) 
+
+	at org.flywaydb.core.internal.command.DbMigrate.doMigrateGroup(DbMigrate.java:370) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.access$200(DbMigrate.java:54) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate$3.call(DbMigrate.java:284) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.jdbc.TransactionTemplate.execute(TransactionTemplate.java:74) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.applyMigrations(DbMigrate.java:281) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.migrateGroup(DbMigrate.java:246) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.access$100(DbMigrate.java:54) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate$2.call(DbMigrate.java:164) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate$2.call(DbMigrate.java:161) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.database.mysql.MySQLNamedLockTemplate.execute(MySQLNamedLockTemplate.java:60) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.database.mysql.MySQLConnection.lock(MySQLConnection.java:147) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory.lock(JdbcTableSchemaHistory.java:155) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.migrateAll(DbMigrate.java:161) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.migrate(DbMigrate.java:139) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1395) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1356) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.execute(Flyway.java:1711) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.Flyway.migrate(Flyway.java:1356) ~[flyway-core-5.2.4.jar:na]
+	at org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:65) ~[spring-boot-autoconfigure-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1837) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1774) ~[spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	... 23 common frames omitted
+Caused by: org.flywaydb.core.internal.sqlscript.FlywaySqlScriptException: 
+Migration V1__dataSql.sql failed
+--------------------------------
+SQL State  : 42000
+Error Code : 1067
+Message    : Invalid default value for 'update_timestamp'
+Location   : db/migration/V1__dataSql.sql (/media/krishnacd/Development/Interview-Tracking/interviewtracking/bin/main/db/migration/V1__dataSql.sql)
+Line       : 8
+Statement  : create table candidate
+(
+id INT NOT NULL AUTO_INCREMENT,
+name varchar(20) NOT NULL,
+address varchar(20),
+date_of_birth date,
+qualification varchar(20) NOT NULL,
+total_experience int,
+experience int,
+notice_period int,
+salary_expectation float,
+able_to_relocate boolean,
+current_salary float,
+gender varchar(20),
+phone varchar(20) NOT NULL,
+email varchar(20) NOT NULL,
+deleted boolean,
+shortListed boolean,
+create_timestamp timestamp,
+update_timestamp timestamp,
+unique_id varchar(20) NOT NULL,
+previous_company varchar(20),
+attempt_count int,
+carrier_start_date varchar(20),
+applicant_type varchar(20),
+post_applied varchar(20),
+referal_id varchar(20),
+primary key(id)
+) 
+
+	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.handleException(DefaultSqlScriptExecutor.java:253) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.executeStatement(DefaultSqlScriptExecutor.java:202) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.execute(DefaultSqlScriptExecutor.java:125) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.resolver.sql.SqlMigrationExecutor.execute(SqlMigrationExecutor.java:77) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.command.DbMigrate.doMigrateGroup(DbMigrate.java:367) ~[flyway-core-5.2.4.jar:na]
+	... 43 common frames omitted
+Caused by: java.sql.SQLSyntaxErrorException: Invalid default value for 'update_timestamp'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:764) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:648) ~[mysql-connector-java-8.0.17.jar:8.0.17]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-3.2.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-3.2.0.jar:na]
+	at org.flywaydb.core.internal.jdbc.JdbcTemplate.executeStatement(JdbcTemplate.java:235) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.sqlscript.StandardSqlStatement.execute(StandardSqlStatement.java:42) ~[flyway-core-5.2.4.jar:na]
+	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.executeStatement(DefaultSqlScriptExecutor.java:189) ~[flyway-core-5.2.4.jar:na]
+	... 46 common frames omitted
+
+2019-12-11 12:32:43.610  INFO 9637 --- [restartedMain] c.r.i.InterviewtrackingApplication       : Starting InterviewtrackingApplication on kishancd-ubuntu with PID 9637 (/media/krishnacd/Development/Interview-Tracking/interviewtracking/bin/main started by krishnacd in /media/krishnacd/Development/Interview-Tracking/interviewtracking)
+2019-12-11 12:32:43.613  INFO 9637 --- [restartedMain] c.r.i.InterviewtrackingApplication       : No active profile set, falling back to default profiles: default
+2019-12-11 12:32:43.705  INFO 9637 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-12-11 12:32:43.705  INFO 9637 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-12-11 12:32:44.884  INFO 9637 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-12-11 12:32:45.082  INFO 9637 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 182ms. Found 5 repository interfaces.
+2019-12-11 12:32:45.710  INFO 9637 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$f4538ec2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-12-11 12:32:46.237  INFO 9637 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
+2019-12-11 12:32:46.276  INFO 9637 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-12-11 12:32:46.277  INFO 9637 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.26]
+2019-12-11 12:32:46.410  INFO 9637 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-12-11 12:32:46.410  INFO 9637 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2704 ms
+2019-12-11 12:32:46.676  INFO 9637 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 5.2.4 by Boxfuse
+2019-12-11 12:32:46.685  INFO 9637 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-12-11 12:32:47.152  INFO 9637 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2019-12-11 12:32:47.156  INFO 9637 --- [restartedMain] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:mysql://localhost:3306/demointerview (MySQL 5.7)
+2019-12-11 12:32:47.296  INFO 9637 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.048s)
+2019-12-11 12:32:47.320  INFO 9637 --- [restartedMain] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table: `demointerview`.`flyway_schema_history`
+2019-12-11 12:32:47.809  INFO 9637 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema `demointerview`: << Empty Schema >>
+2019-12-11 12:32:47.810  INFO 9637 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `demointerview` to version 1 - dataSql
+2019-12-11 12:32:49.502  INFO 9637 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Successfully applied 1 migration to schema `demointerview` (execution time 00:02.188s)
+2019-12-11 12:32:49.670  INFO 9637 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-12-11 12:32:49.733  INFO 9637 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.12.Final}
+2019-12-11 12:32:49.735  INFO 9637 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-12-11 12:32:49.907  INFO 9637 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-12-11 12:32:50.176  INFO 9637 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2019-12-11 12:32:51.145  INFO 9637 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-12-11 12:32:51.815  INFO 9637 --- [restartedMain] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2019-12-11 12:32:52.260  INFO 9637 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-12-11 12:32:52.314  WARN 9637 --- [restartedMain] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-12-11 12:32:52.538  INFO 9637 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-12-11 12:32:52.626  INFO 9637 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
+2019-12-11 12:32:52.628  INFO 9637 --- [restartedMain] c.r.i.InterviewtrackingApplication       : Started InterviewtrackingApplication in 9.508 seconds (JVM running for 9.935)
