@@ -19,7 +19,7 @@ import lombok.Data;
 public class InterviewProcessModel {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@Column(name = "assignee_id")
@@ -43,8 +43,8 @@ public class InterviewProcessModel {
 	@Column(name = "interview_id")
 	private String interviewId;
 	
-	@Column(name = "createTimestamp")
-	private Timestamp create_timestamp;
+	@Column(name = "create_timestamp")
+	private Timestamp createTimestamp;
 	
 	@Column(name = "update_timestamp")
 	private Timestamp updateTimestamp;

@@ -82,5 +82,7 @@ candidate_id int,
 create_timestamp DATETIME,
 update_timestamp DATETIME,
 deleted boolean ,
+employee_id int,
+interview_id varchar(20),
 primary key(id)
 );
