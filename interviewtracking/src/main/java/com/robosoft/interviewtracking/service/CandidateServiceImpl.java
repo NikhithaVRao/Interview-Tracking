@@ -144,7 +144,9 @@ public class CandidateServiceImpl implements CandidateService{
 		 cdto.setCarrierStartDate(cmodel.getCarrierStartDate());
 		 cdto.setShortListed(cmodel.isShortListed());
 		 cdto.setTotalExperience(cmodel.getTotalExperience());
+		 
 		 List<SkillsModel> smod = sRep.findAllByCandidateId(cmodel.getId());
+		 
 		 List<String> skills = new ArrayList<String>();
 		 List<Integer> exp = new ArrayList<Integer>();
 		 for(int skill = 0; skill < smod.size(); skill++) {

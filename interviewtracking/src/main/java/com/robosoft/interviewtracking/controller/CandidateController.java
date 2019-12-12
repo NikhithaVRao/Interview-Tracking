@@ -70,9 +70,7 @@ public class CandidateController {
 	}
 
 	
-	
-	
-	/* To shortlist */
+		/* To shortlist */
 	
 	@GetMapping(value = "candidate")
 	@ResponseBody 
