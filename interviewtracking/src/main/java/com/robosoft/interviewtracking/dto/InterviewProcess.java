@@ -11,7 +11,7 @@ public class InterviewProcess {
 	
 	private int assigneeId;
 	
-	private String employeeId;
+	private int employeeId;
 	
 	private boolean status;
 	

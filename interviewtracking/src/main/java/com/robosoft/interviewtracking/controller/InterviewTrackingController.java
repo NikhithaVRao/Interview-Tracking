@@ -7,9 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.robosoft.interviewtracking.dto.Candidate;
+import com.robosoft.interviewtracking.dto.InterviewProcess;
 import com.robosoft.interviewtracking.service.InterviewProcessService;
 
 @Controller("/interview")
@@ -21,9 +23,9 @@ public class InterviewTrackingController {
 	
 	@PostMapping(value="interview")
 	@ResponseBody
-	public List<Integer> interview()
+	public List<Integer> interview(@RequestHeader("id") int candidateId, @RequestBody InterviewProcess interview)
 	{
-		return interviewProcessService.add();
+		return interviewProcessService.add(interview);
 	}
 
 

@@ -26,7 +26,7 @@ public class InterviewProcessModel {
 	private int assigneeId;
 	
 	@Column(name = "employee_id")
-	private String employeeId;
+	private int employeeId;
 	
 	@Column
 	private boolean status;
