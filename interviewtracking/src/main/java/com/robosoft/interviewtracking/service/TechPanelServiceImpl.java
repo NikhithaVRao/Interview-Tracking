@@ -83,14 +83,14 @@ public class TechPanelServiceImpl implements TechPanelService
 
 	@Override
 	public ResponseEntity<CommentsDto> addComments(CommentsDto cdto) {
-		
+		System.out.println(cdto);
 		CommentModel cmodel =  new CommentModel();
 		
 		cmodel.setInterviewId(cdto.getInterviewId());
 		cmodel.setRound(cdto.getRound());
 		cmodel.setComments(cdto.getComments());
 		
-		crep.save(cmodel);
+		cmodel = crep.save(cmodel);
 		
 		cdto.setId(cmodel.getId());
 		cdto.setInterviewId(cmodel.getInterviewId());

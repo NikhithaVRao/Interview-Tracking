@@ -42,8 +42,9 @@ public class TechnicalPanelController {
 /* To post comments into comments table */
 	
 	@PostMapping(value = "techPanel/comments")
-	public ResponseEntity<CommentsDto> addComments(CommentsDto comments)
+	public ResponseEntity<CommentsDto> addComments(@RequestBody CommentsDto comments)
 	{
+		System.out.println(comments);
 		return techService.addComments(comments);
 	}
 	

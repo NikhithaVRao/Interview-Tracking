@@ -11,7 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "comments")
+@Table(name = "comment")
 @Data
 @NoArgsConstructor
 public class CommentModel {
