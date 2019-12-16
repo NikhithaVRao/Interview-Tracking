@@ -5,12 +5,16 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.robosoft.interviewtracking.dao.CommentsRepository;
 import com.robosoft.interviewtracking.dao.TechnicalPanelRepository;
 import com.robosoft.interviewtracking.dto.CommentsDto;
+import com.robosoft.interviewtracking.dto.InterviewProcessDto;
 import com.robosoft.interviewtracking.dto.TechnicalPanelDto;
+import com.robosoft.interviewtracking.model.CommentModel;
 import com.robosoft.interviewtracking.model.TechnicalPanelModel;
 
 @Service
@@ -18,6 +22,8 @@ public class TechPanelServiceImpl implements TechPanelService
 {
 	@Autowired
 	TechnicalPanelRepository techPanelRepository;
+	@Autowired
+	CommentsRepository crep;
 	
 	
 	/* To add technical panel */
@@ -76,11 +82,22 @@ public class TechPanelServiceImpl implements TechPanelService
 
 
 	@Override
-	public ResponseEntity<CommentsDto> addComments(CommentsDto comments) {
+	public ResponseEntity<CommentsDto> addComments(CommentsDto cdto) {
 		
 		CommentModel cmodel =  new CommentModel();
 		
-		return null;
+		cmodel.setInterviewId(cdto.getInterviewId());
+		cmodel.setRound(cdto.getRound());
+		cmodel.setComments(cdto.getComments());
+		
+		crep.save(cmodel);
+		
+		cdto.setId(cmodel.getId());
+		cdto.setInterviewId(cmodel.getInterviewId());
+		cdto.setRound(cmodel.getRound());
+		cdto.setComments(cmodel.getComments());
+		
+		return new ResponseEntity<CommentsDto>(cdto, HttpStatus.ACCEPTED);
 	}
 	
 }

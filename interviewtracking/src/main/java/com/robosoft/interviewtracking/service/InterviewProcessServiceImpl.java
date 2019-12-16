@@ -21,11 +21,13 @@ public class InterviewProcessServiceImpl implements InterviewProcessService{
 	@Override
 	public ResponseEntity<InterviewProcessDto> add(int candidateId, InterviewProcessDto interview) {
 
+//		InterviewProcessModel intmodel = new InterviewProcessModel();
+		System.out.println(candidateId);
+		InterviewProcessModel intmodel1 = intrepo.findByCandidateId(candidateId);
+		System.out.println(intmodel1);
+		if(intmodel1 == null)
+		{
 		InterviewProcessModel intmodel = new InterviewProcessModel();
-		//	int cid = intrepo.findByCandidateId(candidateId);
-		
-//		if(cid == 0)
-//		{
 		intmodel.setCandidateId(candidateId);
 		intmodel.setAssigneeId(interview.getAssigneeId());
 		intmodel.setCreateTimestamp(interview.getCreate_timestamp());
@@ -47,11 +49,11 @@ public class InterviewProcessServiceImpl implements InterviewProcessService{
 		interview.setRound(intmodel.getRound()); 
 		interview.setInterviewId(intmodel.getInterviewId());
 		return new ResponseEntity<InterviewProcessDto>(interview, HttpStatus.ACCEPTED);
-//		}
-//		else
-//		{
-//			return new ResponseEntity<InterviewProcessDto>(HttpStatus.ALREADY_REPORTED);
-//		}
+		}
+		else
+		{
+			return new ResponseEntity<InterviewProcessDto>(HttpStatus.ALREADY_REPORTED);
+		}
 		
 	}
 	 
