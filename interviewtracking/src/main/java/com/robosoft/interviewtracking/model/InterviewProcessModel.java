@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
@@ -32,9 +35,6 @@ public class InterviewProcessModel {
 	private boolean status;
 	
 	@Column
-	private String comments;
-
-	@Column
 	private String round; 
 	
 	@Column(name = "candidate_id")
@@ -44,9 +44,11 @@ public class InterviewProcessModel {
 	private String interviewId;
 	
 	@Column(name = "create_timestamp")
+	@CreationTimestamp
 	private Timestamp createTimestamp;
 	
 	@Column(name = "update_timestamp")
+	@UpdateTimestamp
 	private Timestamp updateTimestamp;
 	
 	@Column(name = "deleted")

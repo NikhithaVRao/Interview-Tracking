@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class HRPanel {
+public class HRPanelDto {
 
 	private int id;
 	

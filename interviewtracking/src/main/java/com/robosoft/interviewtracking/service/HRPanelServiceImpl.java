@@ -12,7 +12,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.robosoft.interviewtracking.dao.HRPanelRepository;
-import com.robosoft.interviewtracking.dto.HRPanel;
+import com.robosoft.interviewtracking.dto.HRPanelDto;
 import com.robosoft.interviewtracking.dto.MailDto;
 import com.robosoft.interviewtracking.model.HRPanelModel;
 
@@ -29,7 +29,7 @@ public class HRPanelServiceImpl implements HRPanelService{
 
  /* To add HR panel */
 
-public ResponseEntity<HRPanel> addHRPanel(HRPanel hrPanelDto)
+public ResponseEntity<HRPanelDto> addHRPanel(HRPanelDto hrPanelDto)
 {
 	HRPanelModel hrModel = new HRPanelModel();
 	hrModel.setName(hrPanelDto.getName());

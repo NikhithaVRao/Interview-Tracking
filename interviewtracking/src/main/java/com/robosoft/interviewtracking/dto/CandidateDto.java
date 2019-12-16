@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Candidate {
+public class CandidateDto {
 	
 	private int id;
 	

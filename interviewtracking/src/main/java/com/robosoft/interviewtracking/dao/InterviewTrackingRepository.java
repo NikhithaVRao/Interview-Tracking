@@ -12,7 +12,6 @@ import com.robosoft.interviewtracking.model.InterviewProcessModel;
 
 public interface InterviewTrackingRepository extends JpaRepository<InterviewProcessModel, Integer> {
 
-	@Query("Select c.id from CandidateModel c where c.isShortListed = true")
-	int[]getId();
-	//List<Integer> getId(); 
+	@Query("Select c.id from InterviewProcessModel c ")
+	Integer findByCandidateId(int candidateId); 
 	}

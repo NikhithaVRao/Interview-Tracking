@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class TechnicalPanel {
+public class TechnicalPanelDto {
 
 	private int id;
 

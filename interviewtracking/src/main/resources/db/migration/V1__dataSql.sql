@@ -40,6 +40,7 @@ primary key(id)
 create table hr_panel
 (
 id int not null auto_increment,
+employee_id varchar(20),
 name varchar(20),
 designation varchar(20),
 create_timestamp DATETIME,
@@ -52,6 +53,7 @@ primary key(id)
 create table technical_panel
 (
 id int not null auto_increment,
+employee_id varchar(20),
 name varchar(20),
 expertise varchar(20),
 create_timestamp DATETIME,
@@ -75,7 +77,6 @@ create table interview
 id int not null auto_increment,
 assignee_id int,
 status boolean,
-comments varchar(20),
 round varchar(20),
 final_result varchar(20),
 candidate_id int,
@@ -86,3 +87,13 @@ employee_id int,
 interview_id varchar(20),
 primary key(id)
 );
+
+create table comment
+(
+id int not null auto_increment,
+interview_id int,
+round varchar(20),
+comments varchar(20),
+primary key(id)
+);
+

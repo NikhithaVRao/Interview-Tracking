@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.robosoft.interviewtracking.dto.HRPanel;
+import com.robosoft.interviewtracking.dto.HRPanelDto;
 import com.robosoft.interviewtracking.dto.MailDto;
 import com.robosoft.interviewtracking.exception.CustomException;
 import com.robosoft.interviewtracking.service.HRPanelService;
@@ -24,7 +24,7 @@ public class HRPanelController {
 	/* To add HR panel */
 	@PostMapping(value = "hrPanel")
 	@ResponseBody 
-	public ResponseEntity<HRPanel> addHRPanel(@RequestBody HRPanel hrPanelDto)
+	public ResponseEntity<HRPanelDto> addHRPanel(@RequestBody HRPanelDto hrPanelDto)
 	{
 		return hrService.addHRPanel(hrPanelDto);
 	}

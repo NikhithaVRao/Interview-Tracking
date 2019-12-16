@@ -1,5 +1,6 @@
  package com.robosoft.interviewtracking.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -39,7 +40,7 @@ public class CandidateController {
 	/* To add candidate */
 	@PostMapping(value="candidate")
 	@ResponseBody
-	public ResponseEntity<Candidate> addCandidate(@RequestBody Candidate candidate)
+	public ResponseEntity<CandidateDto> addCandidate(@RequestBody CandidateDto candidate)
 	{
 		return candidateService.addCandidate(candidate);
 	}
@@ -47,7 +48,7 @@ public class CandidateController {
 	/* To update candidate model */
 	@PatchMapping(value="candidate/{id}")
 	@ResponseBody
-	public ResponseEntity<Candidate> updateCandidate(@PathVariable("id") int id, @RequestBody Candidate candidate) 
+	public ResponseEntity<CandidateDto> updateCandidate(@PathVariable("id") int id, @RequestBody CandidateDto candidate) 
 	
 	{
 		try {
@@ -74,7 +75,7 @@ public class CandidateController {
 	
 	@GetMapping(value = "candidate")
 	@ResponseBody 
-	public List<Candidate> getShortlistedCandidate(@RequestHeader("experience") int experience, @RequestHeader("skills") String skills)
+	public List<CandidateDto> getShortlistedCandidate(@RequestHeader("experience") int experience, @RequestHeader("skills") String skills)
 	{
 		return candidateService.getShortlistedCandidate(experience, skills);
 	} 

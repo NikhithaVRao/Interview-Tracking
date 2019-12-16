@@ -32,16 +32,21 @@ public class HRPanelModel {
 	
 	@Column(name = "name")
 	private String name;
+	
 	@Column(name = "designation")
 	private String designation;
+	
 	@Column(name = "create_timestamp")
 	@CreationTimestamp
 	private Timestamp createTimestamp;
+	
 	@Column(name = "update_timestamp")
 	@UpdateTimestamp
 	private Timestamp updateTimestamp;
+	
 	@Column(name = "email")
 	private String email;
+	
 	@Column(name = "deleted")
 	private boolean isDeleted;
 }

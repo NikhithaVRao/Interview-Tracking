@@ -1,12 +1,16 @@
 package com.robosoft.interviewtracking.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.robosoft.interviewtracking.dao.InterviewTrackingRepository;
-import com.robosoft.interviewtracking.dto.InterviewProcess;
+import com.robosoft.interviewtracking.dto.CandidateDto;
+import com.robosoft.interviewtracking.dto.InterviewProcessDto;
 import com.robosoft.interviewtracking.model.InterviewProcessModel;
 
 @Service
@@ -15,36 +19,43 @@ public class InterviewProcessServiceImpl implements InterviewProcessService{
 	InterviewTrackingRepository intrepo;
 
 	@Override
-	public List<Integer> add(InterviewProcess interview) {
-		//List<Integer> idList = intrepo.getId();
+	public ResponseEntity<InterviewProcessDto> add(int candidateId, InterviewProcessDto interview) {
+
 		InterviewProcessModel intmodel = new InterviewProcessModel();
+		//	int cid = intrepo.findByCandidateId(candidateId);
 		
+//		if(cid == 0)
+//		{
+		intmodel.setCandidateId(candidateId);
 		intmodel.setAssigneeId(interview.getAssigneeId());
 		intmodel.setCreateTimestamp(interview.getCreate_timestamp());
 		intmodel.setUpdateTimestamp(interview.getUpdate_timestamp());
 		intmodel.setEmployeeId(interview.getEmployeeId());
 		intmodel.setRound(interview.getRound());
-		fetchShortListedCandidate();
+		
+		String interviewId = (String.valueOf(LocalDate.now())+" - "+String.valueOf(candidateId));
+		intmodel.setInterviewId(interviewId);
+		
 		intrepo.save(intmodel);
 		
-		return null;
+		interview.setId(intmodel.getId());
+		interview.setCandidateId(intmodel.getCandidateId());
+		interview.setAssigneeId(intmodel.getAssigneeId());
+		interview.setCreate_timestamp(intmodel.getCreateTimestamp());
+		interview.setUpdate_timestamp(intmodel.getUpdateTimestamp());
+		interview.setEmployeeId(intmodel.getEmployeeId());
+		interview.setRound(intmodel.getRound()); 
+		interview.setInterviewId(intmodel.getInterviewId());
+		return new ResponseEntity<InterviewProcessDto>(interview, HttpStatus.ACCEPTED);
+//		}
+//		else
+//		{
+//			return new ResponseEntity<InterviewProcessDto>(HttpStatus.ALREADY_REPORTED);
+//		}
+		
 	}
+	 
 	
-	public void fetchShortListedCandidate() 
-	{
-		int[] idList = intrepo.getId();
-		
-		for(int id = 0; id<idList.length; id++)
-		{
-			InterviewProcessModel intmodel = new InterviewProcessModel();
-			intmodel.setCandidateId(idList[id]);
-			System.out.println(intmodel);
-			intrepo.save(intmodel);
-		}
-		
-		
-	}
-
 }	
 	
 	

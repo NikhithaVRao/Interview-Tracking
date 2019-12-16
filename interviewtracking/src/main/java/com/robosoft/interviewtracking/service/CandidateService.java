@@ -3,16 +3,16 @@ package com.robosoft.interviewtracking.service;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import com.robosoft.interviewtracking.dto.Candidate;
+import com.robosoft.interviewtracking.dto.CandidateDto;
 
 
 public interface CandidateService {
 
-	ResponseEntity<Candidate> addCandidate(Candidate candidate);
+	ResponseEntity<CandidateDto> addCandidate(CandidateDto candidate);
 
-	List<Candidate> getShortlistedCandidate(int experience, String skills);
+	List<CandidateDto> getShortlistedCandidate(int experience, String skills);
 
-	ResponseEntity<Candidate> updateCandidate(int id, Candidate candidate);
+	ResponseEntity<CandidateDto> updateCandidate(int id, CandidateDto candidate);
 
 	@SuppressWarnings("rawtypes")
 	ResponseEntity deleteSkills(int id, String skills);

@@ -2,12 +2,17 @@ package com.robosoft.interviewtracking.service;
 
 import java.util.List;
 
-import com.robosoft.interviewtracking.dto.TechnicalPanel;
+import org.springframework.http.ResponseEntity;
+
+import com.robosoft.interviewtracking.dto.CommentsDto;
+import com.robosoft.interviewtracking.dto.TechnicalPanelDto;
 
 public interface TechPanelService {
 	
-	TechnicalPanel addTechnicalPanel(TechnicalPanel techPanelDto);
+	TechnicalPanelDto addTechnicalPanel(TechnicalPanelDto techPanelDto);
 
-	List<TechnicalPanel> getPanelist(String panelId, String expertise);
+	List<TechnicalPanelDto> getPanelist(String panelId, String expertise);
+
+	ResponseEntity<CommentsDto> addComments(CommentsDto comments);
 
 }

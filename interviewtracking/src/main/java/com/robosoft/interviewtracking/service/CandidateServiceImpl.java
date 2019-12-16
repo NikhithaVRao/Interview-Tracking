@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.robosoft.interviewtracking.dao.CandidateRepository;
 import com.robosoft.interviewtracking.dao.SkillsRepository;
-import com.robosoft.interviewtracking.dto.Candidate;
+import com.robosoft.interviewtracking.dto.CandidateDto;
 import com.robosoft.interviewtracking.exception.CustomException;
 import com.robosoft.interviewtracking.model.CandidateModel;
 import com.robosoft.interviewtracking.model.SkillsModel;
@@ -35,7 +35,7 @@ public class CandidateServiceImpl implements CandidateService{
 	
 	
 	/* method to implement getter setter to save in model class */ 
-	public CandidateModel setModel(CandidateModel cmodel, Candidate candidate)
+	public CandidateModel setModel(CandidateModel cmodel, CandidateDto candidate)
 	{
 		//CandidateModel cmodel = new CandidateModel();		
 		if(candidate.getName() != null) {
@@ -118,7 +118,7 @@ public class CandidateServiceImpl implements CandidateService{
 	}
 	
 	/* method to implement getter setter to get dto response */ 
-	public Candidate setDto(Candidate cdto, CandidateModel cmodel)
+	public CandidateDto setDto(CandidateDto cdto, CandidateModel cmodel)
 	{
 		cdto.setId(cmodel.getId());
 		 cdto.setName(cmodel.getName());
@@ -160,7 +160,7 @@ public class CandidateServiceImpl implements CandidateService{
 	}
 	
 	/* to add candidate details */
-public ResponseEntity<Candidate> addCandidate(Candidate candidate) {
+public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidate) {
 	
 		CandidateModel candidateModel = candidateRepository.findByUniqueId(candidate.getUniqueId());
 		CandidateModel cmodel = new CandidateModel();
@@ -227,15 +227,15 @@ public ResponseEntity<Candidate> addCandidate(Candidate candidate) {
 			 candidate.setAttemptCount(candidateModel.getAttemptCount());
 
 		}
-		 return new ResponseEntity<Candidate>(candidate, HttpStatus.ACCEPTED);
+		 return new ResponseEntity<CandidateDto>(candidate, HttpStatus.ACCEPTED);
 	}	
 
 /* To get shortlisted candidate */
-public List<Candidate> getShortlistedCandidate(int experience, String skills)
+public List<CandidateDto> getShortlistedCandidate(int experience, String skills)
 {
 	List<SkillsModel> skillModel = sRep.findByCriteria(skills, experience);
 	
-	List<Candidate> candidateList = new ArrayList<Candidate>();
+	List<CandidateDto> candidateList = new ArrayList<CandidateDto>();
 		
 	if(skillModel == null)
 		throw new CustomException(100,"Invalid");
@@ -261,7 +261,7 @@ public List<Candidate> getShortlistedCandidate(int experience, String skills)
 	int shortListedId = 0;
 	for(int i = 0 ; i < skillModel.size() ; i++)
 	{
-		Candidate  cdto =  new Candidate();		
+		CandidateDto  cdto =  new CandidateDto();		
 		cdto.setId(skillModel.get(i).getCandidateId());
 		cdto.setSkills(skillsList);
 		cdto.setExperience( experienceList);
@@ -282,15 +282,17 @@ return candidateList;
 
 /* To update candidate */
 
-public ResponseEntity<Candidate> updateCandidate(int id, Candidate candidate)
+public ResponseEntity<CandidateDto> updateCandidate(int id, CandidateDto candidate)
 {
-	/*List for experience an skills */
+	/*List for experience and skills */
 	List<Integer> exp = new ArrayList<Integer>();
 	exp = candidate.getExperience();
 	List<String> skills = new ArrayList<String>();
 	skills = candidate.getSkills();
 	int sumOfExperience = 0;
 	List<SkillsModel> smod = sRep.findAllByCandidateId(id);
+	
+	/* to compare new skills with old skills and if already present dont update else update */
 	for(int newSkill = 0; newSkill < skills.size(); newSkill++) {
 		int flag = 0;
 		SkillsModel skillAtIndex;
@@ -306,6 +308,8 @@ public ResponseEntity<Candidate> updateCandidate(int id, Candidate candidate)
 			System.out.println(skillAtIndex.toString());
 		}
 	}
+	
+	
 	for(int skillObj = 0; skillObj < smod.size(); skillObj++) {
 		SkillsModel skillAtIndex = smod.get(skillObj);
 		for(int newSkill = 0; newSkill < skills.size(); newSkill++) {

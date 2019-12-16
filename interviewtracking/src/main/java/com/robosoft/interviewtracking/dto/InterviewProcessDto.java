@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
-public class InterviewProcess {
+public class InterviewProcessDto {
 
 	private int id;
 	
@@ -16,8 +16,6 @@ public class InterviewProcess {
 	private boolean status;
 	
 	private String round;
-	
-	private String comments;
 
 	private int candidateId;
 	

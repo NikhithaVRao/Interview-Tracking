@@ -44,8 +44,8 @@ public class TechnicalPanelModel {
 	
 	@Column(name = "email")
 	private String email;
+	
 	@Column(name = "deleted")
 	private boolean isDeleted;
-//	@Column
-//	private String panelId;
+
 }

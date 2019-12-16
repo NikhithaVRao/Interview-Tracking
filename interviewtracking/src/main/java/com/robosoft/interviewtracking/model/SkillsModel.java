@@ -28,9 +28,11 @@ public class SkillsModel {
 	
 	@Column(name = "candidate_id")
 	private int candidateId;
+	
 	@Column(name = "skills_name")
 	@NotNull
 	private String skillName ;
+	
 	@Column
 	@NotNull
 	private int experience;

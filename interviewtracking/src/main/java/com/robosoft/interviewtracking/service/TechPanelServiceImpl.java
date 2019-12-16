@@ -5,10 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.robosoft.interviewtracking.dao.TechnicalPanelRepository;
-import com.robosoft.interviewtracking.dto.TechnicalPanel;
+import com.robosoft.interviewtracking.dto.CommentsDto;
+import com.robosoft.interviewtracking.dto.TechnicalPanelDto;
 import com.robosoft.interviewtracking.model.TechnicalPanelModel;
 
 @Service
@@ -19,7 +21,7 @@ public class TechPanelServiceImpl implements TechPanelService
 	
 	
 	/* To add technical panel */
-	public TechnicalPanel addTechnicalPanel(TechnicalPanel techPanelDto)
+	public TechnicalPanelDto addTechnicalPanel(TechnicalPanelDto techPanelDto)
 	{
 		TechnicalPanelModel techPanelModel = new TechnicalPanelModel();
 		
@@ -41,16 +43,16 @@ public class TechPanelServiceImpl implements TechPanelService
 	}
 
 	
-	public List<TechnicalPanel> getPanelist(String panelId, String expertise)
+	public List<TechnicalPanelDto> getPanelist(String panelId, String expertise)
 	{
 		
 		List<TechnicalPanelModel> techModel = techPanelRepository.findByExpertise(expertise);
-		List<TechnicalPanel> techList = new ArrayList<TechnicalPanel>();
+		List<TechnicalPanelDto> techList = new ArrayList<TechnicalPanelDto>();
 		
 		for(TechnicalPanelModel tpmodel : techModel)
 		{
 		
-			TechnicalPanel techPanel = new TechnicalPanel();
+			TechnicalPanelDto techPanel = new TechnicalPanelDto();
 			
 //			tpmodel.setPanelId(panelId);
 			techPanelRepository.save(tpmodel);
@@ -70,6 +72,15 @@ public class TechPanelServiceImpl implements TechPanelService
 			techList.add(techPanel);
 		}
  		return techList;
+	}
+
+
+	@Override
+	public ResponseEntity<CommentsDto> addComments(CommentsDto comments) {
+		
+		CommentModel cmodel =  new CommentModel();
+		
+		return null;
 	}
 	
 }
