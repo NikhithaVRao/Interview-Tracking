@@ -37,7 +37,6 @@ public class InterviewProcessServiceImpl implements InterviewProcessService{
 		
 		String interviewId = (String.valueOf(LocalDate.now())+" - "+String.valueOf(candidateId));
 		intmodel.setInterviewId(interviewId);
-		System.out.println(intmodel);
 		intrepo.save(intmodel);
 		
 		interview.setId(intmodel.getId());

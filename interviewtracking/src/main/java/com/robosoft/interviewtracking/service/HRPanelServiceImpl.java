@@ -77,7 +77,6 @@ public void sendEmailToPanelists(MailDto mailDto) throws MessagingException
 
 @Override
 public ResponseEntity<CommentsDto> getComment(String interviewId) {
-	System.out.println(1);
 	CommentModel comments = commentsRepsitory.findByInterviewId(interviewId, true);
 	CommentsDto commentDto = new CommentsDto();
 	commentDto.setId(comments.getId());
