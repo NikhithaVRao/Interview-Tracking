@@ -1,5 +1,6 @@
 package com.robosoft.interviewtracking.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -11,9 +12,12 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import com.robosoft.interviewtracking.dao.CommentsRepository;
 import com.robosoft.interviewtracking.dao.HRPanelRepository;
+import com.robosoft.interviewtracking.dto.CommentsDto;
 import com.robosoft.interviewtracking.dto.HRPanelDto;
 import com.robosoft.interviewtracking.dto.MailDto;
+import com.robosoft.interviewtracking.model.CommentModel;
 import com.robosoft.interviewtracking.model.HRPanelModel;
 
 @Service
@@ -26,7 +30,8 @@ public class HRPanelServiceImpl implements HRPanelService{
 	@Autowired
     private JavaMailSender javaMailSender;
 	
-
+	@Autowired
+	CommentsRepository commentsRepsitory;
  /* To add HR panel */
 
 public ResponseEntity<HRPanelDto> addHRPanel(HRPanelDto hrPanelDto)
@@ -68,6 +73,18 @@ public void sendEmailToCandidate(MailDto mailDto) throws MessagingException
 public void sendEmailToPanelists(MailDto mailDto) throws MessagingException
 {
 	SimpleMailMessage msg = new SimpleMailMessage();
+}
+
+@Override
+public ResponseEntity<CommentsDto> getComment(String interviewId) {
+	System.out.println(1);
+	CommentModel comments = commentsRepsitory.findByInterviewId(interviewId, true);
+	CommentsDto commentDto = new CommentsDto();
+	commentDto.setId(comments.getId());
+	commentDto.setInterviewId(comments.getInterviewId());
+	commentDto.setRound(comments.getRound());
+	commentDto.setComments(comments.getComments());
+	return new ResponseEntity<>(commentDto, HttpStatus.OK);
 }
 
 }
