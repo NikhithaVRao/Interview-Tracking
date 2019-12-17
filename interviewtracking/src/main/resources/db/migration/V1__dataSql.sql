@@ -91,7 +91,7 @@ primary key(id)
 create table comment
 (
 id int not null auto_increment,
-interview_id int,
+interview_id varchar(40),
 round varchar(20),
 comments varchar(20),
 primary key(id)
