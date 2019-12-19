@@ -10,8 +10,8 @@ import com.robosoft.interviewtracking.model.SkillsModel;
 
 public interface SkillsRepository extends JpaRepository<SkillsModel, Integer> {
 	
-	@Query("Select s from SkillsModel s where s.skillName = :skillName and s.experience >= :experience and isDeleted = 0")
-	List<SkillsModel> findByCriteria(@Param("skillName") String skillName, @Param("experience") int experience);
+	@Query("Select s from SkillsModel s where s.skillName = :skillName and s.experience >= :experience ")
+	List<SkillsModel> getShortlisted(@Param("skillName") String skillName, @Param("experience") int experience);
 
 	/*To delete by id and skills */
 	List<SkillsModel> findByCandidateIdAndSkillName(int id, String skills);

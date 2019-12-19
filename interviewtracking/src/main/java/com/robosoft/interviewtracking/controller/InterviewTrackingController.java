@@ -20,9 +20,9 @@ public class InterviewTrackingController {
 	
 	@PostMapping(value="interview")
 	@ResponseBody
-	public ResponseEntity<InterviewProcessDto> interview(@RequestHeader("id") int candidateId, @RequestBody InterviewProcessDto interview)
+	public ResponseEntity<InterviewProcessDto> addInterviewDetails(@RequestHeader("id") int candidateId, @RequestBody InterviewProcessDto interview)
 	{
-		return interviewProcessService.add(candidateId, interview);
+		return interviewProcessService.addInterviewDetails(candidateId, interview);
 	}
 
 

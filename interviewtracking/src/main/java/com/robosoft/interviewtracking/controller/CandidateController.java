@@ -61,7 +61,7 @@ public class CandidateController {
 	}
 	
 	/* To delete skills */
-	@SuppressWarnings("rawtypes")
+
 	@DeleteMapping(value = "candidate")
 	@ResponseBody
 	public ResponseEntity deleteSkills(@RequestHeader("id") int id, @RequestHeader("skills") String skills)
@@ -70,7 +70,6 @@ public class CandidateController {
 	
 	}
 
-	
 		/* To shortlist */
 	
 	@GetMapping(value = "candidate")

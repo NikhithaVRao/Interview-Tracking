@@ -32,8 +32,8 @@ public class HRPanelServiceImpl implements HRPanelService{
 	
 	@Autowired
 	CommentsRepository commentsRepsitory;
+	
  /* To add HR panel */
-
 public ResponseEntity<HRPanelDto> addHRPanel(HRPanelDto hrPanelDto)
 {
 	HRPanelModel hrModel = new HRPanelModel();
@@ -75,6 +75,7 @@ public void sendEmailToPanelists(MailDto mailDto) throws MessagingException
 	SimpleMailMessage msg = new SimpleMailMessage();
 }
 
+/* to fetch comments from database */
 @Override
 public ResponseEntity<CommentsDto> getComment(String interviewId) {
 	CommentModel comments = commentsRepsitory.findByInterviewId(interviewId, true);

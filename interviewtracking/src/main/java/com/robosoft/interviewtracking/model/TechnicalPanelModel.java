@@ -48,4 +48,12 @@ public class TechnicalPanelModel {
 	@Column(name = "deleted")
 	private boolean isDeleted;
 
+	@Column(name = "available_morning")
+	private boolean availableMorning;
+	
+	@Column(name = "available_afternoon")
+	private boolean availableAfternoon;
+	
+	@Column(name = "available_evening")
+	private boolean availableEvening;
 }

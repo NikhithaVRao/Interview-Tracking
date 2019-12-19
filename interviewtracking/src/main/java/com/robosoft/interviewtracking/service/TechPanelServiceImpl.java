@@ -49,38 +49,7 @@ public class TechPanelServiceImpl implements TechPanelService
 	}
 
 	
-	public List<TechnicalPanelDto> getPanelist(String panelId, String expertise)
-	{
-		
-		List<TechnicalPanelModel> techModel = techPanelRepository.findByExpertise(expertise);
-		List<TechnicalPanelDto> techList = new ArrayList<TechnicalPanelDto>();
-		
-		for(TechnicalPanelModel tpmodel : techModel)
-		{
-		
-			TechnicalPanelDto techPanel = new TechnicalPanelDto();
-			
-//			tpmodel.setPanelId(panelId);
-			techPanelRepository.save(tpmodel);
-			
-			techPanel.setId(tpmodel.getId());
-			techPanel.setName(tpmodel.getName());
-			techPanel.setEmail(tpmodel.getEmail());
-			techPanel.setCreate_timestamp(tpmodel.getCreateTimestamp());
-			techPanel.setUpdate_timestamp(tpmodel.getUpdateTimestamp());
-			
-			/* to convert a string expertise into list */
-			String [] expertiseArray = tpmodel.getExpertise().split(",");
-			List<String> expertiseList = Arrays.asList(expertiseArray);
-			techPanel.setExpertise(expertiseList);
-			
-//			techPanel.setPanelId(tpmodel.getPanelId());
-			techList.add(techPanel);
-		}
- 		return techList;
-	}
-
-
+/* comments being added by panelists */
 	@Override
 	public ResponseEntity<CommentsDto> addComments(CommentsDto cdto) {
 		System.out.println(cdto);
@@ -100,4 +69,68 @@ public class TechPanelServiceImpl implements TechPanelService
 		return new ResponseEntity<CommentsDto>(cdto, HttpStatus.ACCEPTED);
 	}
 	
+	/* to check the availability of the panelists */
+	@Override
+	public ResponseEntity<TechnicalPanelDto> setAvailability(String employeeId,TechnicalPanelDto techPanelDto) {
+		
+		TechnicalPanelModel techModel =  techPanelRepository.findByEmployeeId(employeeId); 
+		
+		techModel.setAvailableMorning(techPanelDto.isAvailableMorning());
+		techModel.setAvailableAfternoon(techPanelDto.isAvailableAfternoon());
+		techModel.setAvailableEvening(techPanelDto.isAvailableEvening());
+		
+		techPanelRepository.save(techModel);
+		
+		techPanelDto.setId(techModel.getId());
+		techPanelDto.setName(techModel.getName());
+		techPanelDto.setEmployeeId(techModel.getEmployeeId());
+		techPanelDto.setCreate_timestamp(techModel.getCreateTimestamp());
+		techPanelDto.setUpdate_timestamp(techModel.getUpdateTimestamp());
+		techPanelDto.setEmail(techModel.getEmail());
+		
+		String [] expertiseArray = techModel.getExpertise().split(",");
+		List<String> expertiseList = Arrays.asList(expertiseArray);
+		techPanelDto.setExpertise(expertiseList);
+	   
+		techPanelDto.setAvailableMorning(techModel.isAvailableMorning());
+		techPanelDto.setAvailableAfternoon(techModel.isAvailableAfternoon());
+		techPanelDto.setAvailableEvening(techModel.isAvailableEvening());
+		
+		return new ResponseEntity<TechnicalPanelDto>(techPanelDto, HttpStatus.ACCEPTED);
+	}
+
+
+	/* to fetch the details of available panelists for HR*/
+	@Override
+	public List<TechnicalPanelDto> getPanelists() {
+		
+		List<TechnicalPanelModel> techModel = techPanelRepository.findAll();
+		
+		List<TechnicalPanelDto> techList = new ArrayList<TechnicalPanelDto>();
+		
+		System.out.println(techModel);
+		for(TechnicalPanelModel tpModel : techModel)
+		{
+		
+			TechnicalPanelDto techPanel = new TechnicalPanelDto();
+			
+			techPanel.setId(tpModel.getId());
+			techPanel.setEmployeeId(tpModel.getEmployeeId());
+			techPanel.setName(tpModel.getName());
+			techPanel.setEmail(tpModel.getEmail());
+			techPanel.setCreate_timestamp(tpModel.getCreateTimestamp());
+			techPanel.setUpdate_timestamp(tpModel.getUpdateTimestamp());
+			techPanel.setAvailableMorning(tpModel.isAvailableMorning());
+			techPanel.setAvailableAfternoon(tpModel.isAvailableAfternoon());
+			techPanel.setAvailableEvening(tpModel.isAvailableEvening());
+			System.out.println(techPanel);
+			/* to convert a string expertise into list */
+			String [] expertiseArray = tpModel.getExpertise().split(",");
+			List<String> expertiseList = Arrays.asList(expertiseArray);
+			techPanel.setExpertise(expertiseList);
+			
+			techList.add(techPanel);
+		}
+ 		return techList;
+	}
 }
