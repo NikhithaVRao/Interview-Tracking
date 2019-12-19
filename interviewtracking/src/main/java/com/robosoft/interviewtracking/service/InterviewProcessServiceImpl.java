@@ -22,9 +22,7 @@ public class InterviewProcessServiceImpl implements InterviewProcessService{
 	public ResponseEntity<InterviewProcessDto> add(int candidateId, InterviewProcessDto interview) {
 
 //		InterviewProcessModel intmodel = new InterviewProcessModel();
-		System.out.println(candidateId);
 		InterviewProcessModel intmodel1 = intrepo.findByCandidateId(candidateId);
-		System.out.println(intmodel1);
 		if(intmodel1 == null)
 		{
 		InterviewProcessModel intmodel = new InterviewProcessModel();
