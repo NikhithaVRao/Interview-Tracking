@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -37,7 +37,7 @@ public class HRPanelController {
 	}
 	
 	
-//	/* To send an email to candidate*/ 
+	/* To send an email to candidate*/ 
 //	@RequestMapping(value = "candidate/email", method = RequestMethod.POST)
 //	@ResponseBody 
 //	public void sendEmailToCandidate(@RequestBody MailDto mailDto)
@@ -49,7 +49,7 @@ public class HRPanelController {
 //			throw new CustomException(100,"invalid mail");
 //		}
 //	}
-//	
+	
 //	/* To send an email to panelists*/
 //	@RequestMapping(value = "techPanel/email", method = RequestMethod.POST)
 //	@ResponseBody 
@@ -62,6 +62,7 @@ public class HRPanelController {
 //			throw new CustomException(100,"invalid mail");
 //		}
 //	}
+	
 	@GetMapping(value = "techPanel/getcomment")
 	@ResponseBody
 	public ResponseEntity<CommentsDto> getComments(@RequestHeader("interviewid") String interviewId){

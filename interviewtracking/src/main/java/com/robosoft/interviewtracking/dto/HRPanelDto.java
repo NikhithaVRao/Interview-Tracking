@@ -17,9 +17,9 @@ public class HRPanelDto {
 	
 	private String designation;
 	
-	private Timestamp create_timestamp;
+	private Timestamp createTimestamp;
 	
-	private Timestamp update_timestamp;
+	private Timestamp updateTimestamp;
 	
 	private String email;
 	

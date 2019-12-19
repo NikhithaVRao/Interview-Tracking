@@ -44,8 +44,8 @@ public ResponseEntity<HRPanelDto> addHRPanel(HRPanelDto hrPanelDto)
 	hrRepository.save(hrModel);
 	
 	hrPanelDto.setId(hrModel.getId());
-	hrPanelDto.setCreate_timestamp(hrModel.getCreateTimestamp());
-	hrPanelDto.setUpdate_timestamp(hrModel.getUpdateTimestamp());
+	hrPanelDto.setCreateTimestamp(hrModel.getCreateTimestamp());
+	hrPanelDto.setUpdateTimestamp(hrModel.getUpdateTimestamp());
 	return new ResponseEntity<>(hrPanelDto, HttpStatus.ACCEPTED);	
 }
 

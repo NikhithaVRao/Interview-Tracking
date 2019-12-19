@@ -22,7 +22,6 @@ public class InterviewProcessServiceImpl implements InterviewProcessService{
 	@Override
 	public ResponseEntity<InterviewProcessDto> addInterviewDetails(int candidateId, InterviewProcessDto interview) {
 
-//		InterviewProcessModel intmodel = new InterviewProcessModel();
 		System.out.println(candidateId);
 		InterviewProcessModel intmodel1 = intrepo.findByCandidateId(candidateId);
 		System.out.println(intmodel1);

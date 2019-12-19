@@ -13,7 +13,7 @@ public class InterviewProcessDto {
 	
 	private int employeeId;
 	
-	private boolean status;
+	private boolean status = true;
 	
 	private String round;
 

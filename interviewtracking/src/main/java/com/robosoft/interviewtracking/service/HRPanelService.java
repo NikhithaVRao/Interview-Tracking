@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import com.robosoft.interviewtracking.dto.CommentsDto;
 import com.robosoft.interviewtracking.dto.HRPanelDto;
 import com.robosoft.interviewtracking.dto.MailDto;
-import com.robosoft.interviewtracking.model.CommentModel;
 
 public interface HRPanelService {
 
@@ -17,7 +16,7 @@ public interface HRPanelService {
 
 	void sendEmailToCandidate(MailDto mailDto) throws MessagingException;
 
-	void sendEmailToPanelists(MailDto mailDto) throws MessagingException;
+//	void sendEmailToPanelists(MailDto mailDto) throws MessagingException;
 
 	ResponseEntity<CommentsDto> getComment(String interviewId);
 }

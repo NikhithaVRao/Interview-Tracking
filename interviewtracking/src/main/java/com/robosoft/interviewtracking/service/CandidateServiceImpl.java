@@ -358,6 +358,7 @@ public  ResponseEntity deleteSkills(int id, String skills)
 }
 
 
+
 /* send mail to candidate */
 //public void sendEmail(MailDto mailDto) throws MessagingException
 //{
