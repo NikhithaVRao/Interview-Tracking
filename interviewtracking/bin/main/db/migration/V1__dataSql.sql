@@ -60,6 +60,9 @@ create_timestamp DATETIME,
 update_timestamp DATETIME,
 email varchar(20),
 deleted boolean,
+available_morning boolean,
+available_afternoon boolean,
+available_evening boolean,
 primary key(id)
 );
 
@@ -69,6 +72,7 @@ sid int not null auto_increment,
 candidate_id int,
 skills_name varchar(20),
 experience int,
+is_deleted boolean,
 primary key(sid)
 );
 

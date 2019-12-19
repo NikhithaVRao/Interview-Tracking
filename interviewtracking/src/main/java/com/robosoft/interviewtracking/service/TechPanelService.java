@@ -11,8 +11,10 @@ public interface TechPanelService {
 	
 	TechnicalPanelDto addTechnicalPanel(TechnicalPanelDto techPanelDto);
 
-	List<TechnicalPanelDto> getPanelist(String panelId, String expertise);
-
 	ResponseEntity<CommentsDto> addComments(CommentsDto comments);
+
+	ResponseEntity<TechnicalPanelDto> setAvailability(String employeeId, TechnicalPanelDto techPanelDto);
+
+	List<TechnicalPanelDto> getPanelists();
 
 }

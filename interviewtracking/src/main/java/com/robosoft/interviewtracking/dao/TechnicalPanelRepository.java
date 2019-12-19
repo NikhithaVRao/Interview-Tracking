@@ -10,6 +10,8 @@ import com.robosoft.interviewtracking.model.TechnicalPanelModel;
 
 public interface TechnicalPanelRepository extends JpaRepository<TechnicalPanelModel, Integer>{
 
-	@Query("Select t from TechnicalPanelModel t where t.expertise like %:expertise%")
-	List<TechnicalPanelModel> findByExpertise(@Param("expertise") String expertise);
+	@Query("Select t from TechnicalPanelModel t where t.employeeId = :employeeId")
+	TechnicalPanelModel  findByEmployeeId(@Param("employeeId") String employeeId);
+	
+	List<TechnicalPanelModel> findAll();
 }
