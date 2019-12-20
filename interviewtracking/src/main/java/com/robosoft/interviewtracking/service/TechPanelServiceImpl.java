@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.robosoft.interviewtracking.dao.CommentsRepository;
 import com.robosoft.interviewtracking.dao.TechnicalPanelRepository;
 import com.robosoft.interviewtracking.dto.CommentsDto;
-import com.robosoft.interviewtracking.dto.InterviewProcessDto;
 import com.robosoft.interviewtracking.dto.TechnicalPanelDto;
 import com.robosoft.interviewtracking.model.CommentModel;
 import com.robosoft.interviewtracking.model.TechnicalPanelModel;

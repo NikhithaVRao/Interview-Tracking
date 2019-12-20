@@ -18,5 +18,5 @@ public interface HRPanelService {
 
 	ResponseEntity<CommentsDto> getComment(String interviewId);
 	
-	ResponseEntity addStatus(String interviewId, boolean status);
+	ResponseEntity addStatus(String interviewId, boolean status, String nextRound);
 }

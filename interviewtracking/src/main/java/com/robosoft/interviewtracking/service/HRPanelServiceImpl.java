@@ -1,6 +1,5 @@
 package com.robosoft.interviewtracking.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -93,9 +92,10 @@ public ResponseEntity<CommentsDto> getComment(String interviewId) {
 }
 
 @Override
-public ResponseEntity addStatus(String interviewId, boolean status) {
+public ResponseEntity addStatus(String interviewId, boolean status, String nextRound) {
 	InterviewProcessModel interviewProcessModel = intrepo.findByInterviewId(interviewId);
 	interviewProcessModel.setStatus(status);
+	interviewProcessModel.setRound(nextRound);
 	intrepo.save(interviewProcessModel);
 	return new ResponseEntity<>(HttpStatus.OK);
 }
