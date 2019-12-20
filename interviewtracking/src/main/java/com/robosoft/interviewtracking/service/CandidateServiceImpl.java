@@ -59,7 +59,7 @@ public class CandidateServiceImpl implements CandidateService{
 		if(candidate.getCurrentSalary() != 0) {
 			cmodel.setCurrentSalary(candidate.getCurrentSalary());
 		}
-		
+		 
 		if(candidate.getGender() != null) {
 			cmodel.setGender(candidate.getGender());
 		}
