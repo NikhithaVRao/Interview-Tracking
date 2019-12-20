@@ -28,4 +28,10 @@ public class TechnicalPanelDto {
 	private boolean isDeleted;
 	
 	private String panelId;
+	
+	private boolean availableMorning;
+	
+	private boolean availableAfternoon;
+	
+	private boolean availableEvening;
 }

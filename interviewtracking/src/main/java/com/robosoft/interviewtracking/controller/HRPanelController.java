@@ -62,9 +62,15 @@ public class HRPanelController {
 //			throw new CustomException(100,"invalid mail");
 //		}
 //	}
-	@GetMapping(value = "techPanel/getcomment")
+	@GetMapping(value = "hrpanel/getcomment")
 	@ResponseBody
 	public ResponseEntity<CommentsDto> getComments(@RequestHeader("interviewid") String interviewId){
 		return hrService.getComment(interviewId);
+	}
+	
+	@PostMapping(value = "hrpanel/addstatus")
+	@ResponseBody
+	public ResponseEntity addStatus(@RequestHeader("interviewid") String interviewId, @RequestHeader("status") boolean status){
+		return hrService.addStatus(interviewId, status);
 	}
 }

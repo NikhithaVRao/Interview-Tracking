@@ -18,13 +18,12 @@ public class InterviewProcessServiceImpl implements InterviewProcessService{
 	@Autowired
 	InterviewTrackingRepository intrepo;
 
+	/* to add interview details for candidate */
 	@Override
-	public ResponseEntity<InterviewProcessDto> add(int candidateId, InterviewProcessDto interview) {
+	public ResponseEntity<InterviewProcessDto> addInterviewDetails(int candidateId, InterviewProcessDto interview) {
 
 //		InterviewProcessModel intmodel = new InterviewProcessModel();
-		System.out.println(candidateId);
 		InterviewProcessModel intmodel1 = intrepo.findByCandidateId(candidateId);
-		System.out.println(intmodel1);
 		if(intmodel1 == null)
 		{
 		InterviewProcessModel intmodel = new InterviewProcessModel();

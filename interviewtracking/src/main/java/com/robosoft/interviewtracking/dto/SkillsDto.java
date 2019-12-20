@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class SkillsDto {
 		private int candidateId;
 		private String SkillName;
+		private boolean isDeleted;
 	}
 
 

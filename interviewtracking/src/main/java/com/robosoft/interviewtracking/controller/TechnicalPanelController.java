@@ -30,13 +30,20 @@ public class TechnicalPanelController {
 		return techService.addTechnicalPanel(techPanelDto);
 	}
 	
-/* To shortlist panelists */
+/* to set panelists availaibility */
 	
+	@PostMapping(value = "techPanel/availabilty")
+	public ResponseEntity<TechnicalPanelDto> setAvailability(@RequestHeader ("employeeId") String employeeId ,@RequestBody TechnicalPanelDto techPanelDto)
+	{
+		return techService.setAvailability(employeeId,techPanelDto);
+	}
+	
+/* To shortlist panelists */
 	@GetMapping(value = "techPanel")
 	@ResponseBody 
-	public List<TechnicalPanelDto> getPanelists(@RequestHeader("panelId") String panelId, @RequestHeader("expertise") String expertise)
+	public List<TechnicalPanelDto> getPanelists()
 	{
-		return techService.getPanelist(panelId, expertise);
+		return techService.getPanelists();
 	}
 	
 /* To post comments into comments table */

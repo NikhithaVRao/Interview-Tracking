@@ -1,6 +1,5 @@
  package com.robosoft.interviewtracking.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -61,7 +60,7 @@ public class CandidateController {
 	}
 	
 	/* To delete skills */
-	@SuppressWarnings("rawtypes")
+
 	@DeleteMapping(value = "candidate")
 	@ResponseBody
 	public ResponseEntity deleteSkills(@RequestHeader("id") int id, @RequestHeader("skills") String skills)
@@ -70,7 +69,6 @@ public class CandidateController {
 	
 	}
 
-	
 		/* To shortlist */
 	
 	@GetMapping(value = "candidate")

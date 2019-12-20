@@ -42,7 +42,6 @@ public class CandidateModel implements Serializable{
 	private String address;
 	
 	@Column(name = "date_of_birth")
-	//@JsonFormat(pattern = "dd.mm.yyyy")
 	private Date dateOfBirth;
 	
 	@Column
