@@ -59,7 +59,7 @@ public class CandidateServiceImpl implements CandidateService{
 		if(candidate.getCurrentSalary() != 0) {
 			cmodel.setCurrentSalary(candidate.getCurrentSalary());
 		}
-		
+		 
 		if(candidate.getGender() != null) {
 			cmodel.setGender(candidate.getGender());
 		}
@@ -167,7 +167,7 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
 		candidateModel.setCreateTimestamp(candidateDto.getCreateTimestamp());
 		/* to input other dto attributes into model*/
 		candidateModel = setModel(candidateModel, candidateDto);
-		candidateModel.setAttemptCount(candidateDto.getAttemptCount()+1);
+	//	candidateModel.setAttemptCount(candidateDto.getAttemptCount()+1);
 		
 		/* To add total experience */
 		for(int experience = 0; experience < exp.size(); experience++)
@@ -189,7 +189,7 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
  		 candidateDto.setCreateTimestamp(candidateModel.getUpdateTimestamp());
 		 candidateDto.setUpdateTimestamp(candidateModel.getUpdateTimestamp());
 		 candidateDto.setTotalExperience(candidateModel.getTotalExperience());
-		 candidateDto.setAttemptCount(candidateModel.getAttemptCount());
+	//	 candidateDto.setAttemptCount(candidateModel.getAttemptCount());
 		 		 
 		/* To fetch list of strings of skills from candidate dto */
 		List<String> skills = new ArrayList<String>();
@@ -208,6 +208,8 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
 		}
 		else
 		{
+//			if(candidateRepObj.isHrStatus() == false)
+//			{  
 			candidateRepObj.setAttemptCount(candidateRepObj.getAttemptCount()+1);
 			updateCandidate(candidateRepObj.getId(), candidateDto);
 			

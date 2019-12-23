@@ -1,7 +1,5 @@
 package com.robosoft.interviewtracking.service;
 
-import java.util.List;
-
 import javax.mail.MessagingException;
 
 import org.springframework.http.ResponseEntity;
@@ -19,4 +17,6 @@ public interface HRPanelService {
 //	void sendEmailToPanelists(MailDto mailDto) throws MessagingException;
 
 	ResponseEntity<CommentsDto> getComment(String interviewId);
+	
+	ResponseEntity addStatus(String interviewId, boolean status, String nextRound);
 }

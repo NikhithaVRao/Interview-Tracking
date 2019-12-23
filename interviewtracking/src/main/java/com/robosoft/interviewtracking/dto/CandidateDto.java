@@ -70,6 +70,7 @@ public class CandidateDto {
 	
 	private String referalId;
 
+	private boolean hrStatus;
 	
 	
 

@@ -1,7 +1,5 @@
 package com.robosoft.interviewtracking.dto;
 
-import javax.persistence.Column;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

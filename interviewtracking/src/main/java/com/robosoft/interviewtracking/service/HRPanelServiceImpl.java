@@ -1,6 +1,5 @@
 package com.robosoft.interviewtracking.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -14,11 +13,13 @@ import org.springframework.stereotype.Service;
 
 import com.robosoft.interviewtracking.dao.CommentsRepository;
 import com.robosoft.interviewtracking.dao.HRPanelRepository;
+import com.robosoft.interviewtracking.dao.InterviewTrackingRepository;
 import com.robosoft.interviewtracking.dto.CommentsDto;
 import com.robosoft.interviewtracking.dto.HRPanelDto;
 import com.robosoft.interviewtracking.dto.MailDto;
 import com.robosoft.interviewtracking.model.CommentModel;
 import com.robosoft.interviewtracking.model.HRPanelModel;
+import com.robosoft.interviewtracking.model.InterviewProcessModel;
 
 @Service
 public class HRPanelServiceImpl implements HRPanelService{
@@ -33,6 +34,9 @@ public class HRPanelServiceImpl implements HRPanelService{
 	@Autowired
 	CommentsRepository commentsRepsitory;
 	
+	@Autowired
+	InterviewTrackingRepository intrepo;
+
  /* To add HR panel */
 public ResponseEntity<HRPanelDto> addHRPanel(HRPanelDto hrPanelDto)
 {
@@ -70,10 +74,10 @@ public void sendEmailToCandidate(MailDto mailDto) throws MessagingException
 		 javaMailSender.send(msg);
 		}
 }
-public void sendEmailToPanelists(MailDto mailDto) throws MessagingException
-{
-	SimpleMailMessage msg = new SimpleMailMessage();
-}
+//public void sendEmailToPanelists(MailDto mailDto) throws MessagingException
+//{
+//	SimpleMailMessage msg = new SimpleMailMessage();
+//}
 
 /* to fetch comments from database */
 @Override
@@ -85,6 +89,15 @@ public ResponseEntity<CommentsDto> getComment(String interviewId) {
 	commentDto.setRound(comments.getRound());
 	commentDto.setComments(comments.getComments());
 	return new ResponseEntity<>(commentDto, HttpStatus.OK);
+}
+
+@Override
+public ResponseEntity addStatus(String interviewId, boolean status, String nextRound) {
+	InterviewProcessModel interviewProcessModel = intrepo.findByInterviewId(interviewId);
+	interviewProcessModel.setStatus(status);
+	interviewProcessModel.setRound(nextRound);
+	intrepo.save(interviewProcessModel);
+	return new ResponseEntity<>(HttpStatus.OK);
 }
 
 }

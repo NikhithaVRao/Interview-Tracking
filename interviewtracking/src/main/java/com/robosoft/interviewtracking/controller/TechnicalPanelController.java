@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.robosoft.interviewtracking.dto.CommentsDto;
@@ -48,7 +46,7 @@ public class TechnicalPanelController {
 	
 /* To post comments into comments table */
 	
-	@PostMapping(value = "techPanel/comments")
+	@PostMapping(value = "techPanel/addComments")
 	public ResponseEntity<CommentsDto> addComments(@RequestBody CommentsDto comments)
 	{
 		System.out.println(comments);

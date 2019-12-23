@@ -1,15 +1,12 @@
 package com.robosoft.interviewtracking.service;
 
 import java.time.LocalDate;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.robosoft.interviewtracking.dao.InterviewTrackingRepository;
-import com.robosoft.interviewtracking.dto.CandidateDto;
 import com.robosoft.interviewtracking.dto.InterviewProcessDto;
 import com.robosoft.interviewtracking.model.InterviewProcessModel;
 
@@ -22,9 +19,12 @@ public class InterviewProcessServiceImpl implements InterviewProcessService{
 	@Override
 	public ResponseEntity<InterviewProcessDto> addInterviewDetails(int candidateId, InterviewProcessDto interview) {
 
+
 		System.out.println(candidateId);
+
+//		InterviewProcessModel intmodel = new InterviewProcessModel();
+
 		InterviewProcessModel intmodel1 = intrepo.findByCandidateId(candidateId);
-		System.out.println(intmodel1);
 		if(intmodel1 == null)
 		{
 		InterviewProcessModel intmodel = new InterviewProcessModel();
