@@ -96,14 +96,15 @@ public ResponseEntity<CommentsDto> getComment(String interviewId) {
 public ResponseEntity<InterviewProcessDto> addStatus(String interviewId,InterviewProcessDto interviewDto) {
 	InterviewProcessModel interviewProcessModel = intrepo.findByInterviewId(interviewId);
 	interviewProcessModel.setStatus(interviewDto.getStatus());
-	interviewProcessModel.setRound(interviewDto.getRound());
 	interviewProcessModel.setCreateTimestamp(interviewProcessModel.getCreateTimestamp());
+	interviewProcessModel.setRound(interviewProcessModel.getRound());
 	
 	intrepo.save(interviewProcessModel);
 	
 	interviewDto.setId(interviewProcessModel.getId());
 	interviewDto.setInterviewId(interviewProcessModel.getInterviewId());
 	interviewDto.setAssigneeId(interviewProcessModel.getAssigneeId());
+	interviewDto.setRound(interviewProcessModel.getRound());
 	interviewDto.setEmployeeId(interviewProcessModel.getEmployeeId());
 	interviewDto.setCreate_timestamp(interviewProcessModel.getCreateTimestamp());
 	interviewDto.setUpdate_timestamp(interviewProcessModel.getUpdateTimestamp());

@@ -28,4 +28,10 @@ public class CommentModel {
 	
 	@Column(name = "comments")
 	private String comments; 
+	
+	@Column(name = "employee_id")
+	private String employeeId;
+	
+	@Column(name = "assignee_id")
+	private String assigneeId;
 }
