@@ -1458,3 +1458,7 @@ Caused by: org.flywaydb.core.api.FlywayException: Validate failed: Migration che
 2019-12-23 11:45:26.536  INFO 6082 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
 2019-12-23 11:45:26.667  INFO 6082 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
 2019-12-23 11:45:26.671  INFO 6082 --- [restartedMain] c.r.i.InterviewtrackingApplication       : Started InterviewtrackingApplication in 12.542 seconds (JVM running for 13.01)
+2019-12-23 19:25:30.031  INFO 6082 --- [Thread-9] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-12-23 19:25:30.053  INFO 6082 --- [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-12-23 19:25:30.063  INFO 6082 --- [Thread-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2019-12-23 19:25:30.085  INFO 6082 --- [Thread-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
