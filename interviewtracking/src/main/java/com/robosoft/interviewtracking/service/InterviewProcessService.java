@@ -6,7 +6,7 @@ import com.robosoft.interviewtracking.dto.InterviewProcessDto;
 
 public interface InterviewProcessService {
 
-	ResponseEntity<InterviewProcessDto> addInterviewDetails(int candidateId, InterviewProcessDto interview);
+	ResponseEntity<InterviewProcessDto> addInterviewDetails(String interviewId, InterviewProcessDto interview);
 
 	
 

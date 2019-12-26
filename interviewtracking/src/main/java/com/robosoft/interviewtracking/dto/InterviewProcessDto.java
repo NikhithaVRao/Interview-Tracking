@@ -13,11 +13,9 @@ public class InterviewProcessDto {
 	
 	private int employeeId;
 	
-	private boolean status = true;
+	private String status;
 	
 	private String round;
-
-	private int candidateId;
 	
 	private String interviewId;
 	

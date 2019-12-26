@@ -10,8 +10,7 @@ import com.robosoft.interviewtracking.model.InterviewProcessModel;
 
 public interface InterviewTrackingRepository extends JpaRepository<InterviewProcessModel, Integer> {
 
-	@Query("Select c from InterviewProcessModel c where c.candidateId = :id")
-	InterviewProcessModel findByCandidateId(@Param("id")int candidateId);
+	@Query("Select c from InterviewProcessModel c where c.interviewId = :id")
+	InterviewProcessModel findByinterviewId(@Param("id") String interviewId);
 
-	InterviewProcessModel findByInterviewId(String interviewId); 
 	}

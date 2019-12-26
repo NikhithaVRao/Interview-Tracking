@@ -1,5 +1,6 @@
 package com.robosoft.interviewtracking.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,77 +29,81 @@ public class CandidateServiceImpl implements CandidateService{
 //    private JavaMailSender javaMailSender;
 		
 	/* method to implement getter setter to save in model class */ 
-	public CandidateModel setModel(CandidateModel cmodel, CandidateDto candidate)
+	public CandidateModel setModel(CandidateModel candidateModel, CandidateDto candidateDto)
 	{
-		if(candidate.getName() != null) {
-			cmodel.setName(candidate.getName());
+		if(candidateDto.getName() != null) {
+			candidateModel.setName(candidateDto.getName());
 		}
-		if(candidate.getDateOfBirth() != null) {
-			cmodel.setDateOfBirth(candidate.getDateOfBirth());
+		if(candidateDto.getDateOfBirth() != null) {
+			candidateModel.setDateOfBirth(candidateDto.getDateOfBirth());
 		}
-		if(candidate.getAddress() != null) {
-			cmodel.setAddress(candidate.getAddress());
-		}
-		
-		if(candidate.getQualification() != null) {
-			cmodel.setQualification(candidate.getQualification());
+		if(candidateDto.getAddress() != null) {
+			candidateModel.setAddress(candidateDto.getAddress());
 		}
 		
-		if(candidate.getTotalExperience() != 0) {
-			cmodel.setTotalExperience(candidate.getTotalExperience());
+		if(candidateDto.getQualification() != null) {
+			candidateModel.setQualification(candidateDto.getQualification());
 		}
 		
-		if(candidate.getNoticePeriod() != 0) {
-			cmodel.setNoticePeriod(candidate.getNoticePeriod());
+		if(candidateDto.getTotalExperience() != 0) {
+			candidateModel.setTotalExperience(candidateDto.getTotalExperience());
 		}
 		
-		if(candidate.getSalaryExpectation() != 0) {
-			cmodel.setSalaryExpectation(candidate.getSalaryExpectation());
+		if(candidateDto.getNoticePeriod() != 0) {
+			candidateModel.setNoticePeriod(candidateDto.getNoticePeriod());
 		}
 		
-		if(candidate.getCurrentSalary() != 0) {
-			cmodel.setCurrentSalary(candidate.getCurrentSalary());
+		if(candidateDto.getSalaryExpectation() != 0) {
+			candidateModel.setSalaryExpectation(candidateDto.getSalaryExpectation());
+		}
+		
+		if(candidateDto.getCurrentSalary() != 0) {
+			candidateModel.setCurrentSalary(candidateDto.getCurrentSalary());
 		}
 		 
-		if(candidate.getGender() != null) {
-			cmodel.setGender(candidate.getGender());
+		if(candidateDto.getGender() != null) {
+			candidateModel.setGender(candidateDto.getGender());
 		}
 		
-		if(candidate.getPhone() != null) {
-			cmodel.setPhoneNumber(candidate.getPhone());
+		if(candidateDto.getPhone() != null) {
+			candidateModel.setPhoneNumber(candidateDto.getPhone());
 		}
 		
-		if(candidate.getEmail() != null) {
-			cmodel.setEmail(candidate.getEmail());
+		if(candidateDto.getEmail() != null) {
+			candidateModel.setEmail(candidateDto.getEmail());
 		}
 		
-		if(candidate.getUniqueId() != null) {
-			cmodel.setUniqueId(candidate.getUniqueId());
+		if(candidateDto.getUniqueId() != null) {
+			candidateModel.setUniqueId(candidateDto.getUniqueId());
 		}
 		
-		if(candidate.getApplicantType() != null) {
-			cmodel.setApplicantType(candidate.getApplicantType());
+		if(candidateDto.getApplicantType() != null) {
+			candidateModel.setApplicantType(candidateDto.getApplicantType());
 		}
 		
-		if(candidate.getPostApplied() != null) {
-			cmodel.setPostApplied(candidate.getPostApplied());
+		if(candidateDto.getPostApplied() != null) {
+			candidateModel.setPostApplied(candidateDto.getPostApplied());
 		}
 		
-		if(candidate.getPreviousCompany() != null) {
-			cmodel.setPreviousCompany(candidate.getPreviousCompany());
+		if(candidateDto.getPreviousCompany() != null) {
+			candidateModel.setPreviousCompany(candidateDto.getPreviousCompany());
 		}
 		
-		if(candidate.getCarrierStartDate() != null) {
-			cmodel.setCarrierStartDate(candidate.getCarrierStartDate());
+		if(candidateDto.getCarrierStartDate() != null) {
+			candidateModel.setCarrierStartDate(candidateDto.getCarrierStartDate());
 		}
 		
-		if(candidate.getReferalId() != null) {
-			cmodel.setReferalId(candidate.getReferalId());
+		if(candidateDto.getReferalId() != null) {
+			candidateModel.setReferalId(candidateDto.getReferalId());
 		}
 		
+		if(candidateDto.getEvent() != null)
+		{
+			candidateModel.setEvent(candidateDto.getEvent());
+		}
 		
 		try {
-			 cmodel = candidateRepository.save(cmodel);
+			 candidateModel = candidateRepository.save(candidateModel);
 			}
  
 			catch(Exception e)
@@ -106,38 +111,40 @@ public class CandidateServiceImpl implements CandidateService{
 				throw new CustomException(100,"This field is mandatory");
 			}
 		
-		return cmodel;
+		return candidateModel;
 	}
 	
 	/* method to implement getter setter to get dto response */ 
-	public CandidateDto setDto(CandidateDto cdto, CandidateModel cmodel)
+	public CandidateDto setDto(CandidateDto candidateDto, CandidateModel candidateModel)
 	{
-		cdto.setId(cmodel.getId());
-		 cdto.setName(cmodel.getName());
-		 cdto.setAddress(cmodel.getAddress());
-		 cdto.setDateOfBirth(cmodel.getDateOfBirth());
-		 cdto.setAddress(cmodel.getAddress());
-		 cdto.setQualification(cmodel.getQualification());
-		 cdto.setTotalExperience(cmodel.getTotalExperience());
-		 cdto.setNoticePeriod(cmodel.getNoticePeriod());
-		 cdto.setSalaryExpectation(cmodel.getSalaryExpectation());
-		 cdto.setCurrentSalary(cmodel.getCurrentSalary());
-		 cdto.setGender(cmodel.getGender());
-		 cdto.setPhone(cmodel.getPhoneNumber());
-		 cdto.setEmail(cmodel.getEmail());
-		 cdto.setUniqueId(cmodel.getUniqueId());
-		 cdto.setApplicantType(cmodel.getApplicantType());
-		 cdto.setPostApplied(cmodel.getPostApplied());
-		 cdto.setAttemptCount(cmodel.getAttemptCount());
-		 cdto.setCreateTimestamp(cmodel.getCreateTimestamp());
-		 cdto.setUpdateTimestamp(cmodel.getUpdateTimestamp());
-		 cdto.setPreviousCompany(cmodel.getPreviousCompany());
-		 cdto.setReferalId(cmodel.getReferalId());
-		 cdto.setCarrierStartDate(cmodel.getCarrierStartDate());
-		 cdto.setShortListed(cmodel.isShortListed());
-		 cdto.setTotalExperience(cmodel.getTotalExperience());
+		candidateDto.setId(candidateModel.getId());
+		 candidateDto.setName(candidateModel.getName());
+		 candidateDto.setAddress(candidateModel.getAddress());
+		 candidateDto.setDateOfBirth(candidateModel.getDateOfBirth());
+		 candidateDto.setAddress(candidateModel.getAddress());
+		 candidateDto.setQualification(candidateModel.getQualification());
+		 candidateDto.setTotalExperience(candidateModel.getTotalExperience());
+		 candidateDto.setNoticePeriod(candidateModel.getNoticePeriod());
+		 candidateDto.setSalaryExpectation(candidateModel.getSalaryExpectation());
+		 candidateDto.setCurrentSalary(candidateModel.getCurrentSalary());
+		 candidateDto.setGender(candidateModel.getGender());
+		 candidateDto.setPhone(candidateModel.getPhoneNumber());
+		 candidateDto.setEmail(candidateModel.getEmail());
+		 candidateDto.setUniqueId(candidateModel.getUniqueId());
+		 candidateDto.setApplicantType(candidateModel.getApplicantType());
+		 candidateDto.setPostApplied(candidateModel.getPostApplied());
+		 candidateDto.setAttemptCount(candidateModel.getAttemptCount());
+		 candidateDto.setCreateTimestamp(candidateModel.getCreateTimestamp());
+		 candidateDto.setUpdateTimestamp(candidateModel.getUpdateTimestamp());
+		 candidateDto.setPreviousCompany(candidateModel.getPreviousCompany());
+		 candidateDto.setReferalId(candidateModel.getReferalId());
+		 candidateDto.setCarrierStartDate(candidateModel.getCarrierStartDate());
+		 candidateDto.setShortListed(candidateModel.isShortListed());
+		 candidateDto.setTotalExperience(candidateModel.getTotalExperience());
+		 candidateDto.setEvent(candidateModel.getEvent());
+		 candidateDto.setInterviewId(candidateModel.getInterviewId());
 		 
-		 List<SkillsModel> smod = skillsRep.findAllByCandidateId(cmodel.getId());
+		 List<SkillsModel> smod = skillsRep.findAllByCandidateId(candidateModel.getId());
 		 
 		 List<String> skills = new ArrayList<String>();
 		 List<Integer> exp = new ArrayList<Integer>();
@@ -146,9 +153,9 @@ public class CandidateServiceImpl implements CandidateService{
 			 skills.add(skillModel.getSkillName());
 			 exp.add(skillModel.getExperience());
 		 }
-		 cdto.setSkills(skills);
-		 cdto.setExperience(exp);
-		 return cdto;
+		 candidateDto.setSkills(skills);
+		 candidateDto.setExperience(exp);
+		 return candidateDto;
 	}
 	
 	/* to add candidate details */
@@ -248,7 +255,7 @@ public List<CandidateDto> getShortlistedCandidate(int experience, String skills)
 	
 	skillsList.add(skill);
 	experienceList.add( exp);
-	System.out.println(skill);
+	//System.out.println(skill);
 	
 	/* to fetch candidate details for shortlisted candidate id */
 	
@@ -264,13 +271,28 @@ public List<CandidateDto> getShortlistedCandidate(int experience, String skills)
 		
 		CandidateModel candidateRepObj = candidateRepository.findById(shortListedId).get();
 		
+	//	System.out.println(candidateRepObj); 
 		candidateRepObj.setShortListed(true);
 		candidateRepository.save(candidateRepObj);
+		
 
 		/* to set model objects to dto */
 		candidateDto =  setDto(candidateDto,candidateRepObj);
 		candidateList.add(candidateDto);    
 	} 
+	
+	List<CandidateModel> idList = candidateRepository.findShorlistedId();
+	System.out.println(idList);
+	for(int j = 0; j < idList.size(); j++)
+	{
+		CandidateModel candidateRepObj1 = idList.get(j);
+		
+		String interviewId = (String.valueOf(LocalDate.now())+" - "+ (j+1));
+		
+		candidateRepObj1.setInterviewId(interviewId);
+		candidateRepository.save(candidateRepObj1);
+
+	}
 return candidateList;
 	}
 

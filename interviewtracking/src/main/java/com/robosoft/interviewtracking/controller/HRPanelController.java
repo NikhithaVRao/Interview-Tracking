@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.robosoft.interviewtracking.dto.CommentsDto;
 import com.robosoft.interviewtracking.dto.HRPanelDto;
+import com.robosoft.interviewtracking.dto.InterviewProcessDto;
 import com.robosoft.interviewtracking.service.HRPanelService;
 
 @Controller("/hrPanel")
@@ -64,7 +65,7 @@ public class HRPanelController {
 	
 	@PostMapping(value = "hrpanel/addstatus")
 	@ResponseBody
-	public ResponseEntity addStatus(@RequestHeader("interviewid") String interviewId, @RequestHeader("status") boolean status, @RequestHeader("nextround") String nextRound){
-		return hrService.addStatus(interviewId, status, nextRound);
+	public ResponseEntity<InterviewProcessDto> addStatus(@RequestHeader("interviewid") String interviewId, @RequestBody InterviewProcessDto interviewDto){
+		return hrService.addStatus(interviewId, interviewDto);
 	}
 }

@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.robosoft.interviewtracking.dto.CommentsDto;
 import com.robosoft.interviewtracking.dto.HRPanelDto;
+import com.robosoft.interviewtracking.dto.InterviewProcessDto;
 import com.robosoft.interviewtracking.dto.MailDto;
 
 public interface HRPanelService {
@@ -18,5 +19,5 @@ public interface HRPanelService {
 
 	ResponseEntity<CommentsDto> getComment(String interviewId);
 	
-	ResponseEntity addStatus(String interviewId, boolean status, String nextRound);
+	ResponseEntity<InterviewProcessDto> addStatus(String interviewId, InterviewProcessDto interviewDto);
 }
