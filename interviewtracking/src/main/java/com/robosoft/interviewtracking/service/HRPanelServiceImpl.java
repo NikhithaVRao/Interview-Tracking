@@ -11,6 +11,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import com.robosoft.interviewtracking.dao.CandidateRepository;
 import com.robosoft.interviewtracking.dao.CommentsRepository;
 import com.robosoft.interviewtracking.dao.HRPanelRepository;
 import com.robosoft.interviewtracking.dao.InterviewTrackingRepository;
@@ -18,6 +19,7 @@ import com.robosoft.interviewtracking.dto.CommentsDto;
 import com.robosoft.interviewtracking.dto.HRPanelDto;
 import com.robosoft.interviewtracking.dto.InterviewProcessDto;
 import com.robosoft.interviewtracking.dto.MailDto;
+import com.robosoft.interviewtracking.model.CandidateModel;
 import com.robosoft.interviewtracking.model.CommentModel;
 import com.robosoft.interviewtracking.model.HRPanelModel;
 import com.robosoft.interviewtracking.model.InterviewProcessModel;
@@ -37,6 +39,9 @@ public class HRPanelServiceImpl implements HRPanelService{
 	
 	@Autowired
 	InterviewTrackingRepository intrepo;
+	
+	@Autowired
+	CandidateRepository candidateRepository;
 
  /* To add HR panel */
 public ResponseEntity<HRPanelDto> addHRPanel(HRPanelDto hrPanelDto)
@@ -95,20 +100,31 @@ public ResponseEntity<CommentsDto> getComment(String interviewId) {
 @Override
 public ResponseEntity<InterviewProcessDto> addStatus(String interviewId,InterviewProcessDto interviewDto) {
 	InterviewProcessModel interviewProcessModel = intrepo.findByInterviewId(interviewId);
-	interviewProcessModel.setStatus(interviewDto.getStatus());
-	interviewProcessModel.setRound(interviewDto.getRound());
-	interviewProcessModel.setCreateTimestamp(interviewProcessModel.getCreateTimestamp());
+	if(!(interviewId.equalsIgnoreCase("rejected"))) {
+		interviewProcessModel.setStatus(interviewDto.getStatus());
+		interviewProcessModel.setRound(interviewDto.getRound());
+		interviewProcessModel.setCreateTimestamp(interviewProcessModel.getCreateTimestamp());
+		
+		intrepo.save(interviewProcessModel);
+		
+		interviewDto.setId(interviewProcessModel.getId());
+		interviewDto.setInterviewId(interviewProcessModel.getInterviewId());
+		interviewDto.setAssigneeId(interviewProcessModel.getAssigneeId());
+		interviewDto.setEmployeeId(interviewProcessModel.getEmployeeId());
+		interviewDto.setCreate_timestamp(interviewProcessModel.getCreateTimestamp());
+		interviewDto.setUpdate_timestamp(interviewProcessModel.getUpdateTimestamp());
+		
+		return new ResponseEntity<>(interviewDto, HttpStatus.OK);
+	}
+	else {
+		CandidateModel candidate = candidateRepository.findByInterviewId(interviewId);
+		candidate.setApplyStatus(interviewProcessModel.getStatus());
+		candidateRepository.save(candidate);
+		interviewProcessModel.setStatus(interviewDto.getStatus());
+		intrepo.save(interviewProcessModel);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 	
-	intrepo.save(interviewProcessModel);
-	
-	interviewDto.setId(interviewProcessModel.getId());
-	interviewDto.setInterviewId(interviewProcessModel.getInterviewId());
-	interviewDto.setAssigneeId(interviewProcessModel.getAssigneeId());
-	interviewDto.setEmployeeId(interviewProcessModel.getEmployeeId());
-	interviewDto.setCreate_timestamp(interviewProcessModel.getCreateTimestamp());
-	interviewDto.setUpdate_timestamp(interviewProcessModel.getUpdateTimestamp());
-	
-	return new ResponseEntity<>(interviewDto, HttpStatus.OK);
 }
 
 }

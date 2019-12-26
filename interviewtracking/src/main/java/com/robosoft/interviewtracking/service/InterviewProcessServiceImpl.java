@@ -20,7 +20,6 @@ public class InterviewProcessServiceImpl implements InterviewProcessService{
 	public ResponseEntity<InterviewProcessDto> addInterviewDetails(String interviewId, InterviewProcessDto interview) {
 
 
-		InterviewProcessModel intmodel1 = intrepo.findByinterviewId(interviewId);
 		System.out.println(intmodel1);
 		if(intmodel1.getStatus() == null || intmodel1.getStatus() == "selected")
 		{
