@@ -70,7 +70,11 @@ public class CandidateDto {
 	
 	private String referalId;
 
+	private String hrStatus;
 	
+	private String event;
+	
+	private String interviewId;
 	
 
 

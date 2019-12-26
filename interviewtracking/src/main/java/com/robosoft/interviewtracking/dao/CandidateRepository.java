@@ -17,4 +17,6 @@ public interface CandidateRepository extends JpaRepository<CandidateModel, Integ
 		@Query("Select c.name from CandidateModel c where c.isShortListed = true")
 		List<String> getName();
 		
+		@Query("select c from CandidateModel c where c.isShortListed = true")
+		List<CandidateModel> findShorlistedId();
 }

@@ -1,0 +1,1 @@
+alter table interview modify column status varchar(20);

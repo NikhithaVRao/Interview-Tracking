@@ -115,15 +115,19 @@ public class CandidateModel implements Serializable{
 	@Column(name = "final_result")
 	private boolean finalResult;
 	
+
 	public CandidateModel()
 	{
 		super();
 	}
 	
 	@Column(name = "hr_status")
-	private boolean hrStatus;
+	private String applyStatus;
 	
 	@Column(name = "event")
 	private String event;
+	
+	@Column(name = "interview_id")
+	private String interviewId;
 		
 }

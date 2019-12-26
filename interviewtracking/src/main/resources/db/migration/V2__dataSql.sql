@@ -1,2 +1,2 @@
 ALTER TABLE candidate 
-ADD hr_status boolean;
+ADD hr_status varchar(20);

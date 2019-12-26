@@ -32,13 +32,10 @@ public class InterviewProcessModel {
 	private int employeeId;
 	
 	@Column
-	private boolean status = true;
+	private String status ;
 	
 	@Column
 	private String round; 
-	
-	@Column(name = "candidate_id")
-	private int candidateId;
 	
 	@Column(name = "interview_id")
 	private String interviewId;

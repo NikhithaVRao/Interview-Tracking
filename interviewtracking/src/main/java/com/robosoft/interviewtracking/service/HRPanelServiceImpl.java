@@ -16,6 +16,7 @@ import com.robosoft.interviewtracking.dao.HRPanelRepository;
 import com.robosoft.interviewtracking.dao.InterviewTrackingRepository;
 import com.robosoft.interviewtracking.dto.CommentsDto;
 import com.robosoft.interviewtracking.dto.HRPanelDto;
+import com.robosoft.interviewtracking.dto.InterviewProcessDto;
 import com.robosoft.interviewtracking.dto.MailDto;
 import com.robosoft.interviewtracking.model.CommentModel;
 import com.robosoft.interviewtracking.model.HRPanelModel;
@@ -48,8 +49,8 @@ public ResponseEntity<HRPanelDto> addHRPanel(HRPanelDto hrPanelDto)
 	hrRepository.save(hrModel);
 	
 	hrPanelDto.setId(hrModel.getId());
-	hrPanelDto.setCreate_timestamp(hrModel.getCreateTimestamp());
-	hrPanelDto.setUpdate_timestamp(hrModel.getUpdateTimestamp());
+	hrPanelDto.setCreateTimestamp(hrModel.getCreateTimestamp());
+	hrPanelDto.setUpdateTimestamp(hrModel.getUpdateTimestamp());
 	return new ResponseEntity<>(hrPanelDto, HttpStatus.ACCEPTED);	
 }
 
@@ -74,15 +75,15 @@ public void sendEmailToCandidate(MailDto mailDto) throws MessagingException
 		 javaMailSender.send(msg);
 		}
 }
-public void sendEmailToPanelists(MailDto mailDto) throws MessagingException
-{
-	SimpleMailMessage msg = new SimpleMailMessage();
-}
+//public void sendEmailToPanelists(MailDto mailDto) throws MessagingException
+//{
+//	SimpleMailMessage msg = new SimpleMailMessage();
+//}
 
 /* to fetch comments from database */
 @Override
 public ResponseEntity<CommentsDto> getComment(String interviewId) {
-	CommentModel comments = commentsRepsitory.findByInterviewId(interviewId, true);
+	CommentModel comments = commentsRepsitory.findByInterviewId(interviewId);
 	CommentsDto commentDto = new CommentsDto();
 	commentDto.setId(comments.getId());
 	commentDto.setInterviewId(comments.getInterviewId());
@@ -92,12 +93,22 @@ public ResponseEntity<CommentsDto> getComment(String interviewId) {
 }
 
 @Override
-public ResponseEntity addStatus(String interviewId, boolean status, String nextRound) {
+public ResponseEntity<InterviewProcessDto> addStatus(String interviewId,InterviewProcessDto interviewDto) {
 	InterviewProcessModel interviewProcessModel = intrepo.findByInterviewId(interviewId);
-	interviewProcessModel.setStatus(status);
-	interviewProcessModel.setRound(nextRound);
+	interviewProcessModel.setStatus(interviewDto.getStatus());
+	interviewProcessModel.setRound(interviewDto.getRound());
+	interviewProcessModel.setCreateTimestamp(interviewProcessModel.getCreateTimestamp());
+	
 	intrepo.save(interviewProcessModel);
-	return new ResponseEntity<>(HttpStatus.OK);
+	
+	interviewDto.setId(interviewProcessModel.getId());
+	interviewDto.setInterviewId(interviewProcessModel.getInterviewId());
+	interviewDto.setAssigneeId(interviewProcessModel.getAssigneeId());
+	interviewDto.setEmployeeId(interviewProcessModel.getEmployeeId());
+	interviewDto.setCreate_timestamp(interviewProcessModel.getCreateTimestamp());
+	interviewDto.setUpdate_timestamp(interviewProcessModel.getUpdateTimestamp());
+	
+	return new ResponseEntity<>(interviewDto, HttpStatus.OK);
 }
 
 }
