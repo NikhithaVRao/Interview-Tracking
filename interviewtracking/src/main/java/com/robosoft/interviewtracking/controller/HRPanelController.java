@@ -58,7 +58,7 @@ public class HRPanelController {
 
 	@GetMapping(value = "hrpanel/getcomment")
 	@ResponseBody
-	public ResponseEntity<CommentsDto> getComments(@RequestHeader("interviewid") String interviewId){
+	public ResponseEntity<InterviewProcessDto> getComments(@RequestHeader("interviewid") String interviewId){
 		return hrService.getComment(interviewId);
 	}
 	

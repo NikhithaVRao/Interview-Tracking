@@ -10,10 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.robosoft.interviewtracking.dao.CommentsRepository;
+import com.robosoft.interviewtracking.dao.InterviewTrackingRepository;
 import com.robosoft.interviewtracking.dao.TechnicalPanelRepository;
 import com.robosoft.interviewtracking.dto.CommentsDto;
+import com.robosoft.interviewtracking.dto.InterviewProcessDto;
 import com.robosoft.interviewtracking.dto.TechnicalPanelDto;
 import com.robosoft.interviewtracking.model.CommentModel;
+import com.robosoft.interviewtracking.model.InterviewProcessModel;
 import com.robosoft.interviewtracking.model.TechnicalPanelModel;
 
 @Service
@@ -22,7 +25,7 @@ public class TechPanelServiceImpl implements TechPanelService
 	@Autowired
 	TechnicalPanelRepository techPanelRepository;
 	@Autowired
-	CommentsRepository crep;
+	InterviewTrackingRepository interviewRepo;
 	
 	
 	/* To add technical panel */
@@ -50,22 +53,22 @@ public class TechPanelServiceImpl implements TechPanelService
 	
 /* comments being added by panelists */
 	@Override
-	public ResponseEntity<CommentsDto> addComments(CommentsDto cdto) {
-		System.out.println(cdto);
-		CommentModel cmodel =  new CommentModel();
+	public ResponseEntity<InterviewProcessDto> addComments(InterviewProcessDto interviewDto) {
 		
-		cmodel.setInterviewId(cdto.getInterviewId());
-		cmodel.setRound(cdto.getRound());
-		cmodel.setComments(cdto.getComments());
+		InterviewProcessModel interviewModel = interviewRepo.findByInterviewId(interviewDto.getInterviewId());
 		
-		cmodel = crep.save(cmodel);
+		interviewModel.setInterviewId(interviewDto.getInterviewId());
+		interviewModel.setRound(interviewDto.getRound());
+		interviewModel.setComments(interviewDto.getComments());
 		
-		cdto.setId(cmodel.getId());
-		cdto.setInterviewId(cmodel.getInterviewId());
-		cdto.setRound(cmodel.getRound());
-		cdto.setComments(cmodel.getComments());
+		interviewModel = interviewRepo.save(interviewModel);
 		
-		return new ResponseEntity<CommentsDto>(cdto, HttpStatus.ACCEPTED);
+		interviewDto.setId(interviewModel.getId());
+		interviewDto.setInterviewId(interviewModel.getInterviewId());
+		interviewDto.setRound(interviewModel.getRound());
+		interviewDto.setComments(interviewModel.getComments());
+		
+		return new ResponseEntity<InterviewProcessDto>(interviewDto, HttpStatus.ACCEPTED);
 	}
 	
 	/* to check the availability of the panelists */

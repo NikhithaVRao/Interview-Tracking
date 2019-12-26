@@ -19,11 +19,13 @@ public class InterviewProcessServiceImpl implements InterviewProcessService{
 	@Override
 	public ResponseEntity<InterviewProcessDto> addInterviewDetails(String interviewId, InterviewProcessDto interview) {
 
+		InterviewProcessModel intmodel1 = intrepo.findByInterviewId(interviewId);
 
 		System.out.println(intmodel1);
-		if(intmodel1.getStatus() == null || intmodel1.getStatus() == "selected")
+		if(intmodel1.getStatus() == null || intmodel1.getStatus().contains("selected"))
 		{
 		InterviewProcessModel intmodel = new InterviewProcessModel();
+		intmodel.setInterviewId(interviewId);
 		intmodel.setAssigneeId(interview.getAssigneeId());
 //		intmodel.setCreateTimestamp(interview.getCreate_timestamp());
 //		intmodel.setUpdateTimestamp(interview.getUpdate_timestamp());
@@ -44,7 +46,12 @@ public class InterviewProcessServiceImpl implements InterviewProcessService{
 		
 		else
 		{
-			return new ResponseEntity<InterviewProcessDto>(HttpStatus.ALREADY_REPORTED);
+			if(intmodel1.getStatus().contains("rejected")) 
+				return new ResponseEntity<InterviewProcessDto>(HttpStatus.NOT_ACCEPTABLE);
+			
+			else
+				return new ResponseEntity<InterviewProcessDto>(HttpStatus.NOT_IMPLEMENTED);
+		
 		}
 	
 	}

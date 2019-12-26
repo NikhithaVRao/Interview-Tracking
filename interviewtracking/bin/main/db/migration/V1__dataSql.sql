@@ -8,6 +8,7 @@ insert into hibernate_sequence values (1);
 create table candidate
 (
 id INT NOT NULL AUTO_INCREMENT,
+interview_id varchar(20),
 name varchar(20) NOT NULL,
 address varchar(20),
 date_of_birth date,
@@ -30,8 +31,9 @@ attempt_count int,
 carrier_start_date varchar(20),
 applicant_type varchar(20),
 post_applied varchar(20),
-referal_id varchar(20),
-final_result boolean,
+referal_id varchar(100),
+event varchar(20) not null,
+final_result varchar(10),
 primary key(id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
@@ -79,25 +81,19 @@ primary key(sid)
 create table interview
 (
 id int not null auto_increment,
+interview_id varchar(30),
 assignee_id int,
-status boolean,
+status varchar(20),
 round varchar(20),
+comments varchar(20),
 final_result varchar(20),
-candidate_id int,
 create_timestamp DATETIME,
 update_timestamp DATETIME,
 deleted boolean ,
 employee_id int,
-interview_id varchar(20),
+
 primary key(id)
 );
 
-create table comment
-(
-id int not null auto_increment,
-interview_id varchar(40),
-round varchar(20),
-comments varchar(20),
-primary key(id)
-);
+
 

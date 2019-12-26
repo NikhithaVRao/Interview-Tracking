@@ -34,11 +34,10 @@ public class HRPanelServiceImpl implements HRPanelService{
 	@Autowired
     private JavaMailSender javaMailSender;
 	
-	@Autowired
-	CommentsRepository commentsRepsitory;
+	
 	
 	@Autowired
-	InterviewTrackingRepository intrepo;
+	InterviewTrackingRepository intRepo;
 	
 	@Autowired
 	CandidateRepository candidateRepository;
@@ -87,25 +86,30 @@ public void sendEmailToCandidate(MailDto mailDto) throws MessagingException
 
 /* to fetch comments from database */
 @Override
-public ResponseEntity<CommentsDto> getComment(String interviewId) {
-	CommentModel comments = commentsRepsitory.findByInterviewId(interviewId);
-	CommentsDto commentDto = new CommentsDto();
-	commentDto.setId(comments.getId());
-	commentDto.setInterviewId(comments.getInterviewId());
-	commentDto.setRound(comments.getRound());
-	commentDto.setComments(comments.getComments());
-	return new ResponseEntity<>(commentDto, HttpStatus.OK);
+public ResponseEntity<InterviewProcessDto> getComment(String interviewId) {
+	InterviewProcessModel interviewModel = intRepo.findByInterviewId(interviewId);
+	InterviewProcessDto interviewProcessDto = new InterviewProcessDto();
+	
+	interviewProcessDto.setId(interviewModel.getId());
+	interviewProcessDto.setInterviewId(interviewModel.getInterviewId());
+	interviewProcessDto.setRound(interviewModel.getRound());
+	interviewProcessDto.setAssigneeId(interviewModel.getAssigneeId());
+	interviewProcessDto.setEmployeeId(interviewModel.getEmployeeId());
+	interviewProcessDto.setStatus(interviewModel.getStatus());
+	
+	interviewProcessDto.setComments(interviewModel.getComments());
+	return new ResponseEntity<>(interviewProcessDto, HttpStatus.OK);
 }
 
 @Override
 public ResponseEntity<InterviewProcessDto> addStatus(String interviewId,InterviewProcessDto interviewDto) {
-	InterviewProcessModel interviewProcessModel = intrepo.findByInterviewId(interviewId);
+	InterviewProcessModel interviewProcessModel = intRepo.findByInterviewId(interviewId);
 	if(!(interviewId.equalsIgnoreCase("rejected"))) {
 		interviewProcessModel.setStatus(interviewDto.getStatus());
 		interviewProcessModel.setRound(interviewDto.getRound());
 		interviewProcessModel.setCreateTimestamp(interviewProcessModel.getCreateTimestamp());
 		
-		intrepo.save(interviewProcessModel);
+		intRepo.save(interviewProcessModel);
 		
 		interviewDto.setId(interviewProcessModel.getId());
 		interviewDto.setInterviewId(interviewProcessModel.getInterviewId());
@@ -117,11 +121,12 @@ public ResponseEntity<InterviewProcessDto> addStatus(String interviewId,Intervie
 		return new ResponseEntity<>(interviewDto, HttpStatus.OK);
 	}
 	else {
-		CandidateModel candidate = candidateRepository.findByInterviewId(interviewId);
-		candidate.setApplyStatus(interviewProcessModel.getStatus());
-		candidateRepository.save(candidate);
+		CandidateModel candidateModel = candidateRepository.findByInterviewId(interviewId);
+		candidateModel.setFinalResult(interviewDto.getStatus());
+		candidateModel.setAttemptCount(candidateModel.getAttemptCount() + 1);
+		candidateRepository.save(candidateModel);
 		interviewProcessModel.setStatus(interviewDto.getStatus());
-		intrepo.save(interviewProcessModel);
+		intRepo.save(interviewProcessModel);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
