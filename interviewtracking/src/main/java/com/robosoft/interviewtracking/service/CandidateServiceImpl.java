@@ -301,6 +301,14 @@ return candidateList;
 
 public ResponseEntity<CandidateDto> updateCandidate(int id, CandidateDto candidateDto)
 {
+	
+	CandidateModel candidateRepObj;
+	try {
+		candidateRepObj = candidateRepository.findById(id).get();
+	}
+	catch(NoSuchElementException e) {
+		throw new CustomException(100,"Enter valid details");
+	}
 	/*List for experience and skills */
 	List<Integer> exp = new ArrayList<Integer>();
 	exp = candidateDto.getExperience();
@@ -350,13 +358,6 @@ public ResponseEntity<CandidateDto> updateCandidate(int id, CandidateDto candida
 	for(int expirience = 0; expirience < skillsRepObj.size(); expirience++ ) {
 		SkillsModel oldSkill = skillsRepObj.get(expirience);
 		sumOfExperience += oldSkill.getExperience();
-	}
-	CandidateModel candidateRepObj;
-	try {
-		candidateRepObj = candidateRepository.findById(id).get();
-	}
-	catch(NoSuchElementException e) {
-		throw new CustomException(100,"Enter valid details");
 	}
 	candidateRepObj = setModel(candidateRepObj, candidateDto);
 	candidateRepObj.setTotalExperience(sumOfExperience);
