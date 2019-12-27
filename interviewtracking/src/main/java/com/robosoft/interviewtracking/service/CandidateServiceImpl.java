@@ -173,16 +173,17 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
 		int sumOfExperience = 0;
 		candidateModel.setId(candidateDto.getId());
 		candidateModel.setCreateTimestamp(candidateDto.getCreateTimestamp());
-		/* to input other dto attributes into model*/
-		candidateModel = setModel(candidateModel, candidateDto);
-	//	candidateModel.setAttemptCount(candidateDto.getAttemptCount()+1);
-		
 		/* To add total experience */
 		for(int experience = 0; experience < exp.size(); experience++)
 		{
 			sumOfExperience += exp.get(experience);
 			candidateModel.setTotalExperience(sumOfExperience);
 		}
+		/* to input other dto attributes into model*/
+		candidateModel = setModel(candidateModel, candidateDto);
+	//	candidateModel.setAttemptCount(candidateDto.getAttemptCount()+1);
+		
+		
 		/* Exception to handle mandatory fields */
 	//	try {
 		 candidateModel = candidateRepository.save(candidateModel);

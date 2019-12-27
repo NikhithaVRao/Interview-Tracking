@@ -1707,3 +1707,35 @@ java.util.NoSuchElementException: No value present
 2019-12-27 11:53:14.746  INFO 4955 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
 2019-12-27 11:53:14.747  INFO 4955 --- [restartedMain] c.r.i.InterviewtrackingApplication       : Started InterviewtrackingApplication in 1.436 seconds (JVM running for 1968.203)
 2019-12-27 11:53:14.749  INFO 4955 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2019-12-27 14:33:22.611  INFO 4955 --- [Thread-34] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-12-27 14:33:22.612  INFO 4955 --- [Thread-34] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-12-27 14:33:22.613  INFO 4955 --- [Thread-34] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown initiated...
+2019-12-27 14:33:22.616  INFO 4955 --- [Thread-34] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown completed.
+2019-12-27 14:33:22.865  INFO 4955 --- [restartedMain] c.r.i.InterviewtrackingApplication       : Starting InterviewtrackingApplication on kishancd-ubuntu with PID 4955 (/media/krishnacd/Development/Interview-Tracking/interviewtracking/bin/main started by krishnacd in /media/krishnacd/Development/Interview-Tracking/interviewtracking)
+2019-12-27 14:33:22.865  INFO 4955 --- [restartedMain] c.r.i.InterviewtrackingApplication       : No active profile set, falling back to default profiles: default
+2019-12-27 14:33:23.480  INFO 4955 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-12-27 14:33:23.555  INFO 4955 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 75ms. Found 6 repository interfaces.
+2019-12-27 14:33:23.672  INFO 4955 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$cf3471c8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-12-27 14:33:23.740  INFO 4955 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
+2019-12-27 14:33:23.741  INFO 4955 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-12-27 14:33:23.745  INFO 4955 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.26]
+2019-12-27 14:33:23.760  INFO 4955 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-12-27 14:33:23.761  INFO 4955 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 891 ms
+2019-12-27 14:33:23.811  INFO 4955 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Starting...
+2019-12-27 14:33:23.825  INFO 4955 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Start completed.
+2019-12-27 14:33:23.826  INFO 4955 --- [restartedMain] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:mysql://localhost:3306/dbinterviewtracker (MySQL 5.7)
+2019-12-27 14:33:23.840  INFO 4955 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.006s)
+2019-12-27 14:33:23.846  INFO 4955 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema `dbinterviewtracker`: 1
+2019-12-27 14:33:23.847  INFO 4955 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Schema `dbinterviewtracker` is up to date. No migration necessary.
+2019-12-27 14:33:23.886  INFO 4955 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-12-27 14:33:23.917  INFO 4955 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2019-12-27 14:33:24.080  INFO 4955 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-12-27 14:33:24.136  INFO 4955 --- [restartedMain] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2019-12-27 14:33:24.359  INFO 4955 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-12-27 14:33:24.367  WARN 4955 --- [restartedMain] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-12-27 14:33:24.467  INFO 4955 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-12-27 14:33:24.498  INFO 4955 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
+2019-12-27 14:33:24.499  INFO 4955 --- [restartedMain] c.r.i.InterviewtrackingApplication       : Started InterviewtrackingApplication in 1.676 seconds (JVM running for 11577.955)
+2019-12-27 14:33:24.501  INFO 4955 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
