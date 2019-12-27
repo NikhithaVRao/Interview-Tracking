@@ -3,6 +3,7 @@ package com.robosoft.interviewtracking.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -307,7 +308,6 @@ public ResponseEntity<CandidateDto> updateCandidate(int id, CandidateDto candida
 	skills = candidateDto.getSkills();
 	int sumOfExperience = 0;
 	List<SkillsModel> skillsRepObj = skillsRep.findAllByCandidateId(id);
-	
 	/* to compare new skills with old skills and if already present dont update else update */
 	for(int newSkill = 0; newSkill < skills.size(); newSkill++) {
 		int flag = 0;
@@ -351,7 +351,13 @@ public ResponseEntity<CandidateDto> updateCandidate(int id, CandidateDto candida
 		SkillsModel oldSkill = skillsRepObj.get(expirience);
 		sumOfExperience += oldSkill.getExperience();
 	}
-	CandidateModel candidateRepObj = candidateRepository.findById(id).get();
+	CandidateModel candidateRepObj;
+	try {
+		candidateRepObj = candidateRepository.findById(id).get();
+	}
+	catch(NoSuchElementException e) {
+		throw new CustomException(100,"Enter valid details");
+	}
 	candidateRepObj = setModel(candidateRepObj, candidateDto);
 	candidateRepObj.setTotalExperience(sumOfExperience);
 	

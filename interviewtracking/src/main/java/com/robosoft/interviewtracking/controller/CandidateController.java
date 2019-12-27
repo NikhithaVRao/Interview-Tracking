@@ -59,13 +59,7 @@ public class CandidateController {
 	public ResponseEntity<CandidateDto> updateCandidate(@PathVariable("id") int id, @RequestBody CandidateDto candidate) 
 	
 	{
-		try {
 		return candidateService.updateCandidate(id, candidate);
-		}
-		catch(NoSuchElementException e)
-		{
-			throw new CustomException(100,"Enter valid details");
-		}
 	}
 	
 	/* To delete skills */
