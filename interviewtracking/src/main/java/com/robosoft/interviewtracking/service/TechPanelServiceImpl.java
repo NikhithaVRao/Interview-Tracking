@@ -55,18 +55,47 @@ public class TechPanelServiceImpl implements TechPanelService
 	@Override
 	public ResponseEntity<InterviewProcessDto> addComments(InterviewProcessDto interviewDto) {
 		
-		InterviewProcessModel interviewModel = interviewRepo.findByInterviewId(interviewDto.getInterviewId());
-		
-		interviewModel.setInterviewId(interviewDto.getInterviewId());
-		interviewModel.setRound(interviewDto.getRound());
+		InterviewProcessModel interviewModel = interviewRepo.findByInterviewIdAndRound(interviewDto.getInterviewId(), interviewDto.getRound());
+
+		if(interviewDto.getInterviewId() != null)
+		{
+			interviewModel.setInterviewId(interviewDto.getInterviewId());
+		}
+		if(interviewDto.getRound() != null)
+		{
+			interviewModel.setRound(interviewDto.getRound());
+		}
+		if(interviewDto.getComments() != null)
+		{
 		interviewModel.setComments(interviewDto.getComments());
+		}
+		if(interviewDto.getEmployeeId() != 0)
+		{
+			interviewModel.setEmployeeId(interviewDto.getEmployeeId());
+		}
+		if(interviewDto.getAssigneeId() != 0)
+		{
+			interviewModel.setAssigneeId(interviewDto.getAssigneeId());
+		}
+		if(interviewDto.getStatus() != null)
+		{
+			interviewModel.setStatus(interviewDto.getStatus());
+		}
+	
+		interviewModel.setUpdateTimestamp(interviewDto.getUpdate_timestamp());
+		
 		
 		interviewModel = interviewRepo.save(interviewModel);
 		
 		interviewDto.setId(interviewModel.getId());
+		interviewDto.setEmployeeId(interviewModel.getEmployeeId());
+		interviewDto.setAssigneeId(interviewModel.getAssigneeId());
 		interviewDto.setInterviewId(interviewModel.getInterviewId());
 		interviewDto.setRound(interviewModel.getRound());
 		interviewDto.setComments(interviewModel.getComments());
+		interviewDto.setCreate_timestamp(interviewModel.getCreateTimestamp());
+		interviewDto.setUpdate_timestamp(interviewModel.getUpdateTimestamp());
+		
 		
 		return new ResponseEntity<InterviewProcessDto>(interviewDto, HttpStatus.ACCEPTED);
 	}

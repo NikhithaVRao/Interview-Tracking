@@ -12,5 +12,10 @@ public interface InterviewTrackingRepository extends JpaRepository<InterviewProc
 
 	@Query("Select c from InterviewProcessModel c where c.interviewId = :id")
 	InterviewProcessModel findByInterviewId(@Param("id") String interviewId);
+	
+//	@Query("Select c from InterviewProcessModel c where c.interviewId = : interviewId and c.round = : round")
+//	InterviewProcessModel findByInterviewIdAndRound(@Param("interviewId") String interviewId, @Param("round") String round); 
+	InterviewProcessModel findByInterviewIdAndRound(String interviewId, String round);
+	
 
-	}
+}

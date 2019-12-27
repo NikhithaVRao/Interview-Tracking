@@ -79,10 +79,6 @@ public void sendEmailToCandidate(MailDto mailDto) throws MessagingException
 		 javaMailSender.send(msg);
 		}
 }
-//public void sendEmailToPanelists(MailDto mailDto) throws MessagingException
-//{
-//	SimpleMailMessage msg = new SimpleMailMessage();
-//}
 
 /* to fetch comments from database */
 @Override
@@ -101,13 +97,39 @@ public ResponseEntity<InterviewProcessDto> getComment(String interviewId) {
 	return new ResponseEntity<>(interviewProcessDto, HttpStatus.OK);
 }
 
+/* to add status to the candidate wether he is selectd or not */ 
 @Override
 public ResponseEntity<InterviewProcessDto> addStatus(String interviewId,InterviewProcessDto interviewDto) {
-	InterviewProcessModel interviewProcessModel = intRepo.findByInterviewId(interviewId);
+
+	InterviewProcessModel interviewProcessModel = intRepo.findByInterviewIdAndRound(interviewId, interviewDto.getRound());
+	
 	if(!(interviewId.equalsIgnoreCase("rejected"))) {
-		interviewProcessModel.setStatus(interviewDto.getStatus());
-		interviewProcessModel.setRound(interviewDto.getRound());
-		interviewProcessModel.setCreateTimestamp(interviewProcessModel.getCreateTimestamp());
+		if(interviewDto.getInterviewId() != null)
+		{
+			interviewProcessModel.setInterviewId(interviewDto.getInterviewId());
+		}
+		if(interviewDto.getRound() != null)
+		{
+			interviewProcessModel.setRound(interviewDto.getRound());
+		}
+		if(interviewDto.getComments() != null)
+		{
+		interviewProcessModel.setComments(interviewDto.getComments());
+		}
+		if(interviewDto.getEmployeeId() != 0)
+		{
+			interviewProcessModel.setEmployeeId(interviewDto.getEmployeeId());
+		}
+		if(interviewDto.getAssigneeId() != 0)
+		{
+			interviewProcessModel.setAssigneeId(interviewDto.getAssigneeId());
+		}
+		if(interviewDto.getStatus() != null)
+		{
+			interviewProcessModel.setStatus(interviewDto.getStatus());
+		}
+		
+		interviewProcessModel.setUpdateTimestamp(interviewDto.getUpdate_timestamp());
 		
 		intRepo.save(interviewProcessModel);
 		
@@ -115,6 +137,7 @@ public ResponseEntity<InterviewProcessDto> addStatus(String interviewId,Intervie
 		interviewDto.setInterviewId(interviewProcessModel.getInterviewId());
 		interviewDto.setAssigneeId(interviewProcessModel.getAssigneeId());
 		interviewDto.setEmployeeId(interviewProcessModel.getEmployeeId());
+		interviewDto.setComments(interviewProcessModel.getComments());
 		interviewDto.setCreate_timestamp(interviewProcessModel.getCreateTimestamp());
 		interviewDto.setUpdate_timestamp(interviewProcessModel.getUpdateTimestamp());
 		
@@ -129,6 +152,7 @@ public ResponseEntity<InterviewProcessDto> addStatus(String interviewId,Intervie
 		intRepo.save(interviewProcessModel);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+
 	
 }
 

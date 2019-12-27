@@ -22,7 +22,7 @@ public class InterviewProcessServiceImpl implements InterviewProcessService{
 		InterviewProcessModel intmodel1 = intrepo.findByInterviewId(interviewId);
 
 		System.out.println(intmodel1);
-		if(intmodel1.getStatus() == null || intmodel1.getStatus().contains("selected"))
+		if(intmodel1 == null || intmodel1.getStatus().contentEquals( "selected"))
 		{
 		InterviewProcessModel intmodel = new InterviewProcessModel();
 		intmodel.setInterviewId(interviewId);
@@ -43,7 +43,7 @@ public class InterviewProcessServiceImpl implements InterviewProcessService{
 		interview.setInterviewId(intmodel.getInterviewId());
 		return new ResponseEntity<InterviewProcessDto>(interview, HttpStatus.ACCEPTED);
 		}
-		
+
 		else
 		{
 			if(intmodel1.getStatus().contains("rejected")) 
@@ -53,7 +53,7 @@ public class InterviewProcessServiceImpl implements InterviewProcessService{
 				return new ResponseEntity<InterviewProcessDto>(HttpStatus.NOT_IMPLEMENTED);
 		
 		}
-	
+		
 	}
 	 
 	
