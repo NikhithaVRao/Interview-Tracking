@@ -56,13 +56,7 @@ public class TechPanelServiceImpl implements TechPanelService
 	public ResponseEntity<InterviewProcessDto> addComments(InterviewProcessDto interviewDto) {
 		
 		InterviewProcessModel interviewModel = interviewRepo.findByInterviewIdAndRound(interviewDto.getInterviewId(), interviewDto.getRound());
-System.out.println(interviewModel);
-//System.out.println(interviewDto);
-//		if(interviewDto.getId() != 0)
-//		{
-//			interviewModel.setId(interviewDto.getId());
-//		}
-		
+
 		if(interviewDto.getInterviewId() != null)
 		{
 			interviewModel.setInterviewId(interviewDto.getInterviewId());

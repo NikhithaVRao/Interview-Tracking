@@ -102,6 +102,7 @@ public ResponseEntity<InterviewProcessDto> getComment(String interviewId) {
 public ResponseEntity<InterviewProcessDto> addStatus(String interviewId,InterviewProcessDto interviewDto) {
 
 	InterviewProcessModel interviewProcessModel = intRepo.findByInterviewIdAndRound(interviewId, interviewDto.getRound());
+	
 	if(!(interviewId.equalsIgnoreCase("rejected"))) {
 		if(interviewDto.getInterviewId() != null)
 		{

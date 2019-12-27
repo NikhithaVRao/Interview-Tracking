@@ -3,6 +3,7 @@ package com.robosoft.interviewtracking.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -213,20 +214,15 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
 		} 
 	
 		}
-		else
-		{
-//			if(candidateRepObj.isHrStatus() == false)
-//			{  
-			candidateRepObj.setAttemptCount(candidateRepObj.getAttemptCount()+1);
+		else if(candidateRepObj.getFinalResult().equalsIgnoreCase("rejected"))
+		{ 
 			updateCandidate(candidateRepObj.getId(), candidateDto);
-			
-			candidateRepository.save(candidateRepObj);
-			 
-			 candidateDto.setId(candidateRepObj.getId());
-			 candidateDto.setCreateTimestamp(candidateRepObj.getCreateTimestamp());
-			 candidateDto.setUpdateTimestamp(candidateRepObj.getUpdateTimestamp());
-			 candidateDto.setAttemptCount(candidateRepObj.getAttemptCount());
-
+			candidateDto.setId(candidateRepObj.getId());
+			candidateDto.setCreateTimestamp(candidateRepObj.getCreateTimestamp());
+			candidateDto.setUpdateTimestamp(candidateRepObj.getUpdateTimestamp());
+		}
+		else {
+			candidateRepObj.setReferalId(candidateRepObj.getReferalId() + candidateDto.getReferalId());
 		}
 		 return new ResponseEntity<CandidateDto>(candidateDto, HttpStatus.ACCEPTED);
 	}	
@@ -300,6 +296,14 @@ return candidateList;
 
 public ResponseEntity<CandidateDto> updateCandidate(int id, CandidateDto candidateDto)
 {
+	
+	CandidateModel candidateRepObj;
+	try {
+		candidateRepObj = candidateRepository.findById(id).get();
+	}
+	catch(NoSuchElementException e) {
+		throw new CustomException(100,"Enter valid details");
+	}
 	/*List for experience and skills */
 	List<Integer> exp = new ArrayList<Integer>();
 	exp = candidateDto.getExperience();
@@ -307,7 +311,6 @@ public ResponseEntity<CandidateDto> updateCandidate(int id, CandidateDto candida
 	skills = candidateDto.getSkills();
 	int sumOfExperience = 0;
 	List<SkillsModel> skillsRepObj = skillsRep.findAllByCandidateId(id);
-	
 	/* to compare new skills with old skills and if already present dont update else update */
 	for(int newSkill = 0; newSkill < skills.size(); newSkill++) {
 		int flag = 0;
@@ -351,10 +354,9 @@ public ResponseEntity<CandidateDto> updateCandidate(int id, CandidateDto candida
 		SkillsModel oldSkill = skillsRepObj.get(expirience);
 		sumOfExperience += oldSkill.getExperience();
 	}
-	CandidateModel candidateRepObj = candidateRepository.findById(id).get();
 	candidateRepObj = setModel(candidateRepObj, candidateDto);
 	candidateRepObj.setTotalExperience(sumOfExperience);
-	
+	candidateRepObj.setFinalResult(null);
 	 
 	candidateRepObj = candidateRepository.save(candidateRepObj);
 
