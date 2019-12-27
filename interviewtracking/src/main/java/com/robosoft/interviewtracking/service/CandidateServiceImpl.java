@@ -214,20 +214,15 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
 		} 
 	
 		}
-		else
-		{
-//			if(candidateRepObj.isHrStatus() == false)
-//			{  
-			candidateRepObj.setAttemptCount(candidateRepObj.getAttemptCount()+1);
+		else if(candidateRepObj.getFinalResult().equalsIgnoreCase("rejected"))
+		{ 
 			updateCandidate(candidateRepObj.getId(), candidateDto);
-			
-			candidateRepository.save(candidateRepObj);
-			 
-			 candidateDto.setId(candidateRepObj.getId());
-			 candidateDto.setCreateTimestamp(candidateRepObj.getCreateTimestamp());
-			 candidateDto.setUpdateTimestamp(candidateRepObj.getUpdateTimestamp());
-			 candidateDto.setAttemptCount(candidateRepObj.getAttemptCount());
-
+			candidateDto.setId(candidateRepObj.getId());
+			candidateDto.setCreateTimestamp(candidateRepObj.getCreateTimestamp());
+			candidateDto.setUpdateTimestamp(candidateRepObj.getUpdateTimestamp());
+		}
+		else {
+			candidateRepObj.setReferalId(candidateRepObj.getReferalId() + candidateDto.getReferalId());
 		}
 		 return new ResponseEntity<CandidateDto>(candidateDto, HttpStatus.ACCEPTED);
 	}	
@@ -361,7 +356,7 @@ public ResponseEntity<CandidateDto> updateCandidate(int id, CandidateDto candida
 	}
 	candidateRepObj = setModel(candidateRepObj, candidateDto);
 	candidateRepObj.setTotalExperience(sumOfExperience);
-	
+	candidateRepObj.setFinalResult(null);
 	 
 	candidateRepObj = candidateRepository.save(candidateRepObj);
 
