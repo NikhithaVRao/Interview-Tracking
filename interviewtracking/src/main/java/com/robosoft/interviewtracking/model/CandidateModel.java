@@ -113,16 +113,13 @@ public class CandidateModel implements Serializable{
 	private String referalId;
 
 	@Column(name = "final_result")
-	private boolean finalResult;
+	private String finalResult;
 	
 
 	public CandidateModel()
 	{
 		super();
 	}
-	
-	@Column(name = "hr_status")
-	private String applyStatus;
 	
 	@Column(name = "event")
 	private String event;

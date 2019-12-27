@@ -60,6 +60,8 @@ public class CandidateDto {
 	
 	private String previousCompany;
 	
+	private String finalResult;
+	
 	private int attemptCount;
 	
 	private String carrierStartDate;
@@ -69,8 +71,6 @@ public class CandidateDto {
 	private String postApplied;
 	
 	private String referalId;
-
-	private String hrStatus;
 	
 	private String event;
 	

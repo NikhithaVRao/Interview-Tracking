@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.robosoft.interviewtracking.dto.CommentsDto;
+import com.robosoft.interviewtracking.dto.InterviewProcessDto;
 import com.robosoft.interviewtracking.dto.TechnicalPanelDto;
 import com.robosoft.interviewtracking.service.TechPanelService;
 
@@ -47,10 +48,10 @@ public class TechnicalPanelController {
 /* To post comments into comments table */
 	
 	@PostMapping(value = "techPanel/comments")
-	public ResponseEntity<CommentsDto> addComments(@RequestBody CommentsDto comments)
+	public ResponseEntity<InterviewProcessDto> addComments(@RequestBody InterviewProcessDto interviewDto)
 	{
-		System.out.println(comments);
-		return techService.addComments(comments);
+		System.out.println(interviewDto);
+		return techService.addComments(interviewDto);
 	}
 	
 }

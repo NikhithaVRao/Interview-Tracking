@@ -19,6 +19,8 @@ public class InterviewProcessDto {
 	
 	private String interviewId;
 	
+	private String comments;
+	
 	private Timestamp create_timestamp;
 	
 	private Timestamp update_timestamp;

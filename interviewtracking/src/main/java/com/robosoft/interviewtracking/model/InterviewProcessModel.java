@@ -40,6 +40,9 @@ public class InterviewProcessModel {
 	@Column(name = "interview_id")
 	private String interviewId;
 	
+	@Column(name = "comments")
+	private String comments;
+	
 	@Column(name = "create_timestamp")
 	@CreationTimestamp
 	private Timestamp createTimestamp;
