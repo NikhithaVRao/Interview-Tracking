@@ -46,9 +46,9 @@ public class CandidateServiceImpl implements CandidateService{
 			candidateModel.setQualification(candidateDto.getQualification());
 		}
 		
-		if(candidateDto.getTotalExperience() != 0) {
-			candidateModel.setTotalExperience(candidateDto.getTotalExperience());
-		}
+//		if(candidateDto.getTotalExperience() != 0) {
+//			candidateModel.setTotalExperience(candidateDto.getTotalExperience());
+//		}
 		
 		if(candidateDto.getNoticePeriod() != 0) {
 			candidateModel.setNoticePeriod(candidateDto.getNoticePeriod());
@@ -213,16 +213,20 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
 			sm.setExperience(exp.get(i));
 			skillsRep.save(sm);
 		} 
-	
+	System.out.println("a");
 		}
 		else if(candidateRepObj.getFinalResult().equalsIgnoreCase("rejected"))
-		{ 
+		{ System.out.println("b");
 			updateCandidate(candidateRepObj.getId(), candidateDto);
 			candidateDto.setId(candidateRepObj.getId());
 			candidateDto.setCreateTimestamp(candidateRepObj.getCreateTimestamp());
 			candidateDto.setUpdateTimestamp(candidateRepObj.getUpdateTimestamp());
+			candidateDto.setFinalResult(candidateRepObj.getFinalResult());
 		}
 		else {
+			System.out.println("ghj");
+			if(candidateRepObj.getFinalResult().equalsIgnoreCase("null"))
+			//candidateRepObj.setUniqueId(candidateDto.getUniqueId());
 			candidateRepObj.setReferalId(candidateRepObj.getReferalId() + candidateDto.getReferalId());
 		}
 		 return new ResponseEntity<CandidateDto>(candidateDto, HttpStatus.ACCEPTED);
