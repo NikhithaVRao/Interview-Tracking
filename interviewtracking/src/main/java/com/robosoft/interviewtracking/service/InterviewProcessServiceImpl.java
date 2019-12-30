@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.robosoft.interviewtracking.dao.InterviewTrackingRepository;
 import com.robosoft.interviewtracking.dto.InterviewProcessDto;
+import com.robosoft.interviewtracking.exception.CustomException;
 import com.robosoft.interviewtracking.model.InterviewProcessModel;
 
 @Service
@@ -31,9 +32,13 @@ public class InterviewProcessServiceImpl implements InterviewProcessService{
 //		intmodel.setUpdateTimestamp(interview.getUpdate_timestamp());
 		intmodel.setEmployeeId(interview.getEmployeeId());
 		intmodel.setRound(interview.getRound()); 
-		
-		intrepo.save(intmodel);
-		
+		try {
+			intrepo.save(intmodel);
+		}
+		catch(Exception e) {
+			throw new CustomException(100,"All feilds are mandetary");
+		}
+	
 		interview.setId(intmodel.getId());
 		interview.setAssigneeId(intmodel.getAssigneeId());
 		interview.setCreate_timestamp(intmodel.getCreateTimestamp());
