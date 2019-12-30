@@ -1,6 +1,5 @@
 package com.robosoft.interviewtracking.service;
 
-import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +21,11 @@ public class InterviewProcessServiceImpl implements InterviewProcessService{
 		InterviewProcessModel intmodel1 = intrepo.findByInterviewId(interviewId);
 
 		System.out.println(intmodel1);
-		if(intmodel1 == null || intmodel1.getStatus().contentEquals( "selected"))
+		if(intmodel1 == null || intmodel1.getStatus().contains("selected"))
 		{
 		InterviewProcessModel intmodel = new InterviewProcessModel();
 		intmodel.setInterviewId(interviewId);
 		intmodel.setAssigneeId(interview.getAssigneeId());
-//		intmodel.setCreateTimestamp(interview.getCreate_timestamp());
-//		intmodel.setUpdateTimestamp(interview.getUpdate_timestamp());
 		intmodel.setEmployeeId(interview.getEmployeeId());
 		intmodel.setRound(interview.getRound()); 
 		

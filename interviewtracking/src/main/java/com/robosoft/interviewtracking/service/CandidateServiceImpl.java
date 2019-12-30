@@ -45,10 +45,7 @@ public class CandidateServiceImpl implements CandidateService{
 		if(candidateDto.getQualification() != null) {
 			candidateModel.setQualification(candidateDto.getQualification());
 		}
-		
-		if(candidateDto.getTotalExperience() != 0) {
-			candidateModel.setTotalExperience(candidateDto.getTotalExperience());
-		}
+	
 		
 		if(candidateDto.getNoticePeriod() != 0) {
 			candidateModel.setNoticePeriod(candidateDto.getNoticePeriod());
@@ -118,7 +115,7 @@ public class CandidateServiceImpl implements CandidateService{
 	/* method to implement getter setter to get dto response */ 
 	public CandidateDto setDto(CandidateDto candidateDto, CandidateModel candidateModel)
 	{
-		candidateDto.setId(candidateModel.getId());
+		 candidateDto.setId(candidateModel.getId());
 		 candidateDto.setName(candidateModel.getName());
 		 candidateDto.setAddress(candidateModel.getAddress());
 		 candidateDto.setDateOfBirth(candidateModel.getDateOfBirth());
@@ -164,6 +161,7 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
 	
 		CandidateModel candidateRepObj = candidateRepository.findByUniqueId(candidateDto.getUniqueId());
 		CandidateModel candidateModel = new CandidateModel();
+		
 		if(candidateRepObj == null)
 		{
 		/* To fetch list of int of experience from candidate dto */
@@ -184,14 +182,13 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
 			candidateModel.setTotalExperience(sumOfExperience);
 		}
 		/* Exception to handle mandatory fields */
-	//	try {
+		try {
 		 candidateModel = candidateRepository.save(candidateModel);
-		//}
-//		catch(Exception e)
-//		{
-//			//throw new CustomException(100,"This field is mandatory");
-//			e.printStackTrace();
-//		}
+		}
+		catch(Exception e)
+		{
+			throw new CustomException(100,"This field is mandatory");
+		}
 		 		 
 		 candidateDto.setId(candidateModel.getId());
  		 candidateDto.setCreateTimestamp(candidateModel.getUpdateTimestamp());
@@ -212,7 +209,7 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
 			sm.setExperience(exp.get(i));
 			skillsRep.save(sm);
 		} 
-	
+		
 		}
 		else if(candidateRepObj.getFinalResult().equalsIgnoreCase("rejected"))
 		{ 
@@ -222,7 +219,15 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
 			candidateDto.setUpdateTimestamp(candidateRepObj.getUpdateTimestamp());
 		}
 		else {
+			
+			candidateRepObj.setUniqueId(candidateDto.getUniqueId());
 			candidateRepObj.setReferalId(candidateRepObj.getReferalId() + candidateDto.getReferalId());
+			
+			System.out.println(candidateRepObj.getReferalId());
+			candidateRepository.save(candidateRepObj);
+//			 candidateDto.setId(candidateRepObj.getId());
+//			 candidateDto.setUpdateTimestamp(candidateRepObj.getUpdateTimestamp());
+//			 candidateDto.setTotalExperience(candidateRepObj.getTotalExperience());
 		}
 		 return new ResponseEntity<CandidateDto>(candidateDto, HttpStatus.ACCEPTED);
 	}	
@@ -231,26 +236,15 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
 public List<CandidateDto> getShortlistedCandidate(int experience, String skills)
 {
 	List<SkillsModel> skillModel = skillsRep.getShortlisted(skills, experience);
+	System.out.println(skillModel);
 	
 	List<CandidateDto> candidateList = new ArrayList<CandidateDto>();
 		
 	if(skillModel == null)
 		throw new CustomException(100,"Invalid");
 	
-	List<String> skillsList = new ArrayList<String>();
-	String skill = "" ;
-	 
-	List<Integer> experienceList = new ArrayList<Integer>();
-	int exp = 0;
 	
-	for(int i = 0; i < skillModel.size(); i++)
-	{
-		skill = skillModel.get(i).getSkillName();
-		exp = skillModel.get(i).getExperience();			
-	}
-	
-	skillsList.add(skill);
-	experienceList.add( exp);
+
 	//System.out.println(skill);
 	
 	/* to fetch candidate details for shortlisted candidate id */
@@ -259,9 +253,6 @@ public List<CandidateDto> getShortlistedCandidate(int experience, String skills)
 	for(int i = 0 ; i < skillModel.size() ; i++)
 	{
 		CandidateDto  candidateDto =  new CandidateDto();		
-		candidateDto.setId(skillModel.get(i).getCandidateId());
-		candidateDto.setSkills(skillsList);
-		candidateDto.setExperience( experienceList);
 		
 		shortListedId = skillModel.get(i).getCandidateId()	;
 		
@@ -277,6 +268,7 @@ public List<CandidateDto> getShortlistedCandidate(int experience, String skills)
 		candidateList.add(candidateDto);    
 	} 
 	
+	/* to set interview Id */
 	List<CandidateModel> idList = candidateRepository.findShorlistedId();
 	System.out.println(idList);
 	for(int j = 0; j < idList.size(); j++)

@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -48,7 +50,7 @@ public class CandidateController {
 	/* To add candidate */
 	@PostMapping(value="candidate")
 	@ResponseBody
-	public ResponseEntity<CandidateDto> addCandidate(@RequestBody CandidateDto candidate)
+	public ResponseEntity<CandidateDto> addCandidate(@RequestBody @Valid CandidateDto candidate)
 	{
 		return candidateService.addCandidate(candidate);
 	}
