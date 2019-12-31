@@ -9,14 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.robosoft.interviewtracking.dao.CommentsRepository;
 import com.robosoft.interviewtracking.dao.InterviewTrackingRepository;
 import com.robosoft.interviewtracking.dao.TechnicalPanelRepository;
-import com.robosoft.interviewtracking.dto.CommentsDto;
 import com.robosoft.interviewtracking.dto.InterviewProcessDto;
 import com.robosoft.interviewtracking.dto.TechnicalPanelDto;
 import com.robosoft.interviewtracking.exception.CustomException;
-import com.robosoft.interviewtracking.model.CommentModel;
 import com.robosoft.interviewtracking.model.InterviewProcessModel;
 import com.robosoft.interviewtracking.model.TechnicalPanelModel;
 
@@ -63,7 +60,7 @@ public class TechPanelServiceImpl implements TechPanelService
 		
 		InterviewProcessModel interviewModel = interviewRepo.findByInterviewIdAndRound(interviewDto.getInterviewId(), interviewDto.getRound());
 		if(interviewModel == null) {
-			throw new CustomException(100,"Invalid ID or Round");
+			throw new CustomException(104,"Invalid ID or Round");
 		}
 		if(interviewDto.getInterviewId() != null)
 		{
@@ -119,7 +116,7 @@ public class TechPanelServiceImpl implements TechPanelService
 		
 		TechnicalPanelModel techModel =  techPanelRepository.findByEmployeeId(employeeId); 
 		if(techModel == null) {
-			throw new CustomException(100,"Invalid ID");
+			throw new CustomException(101,"Invalid ID");
 		}
 		techModel.setAvailableMorning(techPanelDto.isAvailableMorning());
 		techModel.setAvailableAfternoon(techPanelDto.isAvailableAfternoon());

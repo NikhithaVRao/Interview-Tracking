@@ -1,9 +1,6 @@
  package com.robosoft.interviewtracking.controller;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.NoSuchElementException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.robosoft.interviewtracking.dto.*;
-import com.robosoft.interviewtracking.exception.CustomException;
 import com.robosoft.interviewtracking.service.CandidateService;
 
 
