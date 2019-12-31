@@ -17,6 +17,8 @@ import com.robosoft.interviewtracking.exception.CustomException;
 import com.robosoft.interviewtracking.model.CandidateModel;
 import com.robosoft.interviewtracking.model.SkillsModel;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
+
 
 @Service
 public class CandidateServiceImpl implements CandidateService{
@@ -171,16 +173,17 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
 		int sumOfExperience = 0;
 		candidateModel.setId(candidateDto.getId());
 		candidateModel.setCreateTimestamp(candidateDto.getCreateTimestamp());
-		/* to input other dto attributes into model*/
-		candidateModel = setModel(candidateModel, candidateDto);
-	//	candidateModel.setAttemptCount(candidateDto.getAttemptCount()+1);
-		
 		/* To add total experience */
 		for(int experience = 0; experience < exp.size(); experience++)
 		{
 			sumOfExperience += exp.get(experience);
 			candidateModel.setTotalExperience(sumOfExperience);
 		}
+		/* to input other dto attributes into model*/
+		candidateModel = setModel(candidateModel, candidateDto);
+	//	candidateModel.setAttemptCount(candidateDto.getAttemptCount()+1);
+		
+		
 		/* Exception to handle mandatory fields */
 		try {
 		 candidateModel = candidateRepository.save(candidateModel);
@@ -211,8 +214,7 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
 		} 
 		
 		}
-		else if(candidateRepObj.getFinalResult().equalsIgnoreCase("rejected"))
-		{ 
+		else if(candidateRepObj.getFinalResult().equalsIgnoreCase("rejected")) { 
 			updateCandidate(candidateRepObj.getId(), candidateDto);
 			candidateDto.setId(candidateRepObj.getId());
 			candidateDto.setCreateTimestamp(candidateRepObj.getCreateTimestamp());
@@ -220,16 +222,18 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
 		}
 		else {
 			
-			candidateRepObj.setUniqueId(candidateDto.getUniqueId());
+			System.out.println(1);
+	
 			candidateRepObj.setReferalId(candidateRepObj.getReferalId() + candidateDto.getReferalId());
-			
-			System.out.println(candidateRepObj.getReferalId());
 			candidateRepository.save(candidateRepObj);
-//			 candidateDto.setId(candidateRepObj.getId());
-//			 candidateDto.setUpdateTimestamp(candidateRepObj.getUpdateTimestamp());
-//			 candidateDto.setTotalExperience(candidateRepObj.getTotalExperience());
+		
+			 candidateDto.setId(candidateRepObj.getId());
+			 candidateDto.setUpdateTimestamp(candidateRepObj.getUpdateTimestamp());
+			 candidateDto.setTotalExperience(candidateRepObj.getTotalExperience());
+
+		
 		}
-		 return new ResponseEntity<CandidateDto>(candidateDto, HttpStatus.ACCEPTED);
+		 return new ResponseEntity<>(candidateDto, HttpStatus.ACCEPTED);
 	}	
 
 /* To get shortlisted candidate */
@@ -243,20 +247,27 @@ public List<CandidateDto> getShortlistedCandidate(int experience, String skills)
 	if(skillModel == null)
 		throw new CustomException(100,"Invalid");
 	
-	
 
 	//System.out.println(skill);
 	
+
 	/* to fetch candidate details for shortlisted candidate id */
 	
 	int shortListedId = 0;
 	for(int i = 0 ; i < skillModel.size() ; i++)
 	{
 		CandidateDto  candidateDto =  new CandidateDto();		
-		
+
 		shortListedId = skillModel.get(i).getCandidateId()	;
 		
-		CandidateModel candidateRepObj = candidateRepository.findById(shortListedId).get();
+		CandidateModel candidateRepObj;
+		
+		try {
+			candidateRepObj = candidateRepository.findById(shortListedId).get();
+		}
+		catch(NoSuchElementException e) {
+			throw new CustomException(100,"Invalid Id");
+		}
 		
 	//	System.out.println(candidateRepObj); 
 		candidateRepObj.setShortListed(true);
@@ -270,7 +281,6 @@ public List<CandidateDto> getShortlistedCandidate(int experience, String skills)
 	
 	/* to set interview Id */
 	List<CandidateModel> idList = candidateRepository.findShorlistedId();
-	System.out.println(idList);
 	for(int j = 0; j < idList.size(); j++)
 	{
 		CandidateModel candidateRepObj1 = idList.get(j);
@@ -350,7 +360,12 @@ public ResponseEntity<CandidateDto> updateCandidate(int id, CandidateDto candida
 	candidateRepObj.setTotalExperience(sumOfExperience);
 	candidateRepObj.setFinalResult(null);
 	 
-	candidateRepObj = candidateRepository.save(candidateRepObj);
+	try {
+		candidateRepObj = candidateRepository.save(candidateRepObj);
+	}
+	catch(Exception e) {
+		throw new CustomException(100,"This field is mandatory");
+	}
 
 	 candidateDto = setDto(candidateDto, candidateRepObj);
 

@@ -113,7 +113,7 @@ public class CandidateModel implements Serializable{
 	private String referalId;
 
 	@Column(name = "final_result")
-	private String finalResult;
+	private String finalResult = "null";
 	
 
 	public CandidateModel()
