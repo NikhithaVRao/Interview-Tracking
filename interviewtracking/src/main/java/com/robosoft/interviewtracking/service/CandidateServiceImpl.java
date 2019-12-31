@@ -229,14 +229,13 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
 			candidateDto.setFinalResult(candidateRepObj.getFinalResult());
 		}
 		else {
-			System.out.println("ghj");
-			if(candidateRepObj.getFinalResult().equalsIgnoreCase("null"))
-			//candidateRepObj.setUniqueId(candidateDto.getUniqueId());
-			candidateRepObj.setReferalId(candidateRepObj.getReferalId() + candidateDto.getReferalId());
+			
+			candidateRepObj.setReferalId(candidateRepObj.getReferalId() +"," + candidateDto.getReferalId());
 			candidateRepObj = candidateRepository.save(candidateRepObj);
 			candidateDto.setId(candidateRepObj.getId());
 			candidateDto.setCreateTimestamp(candidateRepObj.getCreateTimestamp());
 			candidateDto.setUpdateTimestamp(candidateRepObj.getUpdateTimestamp());
+			candidateDto.setReferalId(candidateRepObj.getReferalId());
 		}
 		 return new ResponseEntity<>(candidateDto, HttpStatus.ACCEPTED);
 	}	
