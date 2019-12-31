@@ -2593,3 +2593,5 @@ Caused by: java.net.ConnectException: Connection refused: connect
 2019-12-31 10:44:37.789  INFO 5724 --- [restartedMain] c.r.i.InterviewtrackingApplication       : Started InterviewtrackingApplication in 0.866 seconds (JVM running for 131.493)
 2019-12-31 10:44:37.791  INFO 5724 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
 2019-12-31 10:44:39.364  INFO 5724 --- [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-12-31 10:44:39.365  INFO 5724 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-12-31 10:44:39.373  INFO 5724 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
