@@ -19,6 +19,7 @@ import com.robosoft.interviewtracking.dto.CommentsDto;
 import com.robosoft.interviewtracking.dto.HRPanelDto;
 import com.robosoft.interviewtracking.dto.InterviewProcessDto;
 import com.robosoft.interviewtracking.dto.MailDto;
+import com.robosoft.interviewtracking.exception.CustomException;
 import com.robosoft.interviewtracking.model.CandidateModel;
 import com.robosoft.interviewtracking.model.CommentModel;
 import com.robosoft.interviewtracking.model.HRPanelModel;
@@ -50,7 +51,12 @@ public ResponseEntity<HRPanelDto> addHRPanel(HRPanelDto hrPanelDto)
 	hrModel.setEmail(hrPanelDto.getEmail());
 	hrModel.setDesignation(hrPanelDto.getDesignation());
 	
-	hrRepository.save(hrModel);
+	try {
+		hrRepository.save(hrModel);
+	}
+	catch(Exception e) {
+		throw new CustomException(100,"This field is mandatory");
+	}
 	
 	hrPanelDto.setId(hrModel.getId());
 	hrPanelDto.setCreateTimestamp(hrModel.getCreateTimestamp());
@@ -84,6 +90,9 @@ public void sendEmailToCandidate(MailDto mailDto) throws MessagingException
 @Override
 public ResponseEntity<InterviewProcessDto> getComment(String interviewId) {
 	InterviewProcessModel interviewModel = intRepo.findByInterviewId(interviewId);
+	if(interviewModel == null) {
+		throw new CustomException(100,"Invalid Id");
+	}
 	InterviewProcessDto interviewProcessDto = new InterviewProcessDto();
 	
 	interviewProcessDto.setId(interviewModel.getId());
@@ -102,6 +111,9 @@ public ResponseEntity<InterviewProcessDto> getComment(String interviewId) {
 public ResponseEntity<InterviewProcessDto> addStatus(String interviewId,InterviewProcessDto interviewDto) {
 
 	InterviewProcessModel interviewProcessModel = intRepo.findByInterviewIdAndRound(interviewId, interviewDto.getRound());
+	if(interviewProcessModel == null) {
+		throw new CustomException(102,"Invalid Id or round");
+	}
 	
 	if(!(interviewId.equalsIgnoreCase("rejected"))) {
 		if(interviewDto.getInterviewId() != null)
@@ -131,7 +143,12 @@ public ResponseEntity<InterviewProcessDto> addStatus(String interviewId,Intervie
 		
 		interviewProcessModel.setUpdateTimestamp(interviewDto.getUpdate_timestamp());
 		
-		intRepo.save(interviewProcessModel);
+		try {
+			intRepo.save(interviewProcessModel);
+		}
+		catch(Exception e) {
+			throw new CustomException(100,"All feilds are mandetary");
+		}
 		
 		interviewDto.setId(interviewProcessModel.getId());
 		interviewDto.setInterviewId(interviewProcessModel.getInterviewId());
@@ -144,12 +161,28 @@ public ResponseEntity<InterviewProcessDto> addStatus(String interviewId,Intervie
 		return new ResponseEntity<>(interviewDto, HttpStatus.OK);
 	}
 	else {
-		CandidateModel candidateModel = candidateRepository.findByInterviewId(interviewId);
+		CandidateModel candidateModel;
+		try {
+			candidateModel = candidateRepository.findByInterviewId(interviewId);
+		}
+		catch(Exception e) {
+			throw new CustomException(101,"Invalid ID");
+		}
 		candidateModel.setFinalResult(interviewDto.getStatus());
 		candidateModel.setAttemptCount(candidateModel.getAttemptCount() + 1);
-		candidateRepository.save(candidateModel);
+		try {
+			candidateRepository.save(candidateModel);
+		}
+		catch(Exception e) {
+			throw new CustomException(100,"All feilds are mandetary");
+		}
 		interviewProcessModel.setStatus(interviewDto.getStatus());
-		intRepo.save(interviewProcessModel);
+		try {
+			intRepo.save(interviewProcessModel);
+		}
+		catch(Exception e) {
+			throw new CustomException(100,"All feilds are mandetary");
+		}
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 

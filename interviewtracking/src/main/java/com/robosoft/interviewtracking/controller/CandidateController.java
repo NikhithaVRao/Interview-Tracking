@@ -35,14 +35,6 @@ public class CandidateController {
 	@ResponseBody
 	public String test() {
 	System.out.println("==================app startup================");
-//	
-//	for(int i = 1; i < 5; i++)
-//	{
-//	String interviewId = (String.valueOf(LocalDate.now())+" - "+i);
-//	System.out.println(interviewId);
-//	}
-//	
-	
 	return "App Started";
 	}
 	
