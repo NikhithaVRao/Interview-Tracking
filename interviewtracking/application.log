@@ -61,3 +61,9 @@
 2020-01-01 10:57:54.797  INFO 5088 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 2020-01-01 10:57:54.922  INFO 5088 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
 2020-01-01 10:57:55.056  INFO 5088 --- [restartedMain] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2020-01-01 10:57:55.223  INFO 5088 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-01-01 10:57:55.238  WARN 5088 --- [restartedMain] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-01-01 10:57:55.301  INFO 5088 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-01-01 10:57:55.316  INFO 5088 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
+2020-01-01 10:57:55.316  INFO 5088 --- [restartedMain] c.r.i.InterviewtrackingApplication       : Started InterviewtrackingApplication in 1.573 seconds (JVM running for 2425.94)
+2020-01-01 10:57:55.316  INFO 5088 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
