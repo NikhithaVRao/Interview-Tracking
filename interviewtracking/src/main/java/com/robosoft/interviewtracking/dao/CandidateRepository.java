@@ -21,4 +21,6 @@ public interface CandidateRepository extends JpaRepository<CandidateModel, Integ
 		List<CandidateModel> findShorlistedId();
 
 		CandidateModel findByInterviewId(String interviewId);
+		
+		List<CandidateModel> findByfinalResult(String var);
 }

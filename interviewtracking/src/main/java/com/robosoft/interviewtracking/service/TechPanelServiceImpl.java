@@ -36,6 +36,9 @@ public class TechPanelServiceImpl implements TechPanelService
 		techPanelModel.setName(techPanelDto.getName());
 		techPanelModel.setEmail(techPanelDto.getEmail());
 		techPanelModel.setDeleted(techPanelDto.isDeleted());
+		techPanelModel.setEmployeeId(techPanelDto.getEmployeeId());
+		
+		
 		/* To convert a list of string into a string object */
 		String expertiseObj = techPanelDto.getExpertise().toString();
 		

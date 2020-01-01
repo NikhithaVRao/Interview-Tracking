@@ -1,13 +1,15 @@
 package com.robosoft.interviewtracking.service;
 
-import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.robosoft.interviewtracking.dao.CandidateRepository;
 import com.robosoft.interviewtracking.dao.InterviewTrackingRepository;
 import com.robosoft.interviewtracking.dto.InterviewProcessDto;
+import com.robosoft.interviewtracking.dto.MailDto;
+import com.robosoft.interviewtracking.model.CandidateModel;
 import com.robosoft.interviewtracking.model.InterviewProcessModel;
 
 @Service
@@ -15,25 +17,31 @@ public class InterviewProcessServiceImpl implements InterviewProcessService{
 	@Autowired
 	InterviewTrackingRepository intrepo;
 
+	@Autowired
+	CandidateRepository canRepo;
+	
 	/* to add interview details for candidate */
 	@Override
 	public ResponseEntity<InterviewProcessDto> addInterviewDetails(String interviewId, InterviewProcessDto interview) {
 
 		InterviewProcessModel intmodel1 = intrepo.findByInterviewId(interviewId);
-
-		System.out.println(intmodel1);
+		CandidateModel canObj = canRepo.findByInterviewId(interviewId);
+		
+		EmailService mailService = new EmailServiceImpl();
+		
 		if(intmodel1 == null || intmodel1.getStatus().contentEquals( "selected"))
 		{
+			
 		InterviewProcessModel intmodel = new InterviewProcessModel();
+		
+		
+		
 		intmodel.setInterviewId(interviewId);
 		intmodel.setAssigneeId(interview.getAssigneeId());
-//		intmodel.setCreateTimestamp(interview.getCreate_timestamp());
-//		intmodel.setUpdateTimestamp(interview.getUpdate_timestamp());
 		intmodel.setEmployeeId(interview.getEmployeeId());
 		intmodel.setRound(interview.getRound()); 
 		
 		intrepo.save(intmodel);
-		
 		interview.setId(intmodel.getId());
 		interview.setAssigneeId(intmodel.getAssigneeId());
 		interview.setCreate_timestamp(intmodel.getCreateTimestamp());
@@ -41,6 +49,24 @@ public class InterviewProcessServiceImpl implements InterviewProcessService{
 		interview.setEmployeeId(intmodel.getEmployeeId());
 		interview.setRound(intmodel.getRound()); 
 		interview.setInterviewId(intmodel.getInterviewId());
+		
+		
+		
+		
+//		MailDto mailData = new MailDto();
+//		mailData.setDate(interview.getDate());
+//		mailData.setRound(interview.getRound());
+//		mailData.setTime(interview.getTime());
+//		mailData.setEmailID(canObj.getEmail());
+//		mailData.setName(canObj.getName());
+//		mailData.setInterviewDetail();
+//		mailData.setSubject("Interview process information");
+//		System.out.println(mailData);
+//		mailService.sendMail(mailData);
+		
+		
+		
+		
 		return new ResponseEntity<InterviewProcessDto>(interview, HttpStatus.ACCEPTED);
 		}
 
