@@ -20,4 +20,8 @@ public interface HRPanelService {
 	ResponseEntity<InterviewProcessDto> getComment(String interviewId);
 	
 	ResponseEntity<InterviewProcessDto> addStatus(String interviewId, InterviewProcessDto interviewDto);
+
+	ResponseEntity addFinalResult(String interviewId, String finalResult);
+	
+	ResponseEntity updateFinalResult(String interviewId, String finalResult);
 }

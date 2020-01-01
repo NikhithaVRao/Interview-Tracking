@@ -68,4 +68,16 @@ public class HRPanelController {
 	public ResponseEntity<InterviewProcessDto> addStatus(@RequestHeader("interviewid") String interviewId, @RequestBody InterviewProcessDto interviewDto){
 		return hrService.addStatus(interviewId, interviewDto);
 	}
+	
+	@PostMapping(value = "hrpanel/addFinalResult")
+	@ResponseBody
+	public ResponseEntity addFinalResult(@RequestHeader("interviewid") String interviewId, @RequestBody String finalResult){
+		return hrService.addFinalResult(interviewId, finalResult);
+	}
+	
+	@PostMapping(value = "hrpanel/updateFinalResult")
+	@ResponseBody
+	public ResponseEntity updateFinalResult(@RequestHeader("interviewid") String interviewId, @RequestBody String finalResult){
+		return hrService.updateFinalResult(interviewId, finalResult);
+	}
 }

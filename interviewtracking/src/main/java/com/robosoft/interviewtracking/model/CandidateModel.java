@@ -121,9 +121,7 @@ public class CandidateModel implements Serializable{
 		super();
 	}
 	
-	@Column(name = "hr_status")
-	private String applyStatus;
-	
+		
 	@Column(name = "event")
 	private String event;
 	
