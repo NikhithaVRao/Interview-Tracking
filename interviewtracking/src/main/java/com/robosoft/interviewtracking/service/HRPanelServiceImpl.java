@@ -191,14 +191,19 @@ public ResponseEntity addFinalResult(String interviewId, String finalResult)
 {
 
 	CandidateModel candidateModelData = candidateRepository.findByInterviewId(interviewId);
+
 	System.out.println(candidateModelData);
+
 	if(candidateModelData == null)
 	{
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	else
 	{
+
 		if(candidateModelData.getFinalResult().equalsIgnoreCase("null"))
+
+
 		{
 			candidateModelData.setFinalResult(finalResult);
 			candidateModelData.setAttemptCount(candidateModelData.getAttemptCount() + 1);

@@ -43,7 +43,8 @@ public class HRPanelController {
 	
 	@PostMapping(value = "hrpanel/addFinalResult")
 	@ResponseBody
-	public ResponseEntity addFinalResult(@RequestHeader("interviewId") String interviewId, @RequestBody String finalResult){
+	public ResponseEntity addFinalResult(@RequestHeader("interviewid") String interviewId, @RequestBody String finalResult){
+
 		return hrService.addFinalResult(interviewId, finalResult);
 	}
 	
