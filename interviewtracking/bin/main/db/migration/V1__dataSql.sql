@@ -91,7 +91,7 @@ create_timestamp DATETIME,
 update_timestamp DATETIME,
 deleted boolean ,
 employee_id int,
-
+interview_date date,
 primary key(id)
 );
 

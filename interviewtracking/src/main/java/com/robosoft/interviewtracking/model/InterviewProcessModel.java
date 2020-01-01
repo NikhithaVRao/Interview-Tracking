@@ -1,5 +1,6 @@
 package com.robosoft.interviewtracking.model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -53,4 +54,7 @@ public class InterviewProcessModel {
 	
 	@Column(name = "deleted")
 	private boolean isDeleted;
+	
+	@Column(name = "date")
+	private Date interviewDate;
 }
