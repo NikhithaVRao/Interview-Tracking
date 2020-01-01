@@ -18,8 +18,6 @@ import com.robosoft.interviewtracking.exception.CustomException;
 import com.robosoft.interviewtracking.model.CandidateModel;
 import com.robosoft.interviewtracking.model.SkillsModel;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
-
 
 @Service
 public class CandidateServiceImpl implements CandidateService{
@@ -213,7 +211,8 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto)
 			skillsRep.save(sm);
 		} 
 		} 
-		
+
+
 		else if(candidateRepObj.getFinalResult().equalsIgnoreCase("rejected"))
 		{ 
 
@@ -265,7 +264,7 @@ public List<CandidateDto> getShortlistedCandidate(int experience, String skills)
 			candidateRepObj = candidateRepository.findById(shortListedId).get();
 		}
 		catch(NoSuchElementException e) {
-			throw new CustomException(100,"Invalid Id");
+			throw new CustomException(101,"Invalid Id");
 		}
 		
 	//	System.out.println(candidateRepObj); 
@@ -284,8 +283,6 @@ public List<CandidateDto> getShortlistedCandidate(int experience, String skills)
 			candidateRepObjList.get(a).setFinalResult("rejected");
 			candidateRepository.save(candidateRepObjList.get(a));
 		}
-		
-		System.out.println(candidateRepObjList);
 		
 		/* to set model objects to dto */
 		candidateDto =  setDto(candidateDto,candidateRepObj);
@@ -321,7 +318,7 @@ public ResponseEntity<CandidateDto> updateCandidate(int id, CandidateDto candida
 		candidateRepObj = candidateRepository.findById(id).get();
 	}
 	catch(NoSuchElementException e) {
-		throw new CustomException(100,"Enter valid details");
+		throw new CustomException(101,"Invalid ID");
 	}
 	/*List for experience and skills */
 	List<Integer> exp = new ArrayList<Integer>();
@@ -350,8 +347,6 @@ public ResponseEntity<CandidateDto> updateCandidate(int id, CandidateDto candida
 			 skillsRep.save(oldSkill);
 			 
 			 candidateDto.setId(oldSkill.getCandidateId());
-			 
-			System.out.println(oldSkill.toString());
 		}
 	}
 	
@@ -362,7 +357,6 @@ public ResponseEntity<CandidateDto> updateCandidate(int id, CandidateDto candida
 			if(oldSkill.getSkillName().equals(skills.get(newSkill))) {
 				oldSkill.setExperience(exp.get(newSkill));
 				skillsRep.save(oldSkill);
-				System.out.println(oldSkill.toString());
 				break;
 			}
 		}
@@ -397,7 +391,7 @@ public  ResponseEntity deleteSkills(int id, String skills)
 	List<SkillsModel> skillsRepObj =  skillsRep.findByCandidateIdAndSkillName(id, skills);
 	
 	if(skillsRepObj == null)
-		throw new CustomException(100,"Cannot delete the non existing skills");
+		throw new CustomException(102,"Cannot delete the non existing skills");
 	
 	 CandidateModel candidateRepObj = candidateRepository.findById(id).get();
 	 SkillsModel skillsModel = skillsRepObj.get(0);

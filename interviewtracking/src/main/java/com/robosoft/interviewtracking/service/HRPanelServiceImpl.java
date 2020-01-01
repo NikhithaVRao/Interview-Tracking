@@ -12,16 +12,13 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.robosoft.interviewtracking.dao.CandidateRepository;
-import com.robosoft.interviewtracking.dao.CommentsRepository;
 import com.robosoft.interviewtracking.dao.HRPanelRepository;
 import com.robosoft.interviewtracking.dao.InterviewTrackingRepository;
-import com.robosoft.interviewtracking.dto.CommentsDto;
 import com.robosoft.interviewtracking.dto.HRPanelDto;
 import com.robosoft.interviewtracking.dto.InterviewProcessDto;
 import com.robosoft.interviewtracking.dto.MailDto;
 import com.robosoft.interviewtracking.exception.CustomException;
 import com.robosoft.interviewtracking.model.CandidateModel;
-import com.robosoft.interviewtracking.model.CommentModel;
 import com.robosoft.interviewtracking.model.HRPanelModel;
 import com.robosoft.interviewtracking.model.InterviewProcessModel;
 
@@ -75,7 +72,6 @@ public void sendEmailToCandidate(MailDto mailDto) throws MessagingException
 	 List<String> nameList = hrRepository.getName();
 	 for(int i = 0 ; i < cmodelList.size() ; i++)
 		{
-		 System.out.println("val ="+cmodelList.get(i));
 		 msg.setTo(cmodelList.get(i));
  
 		 msg.setSubject("ShortListed Candidate");
@@ -112,7 +108,7 @@ public ResponseEntity<InterviewProcessDto> addStatus(String interviewId,Intervie
 
 	InterviewProcessModel interviewProcessModel = intRepo.findByInterviewIdAndRound(interviewId, interviewDto.getRound());
 	if(interviewProcessModel == null) {
-		throw new CustomException(102,"Invalid Id or round");
+		throw new CustomException(104,"Invalid Id or round");
 	}
 	
 	if(!(interviewId.equalsIgnoreCase("rejected"))) {

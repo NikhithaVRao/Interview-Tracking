@@ -37,6 +37,9 @@ public class TechPanelServiceImpl implements TechPanelService
 		techPanelModel.setEmail(techPanelDto.getEmail());
 		techPanelModel.setEmployeeId(techPanelDto.getEmployeeId());
 		techPanelModel.setDeleted(techPanelDto.isDeleted());
+		techPanelModel.setEmployeeId(techPanelDto.getEmployeeId());
+		
+		
 		/* To convert a list of string into a string object */
 		String expertiseObj = techPanelDto.getExpertise().toString();
 		
@@ -63,7 +66,7 @@ public class TechPanelServiceImpl implements TechPanelService
 		
 		InterviewProcessModel interviewModel = interviewRepo.findByInterviewIdAndRound(interviewDto.getInterviewId(), interviewDto.getRound());
 		if(interviewModel == null) {
-			throw new CustomException(100,"Invalid ID or Round");
+			throw new CustomException(104,"Invalid ID or Round");
 		}
 		if(interviewDto.getInterviewId() != null)
 		{
@@ -119,7 +122,7 @@ public class TechPanelServiceImpl implements TechPanelService
 		
 		TechnicalPanelModel techModel =  techPanelRepository.findByEmployeeId(employeeId); 
 		if(techModel == null) {
-			throw new CustomException(100,"Invalid ID");
+			throw new CustomException(101,"Invalid ID");
 		}
 		techModel.setAvailableMorning(techPanelDto.isAvailableMorning());
 		techModel.setAvailableAfternoon(techPanelDto.isAvailableAfternoon());
