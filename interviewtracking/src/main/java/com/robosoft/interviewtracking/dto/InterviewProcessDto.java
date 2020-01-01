@@ -1,5 +1,7 @@
  package com.robosoft.interviewtracking.dto;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 import lombok.Data;
@@ -16,6 +18,10 @@ public class InterviewProcessDto {
 	private String status;
 	
 	private String round;
+	
+	private Date date;
+	
+	private Time time;
 	
 	private String interviewId;
 	

@@ -4,7 +4,6 @@ import javax.mail.MessagingException;
 
 import org.springframework.http.ResponseEntity;
 
-import com.robosoft.interviewtracking.dto.CommentsDto;
 import com.robosoft.interviewtracking.dto.HRPanelDto;
 import com.robosoft.interviewtracking.dto.InterviewProcessDto;
 import com.robosoft.interviewtracking.dto.MailDto;

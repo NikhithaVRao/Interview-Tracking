@@ -9,13 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.robosoft.interviewtracking.dao.CommentsRepository;
 import com.robosoft.interviewtracking.dao.InterviewTrackingRepository;
 import com.robosoft.interviewtracking.dao.TechnicalPanelRepository;
-import com.robosoft.interviewtracking.dto.CommentsDto;
 import com.robosoft.interviewtracking.dto.InterviewProcessDto;
 import com.robosoft.interviewtracking.dto.TechnicalPanelDto;
-import com.robosoft.interviewtracking.model.CommentModel;
+import com.robosoft.interviewtracking.exception.CustomException;
 import com.robosoft.interviewtracking.model.InterviewProcessModel;
 import com.robosoft.interviewtracking.model.TechnicalPanelModel;
 
@@ -36,12 +34,20 @@ public class TechPanelServiceImpl implements TechPanelService
 		techPanelModel.setName(techPanelDto.getName());
 		techPanelModel.setEmail(techPanelDto.getEmail());
 		techPanelModel.setDeleted(techPanelDto.isDeleted());
+		techPanelModel.setEmployeeId(techPanelDto.getEmployeeId());
+		
+		
 		/* To convert a list of string into a string object */
 		String expertiseObj = techPanelDto.getExpertise().toString();
 		
 		techPanelModel.setExpertise(expertiseObj);
+		try {
+			techPanelRepository.save(techPanelModel);
+		}
+		catch(Exception e) {
+			throw new CustomException(100,"All feilds are mandetary");
+		}
 		
-		techPanelRepository.save(techPanelModel);
 		
 		techPanelDto.setId(techPanelModel.getId());
 		techPanelDto.setCreate_timestamp(techPanelModel.getCreateTimestamp());
@@ -55,18 +61,54 @@ public class TechPanelServiceImpl implements TechPanelService
 	@Override
 	public ResponseEntity<InterviewProcessDto> addComments(InterviewProcessDto interviewDto) {
 		
-		InterviewProcessModel interviewModel = interviewRepo.findByInterviewId(interviewDto.getInterviewId());
-		
-		interviewModel.setInterviewId(interviewDto.getInterviewId());
-		interviewModel.setRound(interviewDto.getRound());
+		InterviewProcessModel interviewModel = interviewRepo.findByInterviewIdAndRound(interviewDto.getInterviewId(), interviewDto.getRound());
+		if(interviewModel == null) {
+			throw new CustomException(104,"Invalid ID or Round");
+		}
+		if(interviewDto.getInterviewId() != null)
+		{
+			interviewModel.setInterviewId(interviewDto.getInterviewId());
+		}
+		if(interviewDto.getRound() != null)
+		{
+			interviewModel.setRound(interviewDto.getRound());
+		}
+		if(interviewDto.getComments() != null)
+		{
 		interviewModel.setComments(interviewDto.getComments());
+		}
+		if(interviewDto.getEmployeeId() != 0)
+		{
+			interviewModel.setEmployeeId(interviewDto.getEmployeeId());
+		}
+		if(interviewDto.getAssigneeId() != 0)
+		{
+			interviewModel.setAssigneeId(interviewDto.getAssigneeId());
+		}
+		if(interviewDto.getStatus() != null)
+		{
+			interviewModel.setStatus(interviewDto.getStatus());
+		}
+	
+		interviewModel.setUpdateTimestamp(interviewDto.getUpdate_timestamp());
 		
-		interviewModel = interviewRepo.save(interviewModel);
+		try {
+			interviewModel = interviewRepo.save(interviewModel);
+		}
+		catch(Exception e) {
+			throw new CustomException(100,"All feilds are mandetary");
+		}
+	
 		
 		interviewDto.setId(interviewModel.getId());
+		interviewDto.setEmployeeId(interviewModel.getEmployeeId());
+		interviewDto.setAssigneeId(interviewModel.getAssigneeId());
 		interviewDto.setInterviewId(interviewModel.getInterviewId());
 		interviewDto.setRound(interviewModel.getRound());
 		interviewDto.setComments(interviewModel.getComments());
+		interviewDto.setCreate_timestamp(interviewModel.getCreateTimestamp());
+		interviewDto.setUpdate_timestamp(interviewModel.getUpdateTimestamp());
+		
 		
 		return new ResponseEntity<InterviewProcessDto>(interviewDto, HttpStatus.ACCEPTED);
 	}
@@ -76,12 +118,19 @@ public class TechPanelServiceImpl implements TechPanelService
 	public ResponseEntity<TechnicalPanelDto> setAvailability(String employeeId,TechnicalPanelDto techPanelDto) {
 		
 		TechnicalPanelModel techModel =  techPanelRepository.findByEmployeeId(employeeId); 
-		
+		if(techModel == null) {
+			throw new CustomException(101,"Invalid ID");
+		}
 		techModel.setAvailableMorning(techPanelDto.isAvailableMorning());
 		techModel.setAvailableAfternoon(techPanelDto.isAvailableAfternoon());
 		techModel.setAvailableEvening(techPanelDto.isAvailableEvening());
+		try {
+			techPanelRepository.save(techModel);
+		}
+		catch(Exception e) {
+			throw new CustomException(100,"All feilds are mandetary");
+		}
 		
-		techPanelRepository.save(techModel);
 		
 		techPanelDto.setId(techModel.getId());
 		techPanelDto.setName(techModel.getName());
@@ -110,7 +159,6 @@ public class TechPanelServiceImpl implements TechPanelService
 		
 		List<TechnicalPanelDto> techList = new ArrayList<TechnicalPanelDto>();
 		
-		System.out.println(techModel);
 		for(TechnicalPanelModel tpModel : techModel)
 		{
 		
@@ -125,7 +173,6 @@ public class TechPanelServiceImpl implements TechPanelService
 			techPanel.setAvailableMorning(tpModel.isAvailableMorning());
 			techPanel.setAvailableAfternoon(tpModel.isAvailableAfternoon());
 			techPanel.setAvailableEvening(tpModel.isAvailableEvening());
-			System.out.println(techPanel);
 			/* to convert a string expertise into list */
 			String [] expertiseArray = tpModel.getExpertise().split(",");
 			List<String> expertiseList = Arrays.asList(expertiseArray);
