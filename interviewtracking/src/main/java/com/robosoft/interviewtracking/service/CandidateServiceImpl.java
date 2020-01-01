@@ -46,9 +46,9 @@ public class CandidateServiceImpl implements CandidateService{
 			candidateModel.setQualification(candidateDto.getQualification());
 		}
 		
-		if(candidateDto.getTotalExperience() != 0) {
-			candidateModel.setTotalExperience(candidateDto.getTotalExperience());
-		}
+//		if(candidateDto.getTotalExperience() != 0) {
+//			candidateModel.setTotalExperience(candidateDto.getTotalExperience());
+//		}
 		
 		if(candidateDto.getNoticePeriod() != 0) {
 			candidateModel.setNoticePeriod(candidateDto.getNoticePeriod());
@@ -164,8 +164,7 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
 	
 		CandidateModel candidateRepObj = candidateRepository.findByUniqueId(candidateDto.getUniqueId());
 		CandidateModel candidateModel = new CandidateModel();
-		if(candidateRepObj == null)
-		{
+		if(candidateRepObj == null) {
 		/* To fetch list of int of experience from candidate dto */
 		List<Integer> exp = new ArrayList<Integer>();
 		exp = candidateDto.getExperience();
@@ -173,25 +172,25 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
 		int sumOfExperience = 0;
 		candidateModel.setId(candidateDto.getId());
 		candidateModel.setCreateTimestamp(candidateDto.getCreateTimestamp());
-		/* to input other dto attributes into model*/
-		candidateModel = setModel(candidateModel, candidateDto);
-	//	candidateModel.setAttemptCount(candidateDto.getAttemptCount()+1);
-		
 		/* To add total experience */
 		for(int experience = 0; experience < exp.size(); experience++)
 		{
 			sumOfExperience += exp.get(experience);
 			candidateModel.setTotalExperience(sumOfExperience);
 		}
+		/* to input other dto attributes into model*/
+		candidateModel = setModel(candidateModel, candidateDto);
+	//	candidateModel.setAttemptCount(candidateDto.getAttemptCount()+1);
+		
+		
 		/* Exception to handle mandatory fields */
-	//	try {
+		try {
 		 candidateModel = candidateRepository.save(candidateModel);
-		//}
-//		catch(Exception e)
-//		{
-//			//throw new CustomException(100,"This field is mandatory");
-//			e.printStackTrace();
-//		}
+		}
+		catch(Exception e)
+		{
+			throw new CustomException(100,"This field is mandatory");
+		}
 		 		 
 		 candidateDto.setId(candidateModel.getId());
  		 candidateDto.setCreateTimestamp(candidateModel.getUpdateTimestamp());
@@ -211,20 +210,31 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
 			sm.setSkillName(skills.get(i));
 			sm.setExperience(exp.get(i));
 			skillsRep.save(sm);
-		} 
-	
+		}  
 		}
+
+		
+		
+
 		else if(candidateRepObj.getFinalResult().equalsIgnoreCase("rejected"))
 		{ 
+
 			updateCandidate(candidateRepObj.getId(), candidateDto);
 			candidateDto.setId(candidateRepObj.getId());
 			candidateDto.setCreateTimestamp(candidateRepObj.getCreateTimestamp());
 			candidateDto.setUpdateTimestamp(candidateRepObj.getUpdateTimestamp());
+			candidateDto.setFinalResult(candidateRepObj.getFinalResult());
 		}
 		else {
-			candidateRepObj.setReferalId(candidateRepObj.getReferalId() + candidateDto.getReferalId());
+			
+			candidateRepObj.setReferalId(candidateRepObj.getReferalId() +"," + candidateDto.getReferalId());
+			candidateRepObj = candidateRepository.save(candidateRepObj);
+			candidateDto.setId(candidateRepObj.getId());
+			candidateDto.setCreateTimestamp(candidateRepObj.getCreateTimestamp());
+			candidateDto.setUpdateTimestamp(candidateRepObj.getUpdateTimestamp());
+			candidateDto.setReferalId(candidateRepObj.getReferalId());
 		}
-		 return new ResponseEntity<CandidateDto>(candidateDto, HttpStatus.ACCEPTED);
+		 return new ResponseEntity<>(candidateDto, HttpStatus.ACCEPTED);
 	}	
 
 /* To get shortlisted candidate */
@@ -237,48 +247,52 @@ public List<CandidateDto> getShortlistedCandidate(int experience, String skills)
 	if(skillModel == null)
 		throw new CustomException(100,"Invalid");
 	
-	List<String> skillsList = new ArrayList<String>();
-	String skill = "" ;
-	 
-	List<Integer> experienceList = new ArrayList<Integer>();
-	int exp = 0;
-	
-	for(int i = 0; i < skillModel.size(); i++)
-	{
-		skill = skillModel.get(i).getSkillName();
-		exp = skillModel.get(i).getExperience();			
-	}
-	
-	skillsList.add(skill);
-	experienceList.add( exp);
-	//System.out.println(skill);
-	
 	/* to fetch candidate details for shortlisted candidate id */
 	
 	int shortListedId = 0;
 	for(int i = 0 ; i < skillModel.size() ; i++)
 	{
 		CandidateDto  candidateDto =  new CandidateDto();		
-		candidateDto.setId(skillModel.get(i).getCandidateId());
-		candidateDto.setSkills(skillsList);
-		candidateDto.setExperience( experienceList);
-		
+
 		shortListedId = skillModel.get(i).getCandidateId()	;
 		
-		CandidateModel candidateRepObj = candidateRepository.findById(shortListedId).get();
+		CandidateModel candidateRepObj;
+		
+		try {
+			candidateRepObj = candidateRepository.findById(shortListedId).get();
+		}
+		catch(NoSuchElementException e) {
+			throw new CustomException(101,"Invalid Id");
+		}
 		
 	//	System.out.println(candidateRepObj); 
 		candidateRepObj.setShortListed(true);
+		
+		
+	
 		candidateRepository.save(candidateRepObj);
 		
-
+		
+		//to set rejected as a value gor final status field
+		List<CandidateModel> candidateRepObjList = candidateRepository.findByShortlisted();
+		List<CandidateModel> candidateModelObj = new ArrayList<CandidateModel>();
+		
+		for(int a = 0; a < candidateRepObjList.size(); a++)
+		{
+			candidateRepObjList.get(a).setFinalResult("rejected");
+			candidateRepository.save(candidateRepObjList.get(a));
+		}
+		
 		/* to set model objects to dto */
 		candidateDto =  setDto(candidateDto,candidateRepObj);
 		candidateList.add(candidateDto);    
+		
+		
 	} 
 	
+	
+	
 	List<CandidateModel> idList = candidateRepository.findShorlistedId();
-	System.out.println(idList);
 	for(int j = 0; j < idList.size(); j++)
 	{
 		CandidateModel candidateRepObj1 = idList.get(j);
@@ -287,6 +301,8 @@ public List<CandidateDto> getShortlistedCandidate(int experience, String skills)
 		
 		candidateRepObj1.setInterviewId(interviewId);
 		candidateRepository.save(candidateRepObj1);
+		
+		
 
 	}
 return candidateList;
@@ -302,7 +318,7 @@ public ResponseEntity<CandidateDto> updateCandidate(int id, CandidateDto candida
 		candidateRepObj = candidateRepository.findById(id).get();
 	}
 	catch(NoSuchElementException e) {
-		throw new CustomException(100,"Enter valid details");
+		throw new CustomException(101,"Invalid ID");
 	}
 	/*List for experience and skills */
 	List<Integer> exp = new ArrayList<Integer>();
@@ -331,8 +347,6 @@ public ResponseEntity<CandidateDto> updateCandidate(int id, CandidateDto candida
 			 skillsRep.save(oldSkill);
 			 
 			 candidateDto.setId(oldSkill.getCandidateId());
-			 
-			System.out.println(oldSkill.toString());
 		}
 	}
 	
@@ -343,7 +357,6 @@ public ResponseEntity<CandidateDto> updateCandidate(int id, CandidateDto candida
 			if(oldSkill.getSkillName().equals(skills.get(newSkill))) {
 				oldSkill.setExperience(exp.get(newSkill));
 				skillsRep.save(oldSkill);
-				System.out.println(oldSkill.toString());
 				break;
 			}
 		}
@@ -358,7 +371,12 @@ public ResponseEntity<CandidateDto> updateCandidate(int id, CandidateDto candida
 	candidateRepObj.setTotalExperience(sumOfExperience);
 	candidateRepObj.setFinalResult(null);
 	 
-	candidateRepObj = candidateRepository.save(candidateRepObj);
+	try {
+		candidateRepObj = candidateRepository.save(candidateRepObj);
+	}
+	catch(Exception e) {
+		throw new CustomException(100,"This field is mandatory");
+	}
 
 	 candidateDto = setDto(candidateDto, candidateRepObj);
 
@@ -373,7 +391,7 @@ public  ResponseEntity deleteSkills(int id, String skills)
 	List<SkillsModel> skillsRepObj =  skillsRep.findByCandidateIdAndSkillName(id, skills);
 	
 	if(skillsRepObj == null)
-		throw new CustomException(100,"Cannot delete the non existing skills");
+		throw new CustomException(102,"Cannot delete the non existing skills");
 	
 	 CandidateModel candidateRepObj = candidateRepository.findById(id).get();
 	 SkillsModel skillsModel = skillsRepObj.get(0);

@@ -21,6 +21,12 @@ public interface CandidateRepository extends JpaRepository<CandidateModel, Integ
 		List<CandidateModel> findShorlistedId();
 
 		CandidateModel findByInterviewId(String interviewId);
+<<<<<<< HEAD
 		
 		List<CandidateModel> findByfinalResult(String var);
+=======
+
+		@Query("select c from CandidateModel c where c.isShortListed = false")
+		List<CandidateModel> findByShortlisted();
+>>>>>>> 9e77fe280a04186c97f72ef69311f4a7c30155d8
 }
