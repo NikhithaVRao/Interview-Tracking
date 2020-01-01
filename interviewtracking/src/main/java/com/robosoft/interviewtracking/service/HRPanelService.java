@@ -16,7 +16,11 @@ public interface HRPanelService {
 
 //	void sendEmailToPanelists(MailDto mailDto) throws MessagingException;
 
-	ResponseEntity<InterviewProcessDto> getComment(String interviewId);
+	ResponseEntity<InterviewProcessDto> getComment(String interviewId, String round);
 	
 	ResponseEntity<InterviewProcessDto> addStatus(String interviewId, InterviewProcessDto interviewDto);
+
+	ResponseEntity addFinalResult(String interviewId, String finalResult);
+	
+	ResponseEntity updateFinalResult(String interviewId, String finalResult);
 }

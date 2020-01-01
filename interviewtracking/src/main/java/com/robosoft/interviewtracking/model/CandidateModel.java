@@ -123,6 +123,7 @@ public class CandidateModel implements Serializable{
 		super();
 	}
 	
+
 	@Column(name = "event")
 	private String event;
 	

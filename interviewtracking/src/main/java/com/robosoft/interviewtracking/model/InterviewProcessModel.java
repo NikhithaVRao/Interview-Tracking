@@ -55,6 +55,6 @@ public class InterviewProcessModel {
 	@Column(name = "deleted")
 	private boolean isDeleted;
 	
-	@Column(name = "date")
+	@Column(name = "interview_date")
 	private Date interviewDate;
 }

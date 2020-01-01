@@ -28,37 +28,10 @@ public class HRPanelController {
 	}
 	
 	
-	/* To send an email to candidate*/ 
-//	@RequestMapping(value = "candidate/email", method = RequestMethod.POST)
-//	@ResponseBody 
-//	public void sendEmailToCandidate(@RequestBody MailDto mailDto)
-//	{
-//		 System.out.println("date = " +mailDto.getDate());
-//		try {
-//			hrService.sendEmailToCandidate(mailDto);
-//		} catch (MessagingException e) {
-//			throw new CustomException(100,"invalid mail");
-//		}
-//	}
-	
-//	/* To send an email to panelists*/
-//	@RequestMapping(value = "techPanel/email", method = RequestMethod.POST)
-//	@ResponseBody 
-//	public void sendEmailToPanelists(@RequestBody MailDto mailDto)
-//	{
-//		 System.out.println("date = " +mailDto.getDate());
-//		try {
-//			hrService.sendEmailToCandidate(mailDto);
-//		} catch (MessagingException e) {
-//			throw new CustomException(100,"invalid mail");
-//		}
-//	}
-
-
 	@GetMapping(value = "hrpanel/getcomment")
 	@ResponseBody
-	public ResponseEntity<InterviewProcessDto> getComments(@RequestHeader("interviewid") String interviewId){
-		return hrService.getComment(interviewId);
+	public ResponseEntity<InterviewProcessDto> getComments(@RequestHeader("interviewid") String interviewId, @RequestHeader("round") String round){
+		return hrService.getComment(interviewId, round);
 	}
 	
 	
@@ -66,5 +39,17 @@ public class HRPanelController {
 	@ResponseBody
 	public ResponseEntity<InterviewProcessDto> addStatus(@RequestHeader("interviewid") String interviewId, @RequestBody InterviewProcessDto interviewDto){
 		return hrService.addStatus(interviewId, interviewDto);
+	}
+	
+	@PostMapping(value = "hrpanel/addFinalResult")
+	@ResponseBody
+	public ResponseEntity addFinalResult(@RequestHeader("interviewId") String interviewId, @RequestBody String finalResult){
+		return hrService.addFinalResult(interviewId, finalResult);
+	}
+	
+	@PostMapping(value = "hrpanel/updateFinalResult")
+	@ResponseBody
+	public ResponseEntity updateFinalResult(@RequestHeader("interviewid") String interviewId, @RequestBody String finalResult){
+		return hrService.updateFinalResult(interviewId, finalResult);
 	}
 }

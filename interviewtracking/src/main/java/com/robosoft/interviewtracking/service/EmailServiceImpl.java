@@ -84,9 +84,8 @@ public class EmailServiceImpl  implements EmailService
 	public  ResponseEntity<HttpStatus> mailToShortListedCandidate(CandidateModel canObj, InterviewProcessDto interview)
 	{
 		
-		
 		MailDto mailData = new MailDto();
-		mailData.setDate(interview.getDate());
+		mailData.setDate(interview.getInterviewDate());
 		mailData.setRound(interview.getRound());
 		mailData.setTime(interview.getTime());
 		mailData.setEmailID(canObj.getEmail());

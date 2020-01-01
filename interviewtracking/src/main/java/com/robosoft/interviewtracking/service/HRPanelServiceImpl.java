@@ -84,20 +84,21 @@ public void sendEmailToCandidate(MailDto mailDto) throws MessagingException
 
 /* to fetch comments from database */
 @Override
-public ResponseEntity<InterviewProcessDto> getComment(String interviewId) {
-	InterviewProcessModel interviewModel = intRepo.findByInterviewId(interviewId);
+public ResponseEntity<InterviewProcessDto> getComment(String interviewId, String round) {
+	InterviewProcessModel interviewModel = intRepo.findByInterviewIdAndRound(interviewId, round);
 	if(interviewModel == null) {
 		throw new CustomException(100,"Invalid Id");
 	}
 	InterviewProcessDto interviewProcessDto = new InterviewProcessDto();
 	
 	interviewProcessDto.setId(interviewModel.getId());
-	interviewProcessDto.setInterviewId(interviewModel.getInterviewId());
-	interviewProcessDto.setRound(interviewModel.getRound());
+	interviewProcessDto.setInterviewId(interviewId);
+	interviewProcessDto.setRound(round);
 	interviewProcessDto.setAssigneeId(interviewModel.getAssigneeId());
 	interviewProcessDto.setEmployeeId(interviewModel.getEmployeeId());
 	interviewProcessDto.setStatus(interviewModel.getStatus());
-	
+	interviewProcessDto.setCreate_timestamp(interviewModel.getCreateTimestamp());
+	interviewProcessDto.setUpdate_timestamp(interviewModel.getUpdateTimestamp());
 	interviewProcessDto.setComments(interviewModel.getComments());
 	return new ResponseEntity<>(interviewProcessDto, HttpStatus.OK);
 }
@@ -183,6 +184,66 @@ public ResponseEntity<InterviewProcessDto> addStatus(String interviewId,Intervie
 	}
 
 	
+}
+
+@Override
+public ResponseEntity addFinalResult(String interviewId, String finalResult) 
+{
+
+	CandidateModel candidateModelData = candidateRepository.findByInterviewId(interviewId);
+	System.out.println(candidateModelData);
+	if(candidateModelData == null)
+	{
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+	else
+	{
+		if(candidateModelData.getFinalResult().equalsIgnoreCase("null"))
+		{
+			candidateModelData.setFinalResult(finalResult);
+			candidateModelData.setAttemptCount(candidateModelData.getAttemptCount() + 1);
+			candidateModelData.setUpdateTimestamp(candidateModelData.getUpdateTimestamp());
+			candidateRepository.save(candidateModelData);
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+	
+		else if (finalResult == "selected" || finalResult == "rejected")
+		{
+			return new ResponseEntity<>(HttpStatus.ALREADY_REPORTED);
+		}
+	
+		else
+		{
+			return new ResponseEntity(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+}
+	
+
+@Override
+public ResponseEntity updateFinalResult(String interviewId, String finalResult)
+{
+	CandidateModel candidateModelData = candidateRepository.findByInterviewId(interviewId);
+		
+	if(candidateModelData == null)
+	{
+		return new ResponseEntity(HttpStatus.NO_CONTENT);
+	}
+	else
+	{
+		if(finalResult == "selected" || finalResult == "rejected")
+		{
+			candidateModelData.setFinalResult(finalResult);
+			candidateModelData.setUpdateTimestamp(candidateModelData.getUpdateTimestamp());
+			candidateRepository.save(candidateModelData);
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity(HttpStatus.BAD_REQUEST);
+		}
+	}
 }
 
 }
