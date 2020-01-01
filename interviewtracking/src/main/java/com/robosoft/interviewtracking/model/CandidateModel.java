@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -68,6 +69,7 @@ public class CandidateModel implements Serializable{
 	
 	@Column(name = "phone_number")
 	@NotNull
+	@Size(min = 10, message = "phone number must contain 10 digits")
 	private String phoneNumber;
 
 	@Column
