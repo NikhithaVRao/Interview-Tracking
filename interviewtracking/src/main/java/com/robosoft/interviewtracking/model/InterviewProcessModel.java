@@ -32,7 +32,7 @@ public class InterviewProcessModel {
 	private int employeeId;
 	
 	@Column
-	private String status ;
+	private String status = "null";
 	
 	@Column
 	private String round; 

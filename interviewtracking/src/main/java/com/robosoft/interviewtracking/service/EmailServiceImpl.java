@@ -19,10 +19,8 @@ import com.robosoft.interviewtracking.exception.CustomException;
 import com.robosoft.interviewtracking.model.CandidateModel;
 import com.robosoft.interviewtracking.model.TechnicalPanelModel;
 
-import lombok.NoArgsConstructor;
 
 @Service
-@NoArgsConstructor
 public class EmailServiceImpl  implements EmailService
 
 {
@@ -41,8 +39,10 @@ public class EmailServiceImpl  implements EmailService
 	@Override
 	public  void sendMail(MailDto mailData)
 	{
-		
+		System.out.println(1);
+		System.out.println(mailData);
 		MimeMessage message = sender.createMimeMessage();
+		System.out.println(2);
 		try
 		{
 		
@@ -51,7 +51,9 @@ public class EmailServiceImpl  implements EmailService
 		helper.setSubject(mailData.getSubject());
 		helper.setText(mailData.getText());
 		helper.setTo(mailData.getEmailID());
+		System.out.println(3);
 		sender.send(message);
+		System.out.println(4);
 		}catch(Exception e)
 		{
 			e.printStackTrace();
@@ -78,23 +80,23 @@ public class EmailServiceImpl  implements EmailService
 	}
 	
 	
-//	@Override
-//	public  ResponseEntity<HttpStatus> mailToShortListedCandidate(CandidateModel canObj, InterviewProcessDto interview)
-//	{
-//		
-//		
-//		MailDto mailData = new MailDto();
-//		mailData.setDate(interview.getDate());
-//		mailData.setRound(interview.getRound());
-//		mailData.setTime(interview.getTime());
-//		mailData.setEmailID(canObj.getEmail());
-//		mailData.setName(canObj.getName());
-//		mailData.setInterviewDetail();
-//		mailData.setSubject("Interview process information");
-//		sendMail(mailData);
-//		
-//		return new ResponseEntity<>(HttpStatus.OK);
-//	}
+	@Override
+	public  ResponseEntity<HttpStatus> mailToShortListedCandidate(CandidateModel canObj, InterviewProcessDto interview)
+	{
+		
+		
+		MailDto mailData = new MailDto();
+		mailData.setDate(interview.getDate());
+		mailData.setRound(interview.getRound());
+		mailData.setTime(interview.getTime());
+		mailData.setEmailID(canObj.getEmail());
+		mailData.setName(canObj.getName());
+		mailData.setInterviewDetail();
+		mailData.setSubject("Interview process information");
+		sendMail(mailData);
+		
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 
 	
 	
@@ -106,10 +108,9 @@ public class EmailServiceImpl  implements EmailService
 		
 		mailData.setEmailID(techObj.getEmail());
 		mailData.setName(techObj.getName());
-		mailData.setDate(mailData.getDate());
-		mailData.setRound(mailData.getRound());
 		mailData.setTextToPanelAvailability();
 		mailData.setSubject("Confirm your availability");
+		System.out.println(mailData);
 		sendMail(mailData);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
