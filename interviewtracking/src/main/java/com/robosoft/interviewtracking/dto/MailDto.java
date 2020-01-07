@@ -3,12 +3,9 @@ package com.robosoft.interviewtracking.dto;
 import java.sql.Time;
 import java.util.Date;
 
-import javax.management.loading.PrivateClassLoader;
-
-import com.robosoft.interviewtracking.model.CandidateModel;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

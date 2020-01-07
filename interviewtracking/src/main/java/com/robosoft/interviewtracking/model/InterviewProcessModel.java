@@ -1,5 +1,6 @@
 package com.robosoft.interviewtracking.model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -32,7 +33,7 @@ public class InterviewProcessModel {
 	private int employeeId;
 	
 	@Column
-	private String status ;
+	private String status = "null";
 	
 	@Column
 	private String round; 
@@ -53,4 +54,7 @@ public class InterviewProcessModel {
 	
 	@Column(name = "deleted")
 	private boolean isDeleted;
+	
+	@Column(name = "interview_date")
+	private Date interviewDate;
 }

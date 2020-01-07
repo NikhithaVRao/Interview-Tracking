@@ -8,41 +8,50 @@ import org.springframework.stereotype.Service;
 import com.robosoft.interviewtracking.dao.CandidateRepository;
 import com.robosoft.interviewtracking.dao.InterviewTrackingRepository;
 import com.robosoft.interviewtracking.dto.InterviewProcessDto;
-import com.robosoft.interviewtracking.dto.MailDto;
+
 import com.robosoft.interviewtracking.model.CandidateModel;
 import com.robosoft.interviewtracking.exception.CustomException;
+
+
 import com.robosoft.interviewtracking.model.InterviewProcessModel;
 
 @Service
 public class InterviewProcessServiceImpl implements InterviewProcessService{
 	@Autowired
-	InterviewTrackingRepository intrepo;
+
+	InterviewTrackingRepository interviewRepo;
+	
+	@Autowired
+	EmailService emailService;
+	
+	@Autowired
+	CandidateRepository candidateRepo;
 
 	@Autowired
-	CandidateRepository canRepo;
-	
+	InterviewTrackingRepository intrepo;
+
+
 	/* to add interview details for candidate */
 	@Override
 	public ResponseEntity<InterviewProcessDto> addInterviewDetails(String interviewId, InterviewProcessDto interview) {
 
-		InterviewProcessModel intmodel1 = intrepo.findByInterviewId(interviewId);
 
-		CandidateModel canObj = canRepo.findByInterviewId(interviewId);
-		
-		EmailService mailService = new EmailServiceImpl();
+		InterviewProcessModel intmodel1 = interviewRepo.findByInterviewId(interviewId);
+		CandidateModel canObj = candidateRepo.findByInterviewId(interviewId);
 		
 
-		if(intmodel1 == null || intmodel1.getStatus().contentEquals( "selected"))
+		System.out.println(intmodel1);
+		if(intmodel1 == null || intmodel1.getStatus().equalsIgnoreCase("selected"))
+
 		{
-			
 		InterviewProcessModel intmodel = new InterviewProcessModel();
-		
-		
-		
 		intmodel.setInterviewId(interviewId);
 		intmodel.setAssigneeId(interview.getAssigneeId());
+//		intmodel.setCreateTimestamp(interview.getCreate_timestamp());
+//		intmodel.setUpdateTimestamp(interview.getUpdate_timestamp());
 		intmodel.setEmployeeId(interview.getEmployeeId());
 		intmodel.setRound(interview.getRound()); 
+
 
 		intrepo.save(intmodel);
 
@@ -53,6 +62,10 @@ public class InterviewProcessServiceImpl implements InterviewProcessService{
 			throw new CustomException(100,"All feilds are mandetary");
 		}
 
+		
+
+		interviewRepo.save(intmodel);
+
 		interview.setId(intmodel.getId());
 		interview.setAssigneeId(intmodel.getAssigneeId());
 		interview.setCreate_timestamp(intmodel.getCreateTimestamp());
@@ -60,27 +73,15 @@ public class InterviewProcessServiceImpl implements InterviewProcessService{
 		interview.setEmployeeId(intmodel.getEmployeeId());
 		interview.setRound(intmodel.getRound()); 
 		interview.setInterviewId(intmodel.getInterviewId());
-		
-		
-		
-		
-//		MailDto mailData = new MailDto();
-//		mailData.setDate(interview.getDate());
-//		mailData.setRound(interview.getRound());
-//		mailData.setTime(interview.getTime());
-//		mailData.setEmailID(canObj.getEmail());
-//		mailData.setName(canObj.getName());
-//		mailData.setInterviewDetail();
-//		mailData.setSubject("Interview process information");
-//		System.out.println(mailData);
-//		mailService.sendMail(mailData);
-		
-		
-		
+
+	
+		emailService.mailToShortListedCandidate(canObj, interview);
 		
 		return new ResponseEntity<InterviewProcessDto>(interview, HttpStatus.ACCEPTED);
-		}
+		
 
+		}
+		
 		else
 		{
 			if(intmodel1.getStatus().contains("rejected")) 
@@ -90,7 +91,7 @@ public class InterviewProcessServiceImpl implements InterviewProcessService{
 				return new ResponseEntity<InterviewProcessDto>(HttpStatus.NOT_IMPLEMENTED);
 		
 		}
-		
+	
 	}
 	 
 	

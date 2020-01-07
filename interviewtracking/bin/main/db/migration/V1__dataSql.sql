@@ -33,7 +33,7 @@ applicant_type varchar(20),
 post_applied varchar(20),
 referal_id varchar(100),
 event varchar(20) not null,
-final_result varchar(10),
+final_result varchar(20),
 primary key(id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
@@ -91,7 +91,7 @@ create_timestamp DATETIME,
 update_timestamp DATETIME,
 deleted boolean ,
 employee_id int,
-
+interview_date date,
 primary key(id)
 );
 

@@ -13,7 +13,9 @@ import com.robosoft.interviewtracking.dao.InterviewTrackingRepository;
 import com.robosoft.interviewtracking.dao.TechnicalPanelRepository;
 import com.robosoft.interviewtracking.dto.InterviewProcessDto;
 import com.robosoft.interviewtracking.dto.TechnicalPanelDto;
+
 import com.robosoft.interviewtracking.exception.CustomException;
+
 import com.robosoft.interviewtracking.model.InterviewProcessModel;
 import com.robosoft.interviewtracking.model.TechnicalPanelModel;
 
@@ -33,6 +35,7 @@ public class TechPanelServiceImpl implements TechPanelService
 		
 		techPanelModel.setName(techPanelDto.getName());
 		techPanelModel.setEmail(techPanelDto.getEmail());
+		techPanelModel.setEmployeeId(techPanelDto.getEmployeeId());
 		techPanelModel.setDeleted(techPanelDto.isDeleted());
 		techPanelModel.setEmployeeId(techPanelDto.getEmployeeId());
 		
@@ -49,7 +52,7 @@ public class TechPanelServiceImpl implements TechPanelService
 		}
 		
 		
-		techPanelDto.setId(techPanelModel.getId());
+		techPanelDto.setId(techPanelModel.getId());  
 		techPanelDto.setCreate_timestamp(techPanelModel.getCreateTimestamp());
 		techPanelDto.setUpdate_timestamp(techPanelModel.getUpdateTimestamp());
 		

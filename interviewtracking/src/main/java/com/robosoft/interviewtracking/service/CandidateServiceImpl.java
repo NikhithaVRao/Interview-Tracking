@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import com.robosoft.interviewtracking.dao.CandidateRepository;
 import com.robosoft.interviewtracking.dao.SkillsRepository;
@@ -45,10 +46,6 @@ public class CandidateServiceImpl implements CandidateService{
 		if(candidateDto.getQualification() != null) {
 			candidateModel.setQualification(candidateDto.getQualification());
 		}
-		
-//		if(candidateDto.getTotalExperience() != 0) {
-//			candidateModel.setTotalExperience(candidateDto.getTotalExperience());
-//		}
 		
 		if(candidateDto.getNoticePeriod() != 0) {
 			candidateModel.setNoticePeriod(candidateDto.getNoticePeriod());
@@ -118,7 +115,7 @@ public class CandidateServiceImpl implements CandidateService{
 	/* method to implement getter setter to get dto response */ 
 	public CandidateDto setDto(CandidateDto candidateDto, CandidateModel candidateModel)
 	{
-		candidateDto.setId(candidateModel.getId());
+		 candidateDto.setId(candidateModel.getId());
 		 candidateDto.setName(candidateModel.getName());
 		 candidateDto.setAddress(candidateModel.getAddress());
 		 candidateDto.setDateOfBirth(candidateModel.getDateOfBirth());
@@ -160,11 +157,15 @@ public class CandidateServiceImpl implements CandidateService{
 	}
 	
 	/* to add candidate details */
-public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
+public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto)
+{
 	
 		CandidateModel candidateRepObj = candidateRepository.findByUniqueId(candidateDto.getUniqueId());
 		CandidateModel candidateModel = new CandidateModel();
+
+
 		if(candidateRepObj == null) {
+
 		/* To fetch list of int of experience from candidate dto */
 		List<Integer> exp = new ArrayList<Integer>();
 		exp = candidateDto.getExperience();
@@ -180,8 +181,6 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
 		}
 		/* to input other dto attributes into model*/
 		candidateModel = setModel(candidateModel, candidateDto);
-	//	candidateModel.setAttemptCount(candidateDto.getAttemptCount()+1);
-		
 		
 		/* Exception to handle mandatory fields */
 		try {
@@ -210,11 +209,9 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
 			sm.setSkillName(skills.get(i));
 			sm.setExperience(exp.get(i));
 			skillsRep.save(sm);
-		}  
-		}
+		} 
+		} 
 
-		
-		
 
 		else if(candidateRepObj.getFinalResult().equalsIgnoreCase("rejected"))
 		{ 
@@ -225,14 +222,18 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
 			candidateDto.setUpdateTimestamp(candidateRepObj.getUpdateTimestamp());
 			candidateDto.setFinalResult(candidateRepObj.getFinalResult());
 		}
+		
 		else {
-			
-			candidateRepObj.setReferalId(candidateRepObj.getReferalId() +"," + candidateDto.getReferalId());
-			candidateRepObj = candidateRepository.save(candidateRepObj);
-			candidateDto.setId(candidateRepObj.getId());
-			candidateDto.setCreateTimestamp(candidateRepObj.getCreateTimestamp());
-			candidateDto.setUpdateTimestamp(candidateRepObj.getUpdateTimestamp());
-			candidateDto.setReferalId(candidateRepObj.getReferalId());
+
+			candidateRepObj.setReferalId(candidateRepObj.getReferalId() + ","+ candidateDto.getReferalId());
+			candidateRepository.save(candidateRepObj);
+		
+			 candidateDto.setId(candidateRepObj.getId());
+			 candidateDto.setReferalId(candidateRepObj.getReferalId());
+			 candidateDto.setCreateTimestamp(candidateRepObj.getCreateTimestamp());
+			 candidateDto.setUpdateTimestamp(candidateRepObj.getUpdateTimestamp());
+			 candidateDto.setTotalExperience(candidateRepObj.getTotalExperience());	
+
 		}
 		 return new ResponseEntity<>(candidateDto, HttpStatus.ACCEPTED);
 	}	
@@ -241,17 +242,16 @@ public ResponseEntity<CandidateDto> addCandidate(CandidateDto candidateDto) {
 public List<CandidateDto> getShortlistedCandidate(int experience, String skills)
 {
 	List<SkillsModel> skillModel = skillsRep.getShortlisted(skills, experience);
-	
 	List<CandidateDto> candidateList = new ArrayList<CandidateDto>();
 		
 	if(skillModel == null)
-		throw new CustomException(100,"Invalid");
-	
+		throw new CustomException(106,"No one has shortlisted");
+
 	/* to fetch candidate details for shortlisted candidate id */
 	
 	int shortListedId = 0;
-	for(int i = 0 ; i < skillModel.size() ; i++)
-	{
+	
+	for(int i = 0 ; i < skillModel.size() ; i++) {
 		CandidateDto  candidateDto =  new CandidateDto();		
 
 		shortListedId = skillModel.get(i).getCandidateId()	;
@@ -266,47 +266,24 @@ public List<CandidateDto> getShortlistedCandidate(int experience, String skills)
 		}
 		
 	//	System.out.println(candidateRepObj); 
+		String interviewId = (String.valueOf(LocalDate.now())+" - "+ (i+1));
+		candidateRepObj.setInterviewId(interviewId);
 		candidateRepObj.setShortListed(true);
-		
-		
-	
+
 		candidateRepository.save(candidateRepObj);
-		
-		
-		//to set rejected as a value gor final status field
-		List<CandidateModel> candidateRepObjList = candidateRepository.findByShortlisted();
-		List<CandidateModel> candidateModelObj = new ArrayList<CandidateModel>();
-		
-		for(int a = 0; a < candidateRepObjList.size(); a++)
-		{
-			candidateRepObjList.get(a).setFinalResult("rejected");
-			candidateRepository.save(candidateRepObjList.get(a));
-		}
 		
 		/* to set model objects to dto */
 		candidateDto =  setDto(candidateDto,candidateRepObj);
 		candidateList.add(candidateDto);    
-		
-		
 	} 
-	
-	
-	
-	List<CandidateModel> idList = candidateRepository.findShorlistedId();
-	for(int j = 0; j < idList.size(); j++)
-	{
-		CandidateModel candidateRepObj1 = idList.get(j);
-		
-		String interviewId = (String.valueOf(LocalDate.now())+" - "+ (j+1));
-		
-		candidateRepObj1.setInterviewId(interviewId);
-		candidateRepository.save(candidateRepObj1);
-		
-		
-
+	//to set rejected as a value gor final status field
+	List<CandidateModel> candidateRepObjList = candidateRepository.findByShortlisted();
+	for(int a = 0; a < candidateRepObjList.size(); a++){
+		candidateRepObjList.get(a).setFinalResult("rejected");
+		candidateRepository.save(candidateRepObjList.get(a));
 	}
-return candidateList;
-	}
+	return candidateList;
+}
 
 /* To update candidate */
 
@@ -402,7 +379,7 @@ public  ResponseEntity deleteSkills(int id, String skills)
 }
 
 
-
+}
 /* send mail to candidate */
 //public void sendEmail(MailDto mailDto) throws MessagingException
 //{
@@ -424,7 +401,7 @@ public  ResponseEntity deleteSkills(int id, String skills)
 //
 //		 javaMailSender.send(msg);
 //		}
-}
+
 
 
 

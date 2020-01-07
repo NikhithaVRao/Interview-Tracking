@@ -11,7 +11,7 @@ public interface EmailService
 {
 	void sendMail(MailDto mail);
 	ResponseEntity<HttpStatus> mailToAprovedCandidate(MailDto mail);
-	//ResponseEntity<HttpStatus> mailToShortListedCandidate(CandidateModel canObj, InterviewProcessDto interview);
+	ResponseEntity<HttpStatus> mailToShortListedCandidate(CandidateModel canObj, InterviewProcessDto interview);
 	ResponseEntity<HttpStatus> mailToCheckAvailability(String empId, MailDto mailData);
 
 }

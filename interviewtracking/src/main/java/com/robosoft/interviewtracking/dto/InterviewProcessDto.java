@@ -19,7 +19,7 @@ public class InterviewProcessDto {
 	
 	private String round;
 	
-	private Date date;
+	private Date interviewDate;
 	
 	private Time time;
 	
