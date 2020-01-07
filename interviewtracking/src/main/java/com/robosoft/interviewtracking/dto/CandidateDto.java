@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
@@ -75,12 +74,5 @@ public class CandidateDto {
 	private String event;
 	
 	private String interviewId;
-	
-
-
-
-
-	
-
 
 }

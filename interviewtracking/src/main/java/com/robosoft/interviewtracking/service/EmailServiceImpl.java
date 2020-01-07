@@ -106,8 +106,8 @@ public class EmailServiceImpl  implements EmailService
 		
 		mailData.setEmailID(techObj.getEmail());
 		mailData.setName(techObj.getName());
-		mailData.setDate(mailData.getDate());
-		mailData.setRound(mailData.getRound());
+		//mailData.setDate(mailData.getDate());
+		//mailData.setRound(mailData.getRound());
 		mailData.setTextToPanelAvailability();
 		mailData.setSubject("Confirm your availability");
 		sendMail(mailData);

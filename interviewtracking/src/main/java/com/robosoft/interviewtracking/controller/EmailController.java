@@ -40,8 +40,9 @@ public class EmailController
 	
 	@RequestMapping(value = "/availabilityMail",consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<HttpStatus> sendMailToPanelMember(@RequestHeader ("empID") String empId, MailDto mailData)
+	public ResponseEntity<HttpStatus> sendMailToPanelMember(@RequestHeader ("empID") String empId, @RequestBody MailDto mailData)
 	{
+	
 		try {
 			 emailService.mailToCheckAvailability(empId, mailData);
 			 
